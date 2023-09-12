@@ -76,4 +76,7 @@
     <Build Include="Tables\tblMovie.sql" />
     <Build Include="Tables\tblOrderItem.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="local.publish.xml" />
+  </ItemGroup>
 </Project>
