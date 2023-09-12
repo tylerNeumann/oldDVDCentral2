@@ -75,8 +75,17 @@
     <Build Include="Tables\tblMovieGenre.sql" />
     <Build Include="Tables\tblMovie.sql" />
     <Build Include="Tables\tblOrderItem.sql" />
+    <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="local.publish.xml" />
+    <None Include="PostDeploy\DefaultData\Movies.sql" />
+    <None Include="PostDeploy\DefaultData\Genres.sql" />
+    <None Include="PostDeploy\DefaultData\Customers.sql" />
+    <None Include="PostDeploy\DefaultData\Directors.sql" />
+    <None Include="PostDeploy\DefaultData\Formats.sql" />
+    <None Include="PostDeploy\DefaultData\Orders.sql" />
+    <None Include="PostDeploy\DefaultData\Ratings.sql" />
+    <None Include="PostDeploy\DefaultData\Users.sql" />
   </ItemGroup>
 </Project>
