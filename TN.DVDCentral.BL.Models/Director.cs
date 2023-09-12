@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL.Models
 {
-    internal class Director
+    public class Director
     {
     }
 }
