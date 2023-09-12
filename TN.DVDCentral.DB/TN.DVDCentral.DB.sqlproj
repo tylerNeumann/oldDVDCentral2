@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{36b5bc03-5e73-4b0c-b106-433f784f6111}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -59,7 +59,7 @@
     <Folder Include="PostDeploy" />
     <Folder Include="PreDeploy" />
     <Folder Include="Tables" />
-    <Folder Include="PostDeploy\DefaulfData" />
+    <Folder Include="PostDeploy\DefaultData" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="PreDeploy\Script.PreDeployment1.sql" />
@@ -75,19 +75,5 @@
     <Build Include="Tables\tblMovieGenre.sql" />
     <Build Include="Tables\tblMovie.sql" />
     <Build Include="Tables\tblOrderItem.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PostDeploy\DefaulfData\Customers.sql" />
-    <None Include="PostDeploy\DefaulfData\Directors.sql" />
-    <None Include="PostDeploy\DefaulfData\Formats.sql" />
-    <None Include="PostDeploy\DefaulfData\Genres.sql" />
-    <None Include="PostDeploy\DefaulfData\Movies.sql" />
-    <None Include="PostDeploy\DefaulfData\Orders.sql" />
-    <None Include="PostDeploy\DefaulfData\OrderItems.sql" />
-    <None Include="PostDeploy\DefaulfData\Ratings.sql" />
-    <None Include="PostDeploy\DefaulfData\Users.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
