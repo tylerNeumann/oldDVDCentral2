@@ -9,13 +9,13 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\DefaultData.Customers.sql
-:r .\DefaultData.Directors.sql
-:r .\DefaultData.Formats.sql
-:r .\DefaultData.Genres.sql
-:r .\DefaultData.Movies.sql
-/*:r .\DefaultData.OrderItems.sql*/
-:r .\DefaultData.Orders.sql
-:r .\DefaultData.Ratings.sql
-:r .\DefaultData.Users.sql
+:r .\DefaultData\Customers.sql
+:r .\DefaultData\Directors.sql
+:r .\DefaultData\Formats.sql
+:r .\DefaultData\Genres.sql
+:r .\DefaultData\Movies.sql
+/*:r .\DefaultData\.OrderItems.sql*/
+:r .\DefaultData\Orders.sql
+:r .\DefaultData\Ratings.sql
+:r .\DefaultData\Users.sql
 /*:r.\DefaultData.MovieGenres.sql*/
