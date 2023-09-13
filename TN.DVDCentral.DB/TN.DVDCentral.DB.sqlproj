@@ -88,5 +88,6 @@
     <None Include="PostDeploy\DefaultData\Ratings.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />
     <None Include="PostDeploy\DefaultData\OrderItems.sql" />
+    <None Include="PostDeploy\DefaultData\MovieGenres.sql" />
   </ItemGroup>
 </Project>

@@ -3,5 +3,6 @@
 	VALUES
 	(1,'Action'),
 	(2,'Sci-Fi'),
-	(3,'Fantasy')
+	(3,'Fantasy'),
+	(4,'Adventure')
 END
