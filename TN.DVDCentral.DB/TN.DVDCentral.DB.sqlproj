@@ -89,5 +89,6 @@
     <None Include="PostDeploy\DefaultData\Users.sql" />
     <None Include="PostDeploy\DefaultData\OrderItems.sql" />
     <None Include="PostDeploy\DefaultData\MovieGenres.sql" />
+    <None Include="remote.publish.xml" />
   </ItemGroup>
 </Project>
