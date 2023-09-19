@@ -1,0 +1,8 @@
+Scaffold-DbContext "Server=(localdb)\MSSQLLocalDB;Database=TN.ProgDec.DB;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -Context ProgDecEntities -UseDatabaseNames -force
+
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.VisualStudio.Web.CodeGeneration.Design
+Install-Package
+tools->nuggetPackage manager->packetmanager console
