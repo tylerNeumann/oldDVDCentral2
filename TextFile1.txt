@@ -6,3 +6,7 @@ Microsoft.EntityFrameworkCore.Tools
 Microsoft.VisualStudio.Web.CodeGeneration.Design
 Install-Package
 tools->nuggetPackage manager->packetmanager console
+
+Install-Package xxxx -ProjectName xxx
+
+Uninstall-Package Microsoft.EntityFrameworkCore.Design -RemoveDependencies
