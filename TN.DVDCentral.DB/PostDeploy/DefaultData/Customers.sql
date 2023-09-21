@@ -1,7 +1,7 @@
 ﻿BEGIN 
-	INSERT INTO tblCustomer(Id,FirstName,LastName,UserId,Address,City,ZIP,Phone,ImagePath)
+	INSERT INTO tblCustomer(Id,FirstName,LastName,UserId,Address,City,ZIP,Phone)
 	VALUES
-	(1, 'Rob', 'Smith', 1, '35 D Salmon Run', 'Hilton', '14468', '(585) 392-2805', 'TN.DVDCentral\img\cust\person1.png'),
-	(2, 'Jone', 'Larret', 2, '6317 Clark Rd', 'Harrison', '37341', '(423) 344-6252', 'TN.DVDCentral\img\cust\person2.jpeg'),
-	(3, 'Jim', 'Lawson', 3, '3493 B Rd', 'Council Grove', '66846', '(620) 443-5017', 'TN.DVDCentral\img\cust\person3.jpeg')
+	(1, 'Rob', 'Smith', 1, '35 D Salmon Run', 'Hilton', '14468', '(585) 392-2805'),
+	(2, 'Jone', 'Larret', 2, '6317 Clark Rd', 'Harrison', '37341', '(423) 344-6252'),
+	(3, 'Jim', 'Lawson', 3, '3493 B Rd', 'Council Grove', '66846', '(620) 443-5017')
 End
