@@ -9,10 +9,52 @@ namespace TN.DVDCentral.BL
 {
     public static class MovieManager
     {
-        public static int Insert() { return 0; }
-        public static int Update() { return 0; }
-        public static int Delete() { return 0; }
-        public static Movie LoadById() { return null; }
-        public static List<Movie> Load() { return null; }
+        public static int Insert(Movie movie, bool rollback = false) { return 0; }
+        public static int Update() {
+            try
+            {
+                return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static int Delete() {
+            try
+            {
+                return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static Movie LoadById()
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static List<Movie> Load()
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

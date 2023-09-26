@@ -9,10 +9,53 @@ namespace TN.DVDCentral.BL
 {
     public static class GenreManager
     {
-        public static int Insert() { return 0; }
-        public static int Update() { return 0;}
-        public static int Delete() { return 0;}
-        public static Genre LoadById() { return null; }
-        public static List<Genre> Load() { return null; }
+        public static int Insert(Genre genre, bool rollback = false) { return 0; }
+        public static int Update()
+        {
+            try
+            {
+                return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static int Delete()
+        {
+            try
+            {
+                return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static Genre LoadById()
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static List<Genre> Load()
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            } }
     }
 }
