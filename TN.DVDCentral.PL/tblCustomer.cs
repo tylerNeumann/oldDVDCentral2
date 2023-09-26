@@ -17,9 +17,9 @@ public partial class tblCustomer
 
     public string City { get; set; } = null!;
 
+    public string? State { get; set; }
+
     public string ZIP { get; set; } = null!;
 
     public string Phone { get; set; } = null!;
-
-    public string ImagePath { get; set; } = null!;
 }

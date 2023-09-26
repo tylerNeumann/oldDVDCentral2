@@ -43,7 +43,7 @@ public partial class DVDCentralEntities : DbContext
     {
         modelBuilder.Entity<tblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC07DB7FD73E");
+            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC07A6C54829");
 
             entity.ToTable("tblCustomer");
 
@@ -57,14 +57,14 @@ public partial class DVDCentralEntities : DbContext
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.ImagePath)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Phone)
                 .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.State)
+                .HasMaxLength(2)
                 .IsUnicode(false);
             entity.Property(e => e.ZIP)
                 .HasMaxLength(12)
@@ -73,7 +73,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblDirector>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblDirec__3214EC0743B9BCBB");
+            entity.HasKey(e => e.Id).HasName("PK__tblDirec__3214EC071716B32E");
 
             entity.ToTable("tblDirector");
 
@@ -88,7 +88,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblFormat>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblForma__3214EC0779BEA064");
+            entity.HasKey(e => e.Id).HasName("PK__tblForma__3214EC073F8E1AE8");
 
             entity.ToTable("tblFormat");
 
@@ -100,7 +100,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblGenre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblGenre__3214EC07C9217681");
+            entity.HasKey(e => e.Id).HasName("PK__tblGenre__3214EC07479726B2");
 
             entity.ToTable("tblGenre");
 
@@ -112,7 +112,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblMovie>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC07638F79CD");
+            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC0749CDCC76");
 
             entity.ToTable("tblMovie");
 
@@ -128,7 +128,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblMovieGenre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC074EDC687B");
+            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC07BCAEF656");
 
             entity.ToTable("tblMovieGenre");
 
@@ -137,7 +137,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC0785519B7A");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC073428F50C");
 
             entity.ToTable("tblOrder");
 
@@ -147,7 +147,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblOrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07B78696B7");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC071A11E479");
 
             entity.ToTable("tblOrderItem");
 
@@ -156,7 +156,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblRating>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblRatin__3214EC0760B7635A");
+            entity.HasKey(e => e.Id).HasName("PK__tblRatin__3214EC073B74ABDB");
 
             entity.ToTable("tblRating");
 
@@ -168,7 +168,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07CD6FAEDE");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC074D13782A");
 
             entity.ToTable("tblUser");
 
