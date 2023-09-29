@@ -163,15 +163,15 @@ namespace TN.DVDCentral.BL
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
                      {
-                         Id = entity.Id,
-                         InStkQty = entity.InStkQty,
-                         Title = entity.Title,
-                         Description = entity.Description,
-                         FormatId = entity.FormatId,
-                         DirectorId = entity.DirectorId,
-                         RatingId = entity.RatingId,
-                         Cost = (float)entity.Cost,
-                         ImagePath = entity.ImagePath
+                         Id = movie.Id,
+                         InStkQty = movie.InStkQty,
+                         Title = movie.Title,
+                         Description = movie.Description,
+                         FormatId = movie.FormatId,
+                         DirectorId = movie.DirectorId,
+                         RatingId = movie.RatingId,
+                         Cost = (float)movie.Cost,
+                         ImagePath = movie.ImagePath
                      }));
                 }
                 return list;
