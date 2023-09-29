@@ -19,7 +19,13 @@ namespace TN.DVDCentral.BL
                     tblMovie entity = new tblMovie();
                     entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
                     entity.InStkQty = movie.InStkQty;
-                    entity.LastName = movie.LastName;
+                    entity.Title = movie.Title;
+                    entity.Description = movie.Description;
+                    entity.FormatId = movie.FormatId;
+                    entity.DirectorId = movie.DirectorId;
+                    entity.RatingId = movie.RatingId;
+                    entity.Cost = movie.Cost;
+                    entity.ImagePath = movie.ImagePath;
                     entity.Id = movie.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
@@ -46,8 +52,15 @@ namespace TN.DVDCentral.BL
                     tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == movie.Id);
                     if (entity != null)
                     {
+                        entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
                         entity.InStkQty = movie.InStkQty;
-                        entity.LastName = movie.LastName;
+                        entity.Title = movie.Title;
+                        entity.Description = movie.Description;
+                        entity.FormatId = movie.FormatId;
+                        entity.DirectorId = movie.DirectorId;
+                        entity.RatingId = movie.RatingId;
+                        entity.Cost = movie.Cost;
+                        entity.ImagePath = movie.ImagePath;
                         entity.Id = movie.Id;
                         result = dc.SaveChanges();
                     }
@@ -105,7 +118,13 @@ namespace TN.DVDCentral.BL
                         {
                             Id = entity.Id,
                             InStkQty = entity.InStkQty,
-                            LastName = entity.LastName
+                            Title = entity.Title,
+                            Description = entity.Description,
+                            FormatId = entity.FormatId,
+                            DirectorId = entity.DirectorId,
+                            RatingId = entity.RatingId,
+                            Cost = (float)entity.Cost,
+                            ImagePath = entity.ImagePath
                         };
                     }
                     else
@@ -133,14 +152,26 @@ namespace TN.DVDCentral.BL
                      {
                          d.Id,
                          d.InStkQty,
-                         d.LastName
+                         d.Title,
+                         d.Description,
+                         d.FormatId,
+                         d.DirectorId,
+                         d.RatingId,
+                         d.Cost,
+                         d.ImagePath
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
                      {
-                         Id = movie.Id,
-                         InStkQty = movie.InStkQty,
-                         LastName = movie.LastName
+                         Id = entity.Id,
+                         InStkQty = entity.InStkQty,
+                         Title = entity.Title,
+                         Description = entity.Description,
+                         FormatId = entity.FormatId,
+                         DirectorId = entity.DirectorId,
+                         RatingId = entity.RatingId,
+                         Cost = (float)entity.Cost,
+                         ImagePath = entity.ImagePath
                      }));
                 }
                 return list;
