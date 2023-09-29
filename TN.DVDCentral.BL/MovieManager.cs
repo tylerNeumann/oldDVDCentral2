@@ -18,7 +18,7 @@ namespace TN.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblMovie entity = new tblMovie();
                     entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
-                    entity.FirstName = movie.FirstName;
+                    entity.InStkQty = movie.InStkQty;
                     entity.LastName = movie.LastName;
                     entity.Id = movie.Id;
                     dc.Add(entity);
@@ -46,7 +46,7 @@ namespace TN.DVDCentral.BL
                     tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == movie.Id);
                     if (entity != null)
                     {
-                        entity.FirstName = movie.FirstName;
+                        entity.InStkQty = movie.InStkQty;
                         entity.LastName = movie.LastName;
                         entity.Id = movie.Id;
                         result = dc.SaveChanges();
@@ -104,7 +104,7 @@ namespace TN.DVDCentral.BL
                         return new Movie()
                         {
                             Id = entity.Id,
-                            FirstName = entity.FirstName,
+                            InStkQty = entity.InStkQty,
                             LastName = entity.LastName
                         };
                     }
@@ -132,14 +132,14 @@ namespace TN.DVDCentral.BL
                      select new
                      {
                          d.Id,
-                         d.FirstName,
+                         d.InStkQty,
                          d.LastName
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
                      {
                          Id = movie.Id,
-                         FirstName = movie.FirstName,
+                         InStkQty = movie.InStkQty,
                          LastName = movie.LastName
                      }));
                 }

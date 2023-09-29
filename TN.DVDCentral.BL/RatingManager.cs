@@ -18,7 +18,7 @@ namespace TN.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblRating entity = new tblRating();
                     entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
-                    entity.FirstName = rating.FirstName;
+                    entity.Description = rating.Description;
                     entity.LastName = rating.LastName;
                     entity.Id = rating.Id;
                     dc.Add(entity);
@@ -46,8 +46,7 @@ namespace TN.DVDCentral.BL
                     tblRating entity = dc.tblRatings.FirstOrDefault(s => s.Id == rating.Id);
                     if (entity != null)
                     {
-                        entity.FirstName = rating.FirstName;
-                        entity.LastName = rating.LastName;
+                        entity.Description = rating.Description;
                         entity.Id = rating.Id;
                         result = dc.SaveChanges();
                     }
@@ -104,8 +103,7 @@ namespace TN.DVDCentral.BL
                         return new Rating()
                         {
                             Id = entity.Id,
-                            FirstName = entity.FirstName,
-                            LastName = entity.LastName
+                            Description = entity.Description
                         };
                     }
                     else
@@ -132,15 +130,13 @@ namespace TN.DVDCentral.BL
                      select new
                      {
                          d.Id,
-                         d.FirstName,
-                         d.LastName
+                         d.Description,
                      })
                      .ToList()
                      .ForEach(rating => list.Add(new Rating
                      {
                          Id = rating.Id,
-                         FirstName = rating.FirstName,
-                         LastName = rating.LastName
+                         Description = rating.Description,
                      }));
                 }
                 return list;
