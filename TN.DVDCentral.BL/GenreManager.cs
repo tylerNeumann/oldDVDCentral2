@@ -18,8 +18,7 @@ namespace TN.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblGenre entity = new tblGenre();
                     entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
-                    entity.FirstName = genre.FirstName;
-                    entity.LastName = genre.LastName;
+                    entity.Description = genre.Description;
                     entity.Id = genre.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
@@ -46,8 +45,8 @@ namespace TN.DVDCentral.BL
                     tblGenre entity = dc.tblGenres.FirstOrDefault(s => s.Id == genre.Id);
                     if (entity != null)
                     {
-                        entity.FirstName = genre.FirstName;
-                        entity.LastName = genre.LastName;
+                        entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
+                        entity.Description = genre.Description;
                         entity.Id = genre.Id;
                         result = dc.SaveChanges();
                     }
@@ -104,8 +103,7 @@ namespace TN.DVDCentral.BL
                         return new Genre()
                         {
                             Id = entity.Id,
-                            FirstName = entity.FirstName,
-                            LastName = entity.LastName
+                            Description = entity.Description,
                         };
                     }
                     else
@@ -132,15 +130,13 @@ namespace TN.DVDCentral.BL
                      select new
                      {
                          d.Id,
-                         d.FirstName,
-                         d.LastName
+                         d.Description
                      })
                      .ToList()
                      .ForEach(genre => list.Add(new Genre
                      {
                          Id = genre.Id,
-                         FirstName = genre.FirstName,
-                         LastName = genre.LastName
+                         Description = genre.Description
                      }));
                 }
                 return list;

@@ -18,8 +18,7 @@ namespace TN.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblFormat entity = new tblFormat();
                     entity.Id = dc.tblFormats.Any() ? dc.tblFormats.Max(s => s.Id) + 1 : 1;
-                    entity.FirstName = format.FirstName;
-                    entity.LastName = format.LastName;
+                    entity.Description = format.Description;
                     entity.Id = format.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
@@ -46,8 +45,8 @@ namespace TN.DVDCentral.BL
                     tblFormat entity = dc.tblFormats.FirstOrDefault(s => s.Id == format.Id);
                     if (entity != null)
                     {
-                        entity.FirstName = format.FirstName;
-                        entity.LastName = format.LastName;
+                        entity.Id = dc.tblFormats.Any() ? dc.tblFormats.Max(s => s.Id) + 1 : 1;
+                        entity.Description = format.Description;
                         entity.Id = format.Id;
                         result = dc.SaveChanges();
                     }
@@ -104,8 +103,7 @@ namespace TN.DVDCentral.BL
                         return new Format()
                         {
                             Id = entity.Id,
-                            FirstName = entity.FirstName,
-                            LastName = entity.LastName
+                            Description = entity.Description
                         };
                     }
                     else
@@ -132,15 +130,13 @@ namespace TN.DVDCentral.BL
                      select new
                      {
                          d.Id,
-                         d.FirstName,
-                         d.LastName
+                         d.Description
                      })
                      .ToList()
                      .ForEach(format => list.Add(new Format
                      {
                          Id = format.Id,
-                         FirstName = format.FirstName,
-                         LastName = format.LastName
+                         Description = format.Description
                      }));
                 }
                 return list;

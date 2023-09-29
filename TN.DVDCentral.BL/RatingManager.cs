@@ -19,7 +19,6 @@ namespace TN.DVDCentral.BL
                     tblRating entity = new tblRating();
                     entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
                     entity.Description = rating.Description;
-                    entity.LastName = rating.LastName;
                     entity.Id = rating.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
