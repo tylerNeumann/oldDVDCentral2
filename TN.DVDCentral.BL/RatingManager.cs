@@ -1,42 +1,119 @@
 ﻿using BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
+using TN.DVDCentral.PL;
 
 namespace TN.DVDCentral.BL
 {
     public static class RatingManager
     {
-        public static int Insert(Rating rating, bool rollback = false) { return 0; }
-        public static int Update() {
-            try
-            {
-                return 0;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public static int Delete() {
-            try
-            {
-                return 0;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public static Rating LoadById()
+        public static int Insert(Rating rating, bool rollback = false)
         {
             try
             {
-                return null;
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblRating entity = new tblRating();
+                    entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
+                    entity.FirstName = rating.FirstName;
+                    entity.LastName = rating.LastName;
+                    entity.Id = rating.Id;
+                    dc.Add(entity);
+                    result = dc.SaveChanges();
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public static int Update(Rating rating, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblRating entity = dc.tblRatings.FirstOrDefault(s => s.Id == rating.Id);
+                    if (entity != null)
+                    {
+                        entity.FirstName = rating.FirstName;
+                        entity.LastName = rating.LastName;
+                        entity.Id = rating.Id;
+                        result = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("row doesn't exist");
+                    }
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblRating entity = dc.tblRatings.FirstOrDefault(s => s.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Remove(entity);
+                        result = dc.SaveChanges();
+                    }
+                    else { throw new Exception("row doesn't exist"); }
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static Rating LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblRating entity = dc.tblRatings.FirstOrDefault(rating => rating.Id == id);
+                    if (entity != null)
+                    {
+                        return new Rating()
+                        {
+                            Id = entity.Id,
+                            FirstName = entity.FirstName,
+                            LastName = entity.LastName
+                        };
+                    }
+                    else
+                    {
+
+                        throw new Exception();
+                    }
+                }
             }
             catch (Exception)
             {
@@ -48,13 +125,32 @@ namespace TN.DVDCentral.BL
         {
             try
             {
-                return null;
+                List<Rating> list = new List<Rating>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from d in dc.tblRatings
+                     select new
+                     {
+                         d.Id,
+                         d.FirstName,
+                         d.LastName
+                     })
+                     .ToList()
+                     .ForEach(rating => list.Add(new Rating
+                     {
+                         Id = rating.Id,
+                         FirstName = rating.FirstName,
+                         LastName = rating.LastName
+                     }));
+                }
+                return list;
             }
             catch (Exception)
             {
 
                 throw;
             }
+
         }
     }
 }
