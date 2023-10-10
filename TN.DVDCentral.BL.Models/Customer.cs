@@ -10,7 +10,6 @@
         public string? City { get; set; }
         public string? State { get; set; }
         public string? ZIP { get; set; }
-        public string? Phone { get; set; }
-        public string? ImagePath { get; set; }  
+        public string? Phone { get; set; } 
     }
 }

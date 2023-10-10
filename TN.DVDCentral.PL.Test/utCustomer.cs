@@ -32,14 +32,15 @@ namespace TN.DVDCentral.PL.Test
         public void InsertTest()
         {
             tblCustomer entity = new tblCustomer();
-            entity.InStkQty = 1;
+            entity.FirstName = "test";
             entity.Id = 99;
-            entity.ImagePath = "asdgfhg";
-            entity.FormatId = 1;
-            entity.DirectorId = 1;
-            entity.RatingId = 1;
-            entity.Title = "asdf";
-            entity.Description = "sfd";
+            entity.LastName = "test";
+            entity.UserId = 99;
+            entity.Address = "test";
+            entity.City = "test";
+            entity.State = "test";
+            entity.ZIP = "test";
+            entity.Phone = "test";
             dc.Add(entity);
             int results = dc.SaveChanges();
         }
@@ -48,7 +49,7 @@ namespace TN.DVDCentral.PL.Test
         public void UpdateTest()
         {
             tblCustomer entity = dc.tblCustomers.FirstOrDefault();
-            entity.InStkQty = 99;
+            entity.UserId = 9999;
             int results = dc.SaveChanges();
             Assert.AreEqual(1, results);
         }
