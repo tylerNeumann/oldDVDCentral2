@@ -12,5 +12,6 @@ namespace BL.Models
         public int CustomerId { get; set; }
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
+
     }
 }
