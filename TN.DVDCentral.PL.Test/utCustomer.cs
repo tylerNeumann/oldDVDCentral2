@@ -38,7 +38,7 @@ namespace TN.DVDCentral.PL.Test
             entity.UserId = 99;
             entity.Address = "test";
             entity.City = "test";
-            entity.State = "test";
+            entity.State = "Te";
             entity.ZIP = "test";
             entity.Phone = "test";
             dc.Add(entity);
