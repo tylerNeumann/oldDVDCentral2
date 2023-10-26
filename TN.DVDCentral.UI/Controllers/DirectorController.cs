@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TN.DVDCentral.UI.Controllers
 {
-    public class DirectorController1 : Controller
+    public class DirectorController : Controller
     {
         public IActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
             catch (Exception)
             {
-
+                
                 throw;
             }
             
@@ -37,8 +37,17 @@ namespace TN.DVDCentral.UI.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Director director, bool rollback = false) 
         {
-            int result = DirectorManager.Insert(director, rollback);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                int result = DirectorManager.Insert(director, rollback);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(director);
+            }
+            
         }
 
         public IActionResult Delete(int id) { return View(DirectorManager.LoadById(id)); }
@@ -50,10 +59,10 @@ namespace TN.DVDCentral.UI.Controllers
                 int result = DirectorManager.Delete(id, rollback);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ViewBag.Error = ex.Message;
+                return View(director);
             }
             
         }

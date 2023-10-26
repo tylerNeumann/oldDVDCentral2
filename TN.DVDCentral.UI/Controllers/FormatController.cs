@@ -3,26 +3,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TN.DVDCentral.UI.Controllers
 {
-    public class RatingController : Controller
+    public class FormatController : Controller
     {
         public IActionResult Index()
         {
-            return View(RatingManager.Load());
+            return View(FormatManager.Load());
         }
 
         public IActionResult Details(int id)
         {
-            return View(RatingManager.LoadById(id));
+            return View(FormatManager.LoadById(id));
         }
 
         public IActionResult Create() { return View(); }
 
         [HttpPost]
-        public IActionResult Create(Rating rating)
+        public IActionResult Create(Format format)
         {
             try
             {
-                int result = RatingManager.Insert(rating);
+                int result = FormatManager.Insert(format);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -33,36 +33,36 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id) { return View(RatingManager.LoadById(id)); }
+        public IActionResult Edit(int id) { return View(FormatManager.LoadById(id)); }
         [HttpPost]
-        public IActionResult Edit(int id, Rating rating, bool rollback = false)
+        public IActionResult Edit(int id, Format format, bool rollback = false)
         {
             try
             {
-                int result = RatingManager.Insert(rating, rollback);
+                int result = FormatManager.Insert(format, rollback);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(rating);
+                return View(format);
             }
             
         }
 
-        public IActionResult Delete(int id) { return View(RatingManager.LoadById(id)); }
+        public IActionResult Delete(int id) { return View(FormatManager.LoadById(id)); }
         [HttpPost]
-        public IActionResult Delete(int id, Rating rating, bool rollback = false)
+        public IActionResult Delete(int id, Format format, bool rollback = false)
         {
             try
             {
-                int result = RatingManager.Delete(id, rollback);
+                int result = FormatManager.Delete(id, rollback);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(rating);
+                return View(format);
             }
 
         }
