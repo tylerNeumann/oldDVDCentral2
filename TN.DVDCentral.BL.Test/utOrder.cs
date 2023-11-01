@@ -1,10 +1,12 @@
 ﻿using BL.Models;
+using Newtonsoft.Json.Bson;
 
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
     public class utOrder
     {
+        OrderItem orderItems = null;
         [TestMethod]
         public void LoadTest()
         {
@@ -21,7 +23,7 @@ namespace TN.DVDCentral.BL.Test
                 UserId = 99,
                 ShipDate = DateTime.Now
             };
-            int results = OrderManager.Insert(order, true);
+            int results = OrderManager.Insert(order, orderItems, true);
             Assert.AreEqual(1, results);
         }
         [TestMethod]
@@ -39,6 +41,38 @@ namespace TN.DVDCentral.BL.Test
             int id = 0;
             int results = OrderManager.Delete(3, true);
             Assert.AreEqual(1, results);
+        }
+        [TestMethod]
+        public void InsertOrderItemsTest()
+        {
+            Order order = new Order
+            {
+                CustomerId = 99,
+                OrderDate = DateTime.Now,
+                UserId = 99,
+                ShipDate = DateTime.Now,
+                OrderItems = new List<OrderItem>
+                {
+                    new OrderItem
+                    {
+                        Id = 88,
+                        MovieId = 1,
+                        Cost = 9.99f,
+                        Quantity= 9
+                    },
+                    new OrderItem
+                    {
+                        Id = 99,
+                        MovieId = 2,
+                        Cost = 8.88f,
+                        Quantity= 2
+                    }
+                }
+            };
+            
+            int result = OrderManager.Insert(order, orderItems, true);
+            Assert.AreEqual(order.OrderItems[1].OrderId, order.Id);
+            Assert.AreEqual(3,result);
         }
     }
 }

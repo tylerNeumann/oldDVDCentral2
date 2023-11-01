@@ -111,7 +111,22 @@ namespace TN.DVDCentral.BL
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblMovie entity = dc.tblMovies.FirstOrDefault(movie => movie.Id == id);
+                    var entity = (from m in dc.tblMovies
+                                    join f in dc.tblFormats on m.Id equals f.Id
+                                    join d in dc.tblDirectors on m.Id equals d.Id
+                                    join r in dc.tblRatings on m.Id equals r.Id
+                                    where m.Id == id
+                                    select new
+                                    {
+                                        m.Id,
+                                        m.InStkQty,
+                                        m.Title,
+                                        m.Description, 
+                                        FormatDescription = f.Description,
+                                        DirectorName = d.FirstName + " " + d.LastName,
+                                        RatingDescription = r.Description,
+                                        m.Cost
+                                    }).FirstOrDefault();
                     if (entity != null)
                     {
                         return new Movie()
@@ -120,11 +135,10 @@ namespace TN.DVDCentral.BL
                             InStkQty = entity.InStkQty,
                             Title = entity.Title,
                             Description = entity.Description,
-                            FormatId = entity.FormatId,
-                            DirectorId = entity.DirectorId,
-                            RatingId = entity.RatingId,
                             Cost = (float)entity.Cost,
-                            ImagePath = entity.ImagePath
+                            FormatDescription = entity.Description,
+                            DirectorName = entity.DirectorName,
+                            RatingDescription = entity.Description
                         };
                     }
                     else
@@ -140,26 +154,30 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static List<Movie> Load()
+        public static List<Movie> Load(int? genreId = null)
         {
             try
             {
                 List<Movie> list = new List<Movie>();
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    (from d in dc.tblMovies
+                    (from m in dc.tblMovies
+                     join f in dc.tblFormats on m.Id equals f.Id
+                     join d in dc.tblDirectors on m.Id equals d.Id
+                     join r in dc.tblRatings on m.Id equals r.Id
+                     where m.Id == genreId || genreId == null
                      select new
                      {
-                         d.Id,
-                         d.InStkQty,
-                         d.Title,
-                         d.Description,
-                         d.FormatId,
-                         d.DirectorId,
-                         d.RatingId,
-                         d.Cost,
-                         d.ImagePath
+                         m.Id,
+                         m.InStkQty,
+                         m.Title,
+                         m.Description,
+                         FormatDescription = f.Description,
+                         DirectorName = d.FirstName + " " + d.LastName,
+                         RatingDescription = r.Description,
+                         m.Cost
                      })
+                     .Distinct()
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
                      {
@@ -167,11 +185,10 @@ namespace TN.DVDCentral.BL
                          InStkQty = movie.InStkQty,
                          Title = movie.Title,
                          Description = movie.Description,
-                         FormatId = movie.FormatId,
-                         DirectorId = movie.DirectorId,
-                         RatingId = movie.RatingId,
-                         Cost = (float)movie.Cost,
-                         ImagePath = movie.ImagePath
+                         FormatDescription = movie.FormatDescription,
+                         DirectorName = movie.DirectorName,
+                         RatingDescription = movie.RatingDescription,
+                         Cost = (float)movie.Cost                         
                      }));
                 }
                 return list;

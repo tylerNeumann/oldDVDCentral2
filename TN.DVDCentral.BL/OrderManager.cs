@@ -7,7 +7,7 @@ namespace TN.DVDCentral.BL
 {
     public static class OrderManager
     {
-        public static int Insert(Order order, bool rollback = false)
+        public static int Insert(Order order, OrderItem orderItems, bool rollback = false)
         {
             try
             {
@@ -15,18 +15,38 @@ namespace TN.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     IDbContextTransaction transaction = null;
+
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblOrder entity = new tblOrder();
+                    //tblOrderItem entityItem = new tblOrderItem();
                     entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
                     entity.CustomerId = order.CustomerId;
                     entity.UserId = order.UserId;
                     entity.OrderDate = order.OrderDate;
                     entity.ShipDate = order.ShipDate;
+
+                     orderItems =
+                       new OrderItem
+                       {
+                           Id = orderItems.Id,
+                           Quantity = orderItems.Quantity,
+                           MovieId = orderItems.MovieId,
+                           Cost = orderItems.Cost
+                       };
+                    Insert(order, orderItems);
+                        new OrderItem
+                        {
+                        Id = orderItems.Id,
+                        Quantity = orderItems.Quantity,
+                        MovieId = orderItems.MovieId,
+                        Cost = orderItems.Cost
+                        };
+                    Insert(order, orderItems);
                     entity.Id = order.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();
-                }
+                } 
                 return result;
             }
             catch (Exception)
@@ -34,8 +54,10 @@ namespace TN.DVDCentral.BL
 
                 throw;
             }
-
         }
+
+
+
         public static int Update(Order order, bool rollback = false)
         {
             try
@@ -128,6 +150,49 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
+        public static List<Order> Load(int? CustomerId = null)
+        {
+            try
+            {
+                List<Order> list = new List<Order>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from o in dc.tblOrders
+                      join c in dc.tblCustomers on o.CustomerId equals c.Id
+                      where o.CustomerId == CustomerId
+                      select new
+                     {
+                         o.Id,
+                         o.CustomerId,
+                         o.UserId,
+                         o.ShipDate,
+                         o.OrderDate,
+                         CustomerName = c.FirstName + " " + c.LastName,
+                         CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
+                         CustomerPhone = c.Phone
+                     })
+                     .ToList()
+                     .ForEach(order => list.Add(new Order
+                     {
+                         Id = order.Id,
+                         CustomerId = order.CustomerId,
+                         UserId = order.UserId,
+                         OrderDate = order.OrderDate,
+                         ShipDate = order.ShipDate,
+                         CustomerName = order.CustomerName,
+                         CustomerAddress = order.CustomerAddress,
+                         CustomerPhone = order.CustomerPhone
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public static List<Order> Load()
         {
             try
@@ -165,3 +230,12 @@ namespace TN.DVDCentral.BL
         }
     }
 }
+   // entity.orderItems = order.OrderItems.Add();
+
+                    //   {
+                    //   Id = order.OrderItems,
+                    //    CustomerId = order.CustomerId,
+                    //    UserId = order.UserId,
+                    //    OrderDate = order.OrderDate,
+                    //    ShipDate = order.ShipDate
+                    //});
