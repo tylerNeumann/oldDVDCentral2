@@ -25,7 +25,7 @@ namespace TN.DVDCentral.BL
                     Order.OrderDate = order.OrderDate;
                     Order.ShipDate = order.ShipDate;
                     //declaration manager tues last week
-                    Order.OrderItems.ToList() =  foreach (global::BL.Models.Order.OrderItems (object ) => OrderItems.Add(
+                    Order.OrderItems.ToList() =  foreach (Order.OrderItems (object ) => OrderItems.Add(
                     {
                         OrderId 
                         Quantity 
