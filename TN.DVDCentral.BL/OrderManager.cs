@@ -7,7 +7,7 @@ namespace TN.DVDCentral.BL
 {
     public static class OrderManager
     {
-        public static int Insert(Order order, OrderItem orderItems, bool rollback = false)
+        public static int Insert(Order order, bool rollback = false)
         {
             try
             {
@@ -15,35 +15,25 @@ namespace TN.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     IDbContextTransaction transaction = null;
-
+                    List<OrderItem> OrderItems =new List<OrderItem>();
                     if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblOrder entity = new tblOrder();
+                    tblOrder Order = new tblOrder();
                     //tblOrderItem entityItem = new tblOrderItem();
-                    entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
-                    entity.CustomerId = order.CustomerId;
-                    entity.UserId = order.UserId;
-                    entity.OrderDate = order.OrderDate;
-                    entity.ShipDate = order.ShipDate;
-
-                     orderItems =
-                       new OrderItem
-                       {
-                           Id = orderItems.Id,
-                           Quantity = orderItems.Quantity,
-                           MovieId = orderItems.MovieId,
-                           Cost = orderItems.Cost
-                       };
-                    Insert(order, orderItems);
-                        new OrderItem
-                        {
-                        Id = orderItems.Id,
-                        Quantity = orderItems.Quantity,
-                        MovieId = orderItems.MovieId,
-                        Cost = orderItems.Cost
-                        };
-                    Insert(order, orderItems);
-                    entity.Id = order.Id;
-                    dc.Add(entity);
+                    Order.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
+                    Order.CustomerId = order.CustomerId;
+                    Order.UserId = order.UserId;
+                    Order.OrderDate = order.OrderDate;
+                    Order.ShipDate = order.ShipDate;
+                    //declaration manager tues last week
+                    Order.OrderItems.ToList() =  foreach (global::BL.Models.Order.OrderItems (object ) => OrderItems.Add(
+                    {
+                        OrderId 
+                        Quantity 
+                        MovieId 
+                        Cost 
+                    })
+                    Order.Id = order.Id;
+                    dc.Add(Order);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();
                 } 
