@@ -11,30 +11,35 @@ namespace TN.DVDCentral.BL
         {
             try
             {
+
                 int result = 0;
+                List<OrderItem> OrderItems =new List<OrderItem>();
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
+                    
                     IDbContextTransaction transaction = null;
-                    List<OrderItem> OrderItems =new List<OrderItem>();
+                    
                     if (rollback) transaction = dc.Database.BeginTransaction();
+
                     tblOrder Order = new tblOrder();
-                    //tblOrderItem entityItem = new tblOrderItem();
                     Order.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
                     Order.CustomerId = order.CustomerId;
                     Order.UserId = order.UserId;
                     Order.OrderDate = order.OrderDate;
                     Order.ShipDate = order.ShipDate;
+
                     //declaration manager tues last week
-                    Order.OrderItems.ToList() =  foreach (Order.OrderItems (object ) => OrderItems.Add(
+                    foreach(OrderItem item in order.OrderItems)
                     {
-                        OrderId 
-                        Quantity 
-                        MovieId 
-                        Cost 
-                    })
+                        result += OrderItemManager.Insert(item, rollback);
+                    }
+
+                    // Back fill the ID
                     Order.Id = order.Id;
-                    dc.Add(Order);
-                    result = dc.SaveChanges();
+
+                    dc.tblOrders.Add(Order);
+                    result += dc.SaveChanges();
+
                     if (rollback) transaction.Rollback();
                 } 
                 return result;
@@ -151,7 +156,7 @@ namespace TN.DVDCentral.BL
                       join c in dc.tblCustomers on o.CustomerId equals c.Id
                       where o.CustomerId == CustomerId
                       select new
-                     {
+                      {
                          o.Id,
                          o.CustomerId,
                          o.UserId,
@@ -160,7 +165,7 @@ namespace TN.DVDCentral.BL
                          CustomerName = c.FirstName + " " + c.LastName,
                          CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
                          CustomerPhone = c.Phone
-                     })
+                      })
                      .ToList()
                      .ForEach(order => list.Add(new Order
                      {
