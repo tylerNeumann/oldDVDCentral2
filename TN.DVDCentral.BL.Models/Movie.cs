@@ -21,6 +21,6 @@ namespace BL.Models
         public float Cost { get; set; }
         [DisplayName("Quantity")]
         public int InStkQty { get; set; }
-        public string? ImagePath { get; set; }
+        public string? ImagePath { get; set; } = string.Empty;
     }
 }
