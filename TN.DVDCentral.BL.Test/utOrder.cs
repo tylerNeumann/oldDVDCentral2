@@ -82,5 +82,11 @@ namespace TN.DVDCentral.BL.Test
             Assert.AreEqual(order.Id, id);
             Assert.IsTrue(order.OrderItems.Count > 0);
         }
+        [TestMethod]
+        public void LoadByCustomerIdTest()
+        {
+            int customerId = OrderManager.Load().FirstOrDefault().CustomerId;
+            Assert.AreEqual(OrderManager.LoadById(customerId).Id, customerId);
+        }
     }
 }
