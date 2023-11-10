@@ -114,7 +114,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static Order LoadById(int id, OrderItem item)
+        public static Order LoadById(int id)
         {
             try
             {
@@ -123,11 +123,6 @@ namespace TN.DVDCentral.BL
                     tblOrder entity = dc.tblOrders.FirstOrDefault(order => order.Id == id);
                     if (entity != null)
                     {
-                        // (from o in dc.tblOrders join oi in dc.tblOrderItems on o.Id equals oi.OrderId
-                        //where oi.OrderId == o.Id
-                        //select new {
-                        //})
-                        Order order = new Order();
                         return new Order()
                         {
                             Id = entity.Id,
@@ -135,9 +130,9 @@ namespace TN.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
-                            OrderItems = OrderItemManager.LoadById(entity.orderId)
+                            OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
                             
-                        } + item;
+                        };
                     }
                     else
                     {

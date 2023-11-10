@@ -30,7 +30,7 @@ namespace TN.DVDCentral.BL.Test
         public void UpdateTest()
         {
             int id = 0;
-            Order order = OrderManager.LoadById(2, item);
+            Order order = OrderManager.LoadById(2);
             order.CustomerId = 9999;
             int results = OrderManager.Update(order, true);
             Assert.AreEqual(1, results);
@@ -78,7 +78,7 @@ namespace TN.DVDCentral.BL.Test
         public void LoadByIdTest() 
         {
             int id = OrderManager.Load().LastOrDefault().Id;
-            Order order = OrderManager.LoadById(id, item);
+            Order order = OrderManager.LoadById(id);
             Assert.AreEqual(order.Id, id);
             Assert.IsTrue(order.OrderItems.Count > 0);
         }
