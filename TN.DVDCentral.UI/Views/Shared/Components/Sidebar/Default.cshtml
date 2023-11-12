@@ -1,0 +1,17 @@
+﻿@model IEnumerable<TN.DVDCentral.BL.Models.Genre>
+@{
+    <ul>
+        @foreach(var genre in Model)
+        {
+            <li>
+            // <a asp-controller="Genre"
+            //     asp-action="Browse"
+            //     asp-route="@genre.Id">
+            //         @genre.Description
+            // </a>
+                @genre.Description
+            </li>
+            
+        }
+    </ul>
+}

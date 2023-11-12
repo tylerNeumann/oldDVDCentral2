@@ -20,3 +20,35 @@ html {
 body {
   margin-bottom: 60px;
 }
+.card-img{
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgba(0,11,219,1);
+}
+.header h1, .header h2, .header h3, .header h4, .header h5 {
+    margin:0px;
+    padding:0px;
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif'
+}
+.main{
+    margin: 0px;
+    padding: 0px;
+    border-width:1px;
+    border-style: solid;
+}
+.sidebar {
+    margin: 0px 10px 0px 10px;
+    min-height: 500px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-width: 1px;
+    border-style: solid;
+}
+}
