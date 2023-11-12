@@ -7,6 +7,7 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Movies";
             return View(MovieManager.Load());
         }
     }

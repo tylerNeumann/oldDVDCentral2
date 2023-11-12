@@ -7,11 +7,13 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Formats";
             return View(FormatManager.Load());
         }
 
         public IActionResult Details(int id)
         {
+            ViewBag.Title = "Detais";
             return View(FormatManager.LoadById(id));
         }
 
@@ -33,7 +35,12 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id) { return View(FormatManager.LoadById(id)); }
+        public IActionResult Edit(int id) 
+        {
+            var item = FormatManager.LoadById(id);
+            ViewBag.Title = "Edit";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Edit(int id, Format format, bool rollback = false)
         {
@@ -50,7 +57,12 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
 
-        public IActionResult Delete(int id) { return View(FormatManager.LoadById(id)); }
+        public IActionResult Delete(int id) 
+        {
+            var item = FormatManager.LoadById(id);
+            ViewBag.Title = "Delete";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Delete(int id, Format format, bool rollback = false)
         {

@@ -7,15 +7,21 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Genres";
             return View(GenreManager.Load());
         }
 
         public IActionResult Details(int id)
         {
+            ViewBag.Title = "Detais";
             return View(GenreManager.LoadById(id));
         }
 
-        public IActionResult Create() { return View(); }
+        public IActionResult Create() 
+        {
+            ViewBag.Title = "Create";
+            return View(); 
+        }
 
         [HttpPost]
         public IActionResult Create(Genre genre)
@@ -33,7 +39,12 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id) { return View(GenreManager.LoadById(id)); }
+        public IActionResult Edit(int id) 
+        {
+            var item = GenreManager.LoadById(id);
+            ViewBag.Title = "Edit";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Edit(int id, Genre genre, bool rollback = false)
         {
@@ -50,7 +61,12 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
 
-        public IActionResult Delete(int id) { return View(GenreManager.LoadById(id)); }
+        public IActionResult Delete(int id) 
+        {
+            var item = GenreManager.LoadById(id);
+            ViewBag.Title = "Delete";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Delete(int id, Genre genre, bool rollback = false)
         {

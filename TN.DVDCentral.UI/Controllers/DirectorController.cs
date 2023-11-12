@@ -7,15 +7,25 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Directors";
             return View(DirectorManager.Load());
         }
-
+        public IActionResult Browse(int id)
+        {
+            return View(nameof(Index),GenreManager.Load(id));
+        }
         public IActionResult Details(int id) 
         { 
-            return View(DirectorManager.LoadById(id)); 
+            var item = DirectorManager.LoadById(id);
+            ViewBag.Title = "Detais";
+            return View(item);
         }
 
-        public IActionResult Create() { return View(); }
+        public IActionResult Create() 
+        {
+            ViewBag.Title = "Create";
+            return View(); 
+        }
 
         [HttpPost]
         public IActionResult Create(Director director) 
@@ -33,7 +43,12 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
 
-        public IActionResult Edit(int id) { return View(DirectorManager.LoadById(id)); }
+        public IActionResult Edit(int id) 
+        {
+            var item = DirectorManager.LoadById(id);
+            ViewBag.Title = "Edit";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Edit(int id, Director director, bool rollback = false) 
         {
@@ -50,7 +65,12 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
 
-        public IActionResult Delete(int id) { return View(DirectorManager.LoadById(id)); }
+        public IActionResult Delete(int id) 
+        {
+            var item = DirectorManager.LoadById(id);
+            ViewBag.Title = "Delete";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Delete(int id, Director director, bool rollback = false) 
         {

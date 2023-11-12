@@ -7,12 +7,15 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Ratings";
             return View(RatingManager.Load());
         }
 
         public IActionResult Details(int id)
         {
-            return View(RatingManager.LoadById(id));
+            var item = RatingManager.LoadById(id);
+            ViewBag.Title = "Detais";
+            return View(item);
         }
 
         public IActionResult Create() { return View(); }
@@ -23,6 +26,7 @@ namespace TN.DVDCentral.UI.Controllers
             try
             {
                 int result = RatingManager.Insert(rating);
+                ViewBag.Title = "Create";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -33,7 +37,12 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id) { return View(RatingManager.LoadById(id)); }
+        public IActionResult Edit(int id) 
+        {
+            var item = RatingManager.LoadById(id);
+            ViewBag.Title = "Edit";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Edit(int id, Rating rating, bool rollback = false)
         {
@@ -50,7 +59,12 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
 
-        public IActionResult Delete(int id) { return View(RatingManager.LoadById(id)); }
+        public IActionResult Delete(int id) 
+        {
+            var item = RatingManager.LoadById(id);
+            ViewBag.Title = "Delete";
+            return View(item);
+        }
         [HttpPost]
         public IActionResult Delete(int id, Rating rating, bool rollback = false)
         {
