@@ -1,7 +1,7 @@
-﻿using BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using TN.DVDCentral.PL;
+using TN.DVDCentralBL.Models;
 
 namespace TN.DVDCentral.BL
 {
@@ -147,6 +147,50 @@ namespace TN.DVDCentral.BL
                 throw;
             }
 
+        }
+        public static List<Genre> Load(int? genreId = null)
+        {
+            try
+            {
+                List<Genre> list = new List<Genre>();
+                using(DVDCentralEntities dc = new DVDCentralEntities())
+                {/*join movies to genres*/
+                    (from g in dc.tblGenres
+                     join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
+                     join m in dc.tblMovies on mg.MovieId equals m.Id
+                     join f in dc.tblFormats on m.FormatId equals f.Id
+                     join d in dc.tblDirectors on m.DirectorId equals d.Id
+                     join r in dc.tblRatings on m.RatingId equals r.Id
+                     where g.Id == genreId || genreId == null
+                     select new
+                     {
+                         g.Id,
+                         g.Description,
+                         m.Title,
+                         //f.Description,
+                         //r.Description,
+
+
+                     })
+                     .Distinct()
+                     .ToList()
+                     .ForEach(genre => list.Add(new Genre
+                     {
+                         //Id = genre.Id,
+                         //g.Description = genre.Description,
+                         //m.Title = genre.Title,
+                         //m.Description = genre.Description,
+                         //f.Description = genre.Description,
+                         //r.Description = genre.Description
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

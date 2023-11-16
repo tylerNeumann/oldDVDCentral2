@@ -1,4 +1,4 @@
-﻿using BL.Models;
+﻿using TN.DVDCentral.BL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TN.DVDCentral.UI.Controllers

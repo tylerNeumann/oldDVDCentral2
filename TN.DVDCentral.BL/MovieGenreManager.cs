@@ -1,5 +1,4 @@
-﻿using BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using TN.DVDCentral.PL;
 
 namespace TN.DVDCentral.BL

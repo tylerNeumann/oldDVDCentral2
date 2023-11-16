@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL.Models
+namespace TN.DVDCentral.BL.Models
 {
     public class Director
     {

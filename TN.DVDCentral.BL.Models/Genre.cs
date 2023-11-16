@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-namespace BL.Models
+namespace TN.DVDCentralBL.Models
 {
     public class Genre
     {

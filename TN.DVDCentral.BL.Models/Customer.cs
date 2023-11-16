@@ -1,4 +1,4 @@
-﻿namespace BL.Models
+﻿namespace TN.DVDCentral.BL.Models
 {
     public class Customer
     {

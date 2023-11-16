@@ -1,4 +1,4 @@
-﻿using BL.Models;
+﻿using TN.DVDCentral.BL.Models;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using TN.DVDCentral.PL;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BL.Models
+namespace TN.DVDCentral.BL.Models
 {
     public class Movie
     {
