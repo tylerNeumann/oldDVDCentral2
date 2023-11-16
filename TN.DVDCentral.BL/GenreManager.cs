@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using TN.DVDCentral.PL;
-using TN.DVDCentralBL.Models;
+using TN.DVDCentral.BL.Models;
 
 namespace TN.DVDCentral.BL
 {

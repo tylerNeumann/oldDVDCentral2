@@ -14,5 +14,13 @@
     <ProjectReference Include="..\TN.DVDCentral.BL.Models\TN.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL\TN.DVDCentral.BL.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Views\Director\" />
+    <Folder Include="Views\Format\" />
+    <Folder Include="Views\Genre\" />
+    <Folder Include="Views\Movie\" />
+    <Folder Include="Views\Rating\" />
+  </ItemGroup>
 
 </Project>
