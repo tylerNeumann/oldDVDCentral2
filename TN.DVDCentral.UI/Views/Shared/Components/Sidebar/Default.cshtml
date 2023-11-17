@@ -4,16 +4,15 @@
         @foreach(var genre in Model)
         {
             <li>
-            // <a asp-controller="Genre"
-            //     asp-action="Browse"
-            //     asp-route="@genre.Id">
-            //         @genre.Description
-            // </a>
-                @genre.Description
+                <a asp-controller="Genre"
+                   asp-action="Browse"
+                   asp-route-id="@genre.Id">
+                   @genre.Description
+            </a>
             </li>
-            <li><a asp-controller="User" asp-action="Login">Login</a></li>
-            <li><a asp-controller="User" asp-action="Login">Login</a></li>
-            <li><a asp-controller="Genre" asp-action="Index">All Genres</a></li>
         }
+        <li><a asp-controller="User" asp-action="Login">Login</a></li>
+        <li><a asp-controller="User" asp-action="Login">Logout</a></li>
+        <li><a asp-controller="Movie" asp-action="Index">All Movies</a></li>
     </ul>
 }

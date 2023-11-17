@@ -157,31 +157,20 @@ namespace TN.DVDCentral.BL
                 {/*join movies to genres*/
                     (from g in dc.tblGenres
                      join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
-                     join m in dc.tblMovies on mg.MovieId equals m.Id
-                     join f in dc.tblFormats on m.FormatId equals f.Id
-                     join d in dc.tblDirectors on m.DirectorId equals d.Id
-                     join r in dc.tblRatings on m.RatingId equals r.Id
+                     join m in dc.tblMovies on mg.MovieId equals m.Id                     
                      where g.Id == genreId || genreId == null
                      select new
                      {
                          g.Id,
                          g.Description,
-                         m.Title,
-                         //f.Description,
-                         //r.Description,
-
-
+                         m.Title
                      })
                      .Distinct()
                      .ToList()
                      .ForEach(genre => list.Add(new Genre
                      {
-                         //Id = genre.Id,
-                         //g.Description = genre.Description,
-                         //m.Title = genre.Title,
-                         //m.Description = genre.Description,
-                         //f.Description = genre.Description,
-                         //r.Description = genre.Description
+                         Id = genre.Id,
+                         Description = genre.Description                         
                      }));
                 }
                 return list;

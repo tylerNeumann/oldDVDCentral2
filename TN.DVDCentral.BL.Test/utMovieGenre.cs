@@ -1,4 +1,4 @@
-﻿using BL.Models;
+﻿
 using static TN.DVDCentral.BL.MovieGenreManager;
 
 namespace TN.DVDCentral.BL.Test
