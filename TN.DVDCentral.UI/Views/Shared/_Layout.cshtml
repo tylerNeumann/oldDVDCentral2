@@ -1,5 +1,5 @@
-﻿@* @using Microsoft.AspNetCore.Http;
-@inject IHttpContextAccessor HttpContextAccessor *@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +42,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Rating" asp-action="Index">Rating</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            @{
+                                TN.DVDCentral.BL.UserManager.Seed();
+                                var fullname = HttpContextAccessor.HttpContext;
+                            }
                         </li>
                     </ul>
                 </div>
