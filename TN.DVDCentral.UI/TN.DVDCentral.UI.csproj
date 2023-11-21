@@ -14,9 +14,5 @@
     <ProjectReference Include="..\TN.DVDCentral.BL.Models\TN.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL\TN.DVDCentral.BL.csproj" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Views\Customer\" />
-  </ItemGroup>
 
 </Project>
