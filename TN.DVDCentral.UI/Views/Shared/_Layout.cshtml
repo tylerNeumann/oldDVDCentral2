@@ -48,7 +48,8 @@
                         <li class="nav-item">
                             @{
                                 TN.DVDCentral.BL.UserManager.Seed();
-                                var fullname = HttpContextAccessor.HttpContext;
+                                var fullname = HttpContextAccessor.HttpContext;//?.Session.GetString("fullname")
+                               // if (fullname != null) fullname = fullname.Replace("\"", "");
                             }
                             <a class="nav-link text-dark">@fullname</a>
                         </li>

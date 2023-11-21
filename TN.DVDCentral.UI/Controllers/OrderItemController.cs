@@ -5,7 +5,8 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Title = "List of Order Items";
+            return View(OrderItemManager.Load());
         }
     }
 }

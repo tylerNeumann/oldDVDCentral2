@@ -153,24 +153,23 @@ namespace TN.DVDCentral.BL
             try
             {
                 List<Genre> list = new List<Genre>();
-                using(DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities())
                 {/*join movies to genres*/
                     (from g in dc.tblGenres
                      join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
-                     join m in dc.tblMovies on mg.MovieId equals m.Id                     
+                     join m in dc.tblMovies on mg.Id equals m.Id
                      where g.Id == genreId || genreId == null
                      select new
                      {
                          g.Id,
-                         g.Description,
-                         m.Title
+                         g.Description
                      })
                      .Distinct()
                      .ToList()
                      .ForEach(genre => list.Add(new Genre
                      {
                          Id = genre.Id,
-                         Description = genre.Description                         
+                         Description = genre.Description
                      }));
                 }
                 return list;
