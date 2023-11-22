@@ -32,6 +32,7 @@ namespace TN.DVDCentral.UI.Controllers
         }
         public IActionResult LogOut()
         {
+            ViewBag.Title = "Logout";
             SetUser(null);
             return View();
         }
