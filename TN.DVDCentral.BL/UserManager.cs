@@ -24,7 +24,8 @@ namespace TN.DVDCentral.BL
             using(var hasher = SHA1.Create())
             {
                 var hashbytes = Encoding.UTF8.GetBytes(password);
-                return Convert.ToBase64String(hasher.ComputeHash(hashbytes));
+                string hashedpassword = Convert.ToBase64String(hasher.ComputeHash(hashbytes));
+                return hashedpassword;
             }
         }
         public static int DeleteAll() 
@@ -43,27 +44,37 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static int Insert(User user, bool rollback = false) 
+        public static int Insert(User user, bool rollback = false)
         {
-            int results = 0;
-            using(DVDCentralEntities dc = new DVDCentralEntities())
+            try
             {
-                IDbContextTransaction transaction = null;
-                if (rollback) transaction = dc.Database.BeginTransaction();
-                tblUser entity = new tblUser();
-                entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
-                entity.FirstName = user.FirstName;
-                entity.LastName = user.LastName;
-                entity.UserName = user.UserName;
-                entity.Password = GetHash(user.Password);
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblUser entity = new tblUser();
+                    entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
+                    entity.FirstName = user.FirstName;
+                    entity.LastName = user.LastName;
+                    entity.UserName = user.UserName;
+                    entity.Password = GetHash(user.Password);
 
-                //Important -BACKFILL THE REFERENCE ID
-                user.Id = entity.Id;
-                dc.tblUsers.Add(entity);
-                results =dc.SaveChanges();
-                if(rollback) transaction.Rollback();
+                    //Important -BACKFILL THE REFERENCE ID
+                    user.Id = entity.Id;
+                    dc.tblUsers.Add(entity);
+                    results = dc.SaveChanges();
+                    if (rollback) transaction.Rollback();
+                }
+                return results;
             }
-            return results;
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+           
         }
         public static bool Login(User user)
         {
@@ -141,6 +152,7 @@ namespace TN.DVDCentral.BL
                     };
                     Insert(user);
                 }
+                
             }
         }
     }
