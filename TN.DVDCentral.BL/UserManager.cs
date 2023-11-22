@@ -107,6 +107,10 @@ namespace TN.DVDCentral.BL
                     throw new Exception("UserName was not set.");
                 }
             }
+            catch (LoginFailureException)
+            {
+                throw;
+            }
             catch (Exception)
             {
 

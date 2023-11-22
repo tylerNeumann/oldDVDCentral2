@@ -8,23 +8,6 @@ namespace TN.DVDCentral.UI.Controllers
         {
             return View();
         }
-        private void SetUser(User user)
-        {
-            HttpContext.Session.SetObject("user", user);
-            if (user != null)
-            {
-                HttpContext.Session.SetObject("fullname", "Welcome " + user.FullName);
-            }
-            else
-            {
-                HttpContext.Session.SetObject("fullname", string.Empty);
-            }
-        }
-        public IActionResult LogOut()
-        {
-            SetUser(null);
-            return View();
-        }
         public IActionResult Login(string returnUrl)
         {
             TempData["returnUrl"] = returnUrl;
@@ -41,10 +24,27 @@ namespace TN.DVDCentral.UI.Controllers
                 if (TempData["returnUrl"] != null)  return Redirect(TempData["returnUrl"]?.ToString()); 
                 return RedirectToAction(nameof(Index), "Movie");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ViewBag.Error = ex.Message;
+                return View(user);
+            }
+        }
+        public IActionResult LogOut()
+        {
+            SetUser(null);
+            return View();
+        }
+        private void SetUser(User user)
+        {
+            HttpContext.Session.SetObject("user", user);
+            if (user != null)
+            {
+                HttpContext.Session.SetObject("fullname", "Welcome " + user.FullName);
+            }
+            else
+            {
+                HttpContext.Session.SetObject("fullname", string.Empty);
             }
         }
     }
