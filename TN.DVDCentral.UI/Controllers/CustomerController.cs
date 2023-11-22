@@ -16,8 +16,16 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Title = "Create";
-            return View();
+            if(Authentication.IsAuthenticated(HttpContext))
+            {
+                ViewBag.Title = "Create";
+                return View(nameof(Create));
+            }
+            
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
         [HttpPost]
