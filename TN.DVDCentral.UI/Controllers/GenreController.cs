@@ -15,8 +15,9 @@ namespace TN.DVDCentral.UI.Controllers
         }
         public IActionResult Details(int id)
         {
+            var item = GenreManager.LoadById(id);
             ViewBag.Title = "Detais";
-            return View(GenreManager.LoadById(id));
+            return View(item);
         }
 
         public IActionResult Create() 
