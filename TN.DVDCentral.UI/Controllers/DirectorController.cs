@@ -1,5 +1,6 @@
 ﻿using TN.DVDCentral.UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace TN.DVDCentral.UI.Controllers
 {
@@ -20,8 +21,16 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Create() 
         {
-            ViewBag.Title = "Create";
-            return View(); 
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                ViewBag.Title = "Create";
+                return View();
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
 
         [HttpPost]
@@ -42,9 +51,17 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id) 
         {
-            var item = DirectorManager.LoadById(id);
-            ViewBag.Title = "Edit";
-            return View(item);
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                var item = DirectorManager.LoadById(id);
+                ViewBag.Title = "Edit";
+                return View(item);
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
         [HttpPost]
         public IActionResult Edit(int id, Director director, bool rollback = false) 
@@ -64,9 +81,17 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Delete(int id) 
         {
-            var item = DirectorManager.LoadById(id);
-            ViewBag.Title = "Delete";
-            return View(item);
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                var item = DirectorManager.LoadById(id);
+                ViewBag.Title = "Delete";
+                return View(item);
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
         [HttpPost]
         public IActionResult Delete(int id, Director director, bool rollback = false) 
