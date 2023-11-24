@@ -155,5 +155,72 @@ namespace TN.DVDCentral.BL
                 
             }
         }
+        public static int Update(User user, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblUser entity = dc.tblUsers.FirstOrDefault(s => s.Id == user.Id);
+                    if (entity != null)
+                    {
+                        entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
+                        entity.FirstName = user.FirstName;
+                        entity.LastName = user.LastName;
+                        entity.UserName = user.UserName;
+                        entity.Password = user.Password;
+                        entity.Id = user.Id;
+                        result = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("row doesn't exist");
+                    }
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public static User LoadById(int id)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblUser entity = dc.tblUsers.FirstOrDefault(user => user.Id == id);
+                    if (entity != null)
+                    {
+                        return new User()
+                        {
+                            Id = entity.Id,
+                            FirstName = entity.FirstName,
+                            LastName = entity.LastName,
+                            UserName = entity.UserName,
+                            Password = entity.Password,
+
+                        };
+                    }
+                    else
+                    {
+
+                        throw new Exception();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

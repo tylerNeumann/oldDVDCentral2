@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TN.DVDCentral.UI.Controllers
 {
@@ -47,6 +48,59 @@ namespace TN.DVDCentral.UI.Controllers
             {
                 HttpContext.Session.SetObject("fullname", string.Empty);
             }
+        }
+        public IActionResult Create()
+        {
+
+                ViewBag.Title = "Create";
+                return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            try
+            {
+                int result = UserManager.Insert(user);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public IActionResult Edit(int id)
+        {
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                var item = UserManager.LoadById(id);
+                ViewBag.Title = "Edit";
+                return View(item);
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(int id, User user, bool rollback = false)
+        {
+            try
+            {
+                int result = UserManager.Insert(user, rollback);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(user);
+            }
+
         }
     }
 }
