@@ -21,6 +21,7 @@ namespace TN.DVDCentral.BL.Models
         public float Cost { get; set; }
         [DisplayName("Quantity")]
         public int InStkQty { get; set; }
+        [DisplayName("Image")]
         public string? ImagePath { get; set; } = string.Empty;
     }
 }

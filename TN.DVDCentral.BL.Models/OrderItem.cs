@@ -7,5 +7,6 @@
         public int Quantity { get; set; }
         public int MovieId { get; set; }
         public float Cost { get; set; }
+        public string MovieTitle { get; set; }
     }
 }

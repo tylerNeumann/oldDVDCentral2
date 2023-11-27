@@ -1,0 +1,68 @@
+﻿@model TN.DVDCentral.BL.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <dl class="row m-2">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormatDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormatDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DirectorName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DirectorName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RatingDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RatingDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InStkQty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InStkQty)
+        </dd>
+        <dd class = "col-sm-10">
+            <label asp-for="ImagePath" class="control-label"></label>
+            <select asp-for="ImagePath" class="form-control"></select>
+            <img class="imagePropMedium"
+                 alt="Description"
+                 id="movieImage"
+                 onclick="('/images/@Model.ImagePath"
+                 src="~/images/ImagePath" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </dd>
+    </dl>
+</div>
+<div class="m-2">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -172,6 +172,7 @@ namespace TN.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from d in dc.tblOrderItems
+                     join m in dc.tblMovies on d.MovieId equals m.Id
                      where d.OrderId == orderId
                      select new
                      {
@@ -179,7 +180,8 @@ namespace TN.DVDCentral.BL
                          d.OrderId,
                          d.Quantity,
                          d.MovieId,
-                         d.Cost
+                         d.Cost,
+                         m.Title
                      })
                      .ToList()
                      .ForEach(orderItem => list.Add(new OrderItem
@@ -188,7 +190,8 @@ namespace TN.DVDCentral.BL
                          OrderId = orderItem.OrderId,
                          Quantity = orderItem.Quantity,
                          MovieId = orderItem.MovieId,
-                         Cost = (float)orderItem.Cost
+                         Cost = (float)orderItem.Cost,
+                         MovieTitle = orderItem.Title
                      }));
                 }
                 return list;

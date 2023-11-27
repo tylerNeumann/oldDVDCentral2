@@ -43,7 +43,7 @@ public partial class DVDCentralEntities : DbContext
     {
         modelBuilder.Entity<tblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC07F5A1E93D");
+            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC074A1C0759");
 
             entity.ToTable("tblCustomer");
 
@@ -73,7 +73,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblDirector>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblDirec__3214EC0795BC08B6");
+            entity.HasKey(e => e.Id).HasName("PK__tblDirec__3214EC07F23B6638");
 
             entity.ToTable("tblDirector");
 
@@ -88,7 +88,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblFormat>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblForma__3214EC07D1C35CD0");
+            entity.HasKey(e => e.Id).HasName("PK__tblForma__3214EC0708D4883C");
 
             entity.ToTable("tblFormat");
 
@@ -100,7 +100,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblGenre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblGenre__3214EC07EB47250A");
+            entity.HasKey(e => e.Id).HasName("PK__tblGenre__3214EC07F8286580");
 
             entity.ToTable("tblGenre");
 
@@ -112,7 +112,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblMovie>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC07CD2D1034");
+            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC0718F3A97F");
 
             entity.ToTable("tblMovie");
 
@@ -128,7 +128,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblMovieGenre>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC07041C40D4");
+            entity.HasKey(e => e.Id).HasName("PK__tblMovie__3214EC078E19C05F");
 
             entity.ToTable("tblMovieGenre");
 
@@ -137,7 +137,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07E1A61847");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07F2E64A76");
 
             entity.ToTable("tblOrder");
 
@@ -148,7 +148,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblOrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC073BCBB211");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07C01D522A");
 
             entity.ToTable("tblOrderItem");
 
@@ -157,7 +157,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblRating>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblRatin__3214EC07DBE8BDDE");
+            entity.HasKey(e => e.Id).HasName("PK__tblRatin__3214EC078EE941EC");
 
             entity.ToTable("tblRating");
 
@@ -169,7 +169,7 @@ public partial class DVDCentralEntities : DbContext
 
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07D3978387");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07DE7C16F8");
 
             entity.ToTable("tblUser");
 
@@ -181,7 +181,7 @@ public partial class DVDCentralEntities : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Password)
-                .HasMaxLength(25)
+                .HasMaxLength(28)
                 .IsUnicode(false);
             entity.Property(e => e.UserName)
                 .HasMaxLength(25)

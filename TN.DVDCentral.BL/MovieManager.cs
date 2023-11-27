@@ -125,7 +125,8 @@ namespace TN.DVDCentral.BL
                                         FormatDescription = f.Description,
                                         DirectorName = d.FirstName + " " + d.LastName,
                                         RatingDescription = r.Description,
-                                        m.Cost
+                                        m.Cost,
+                                        m.ImagePath
                                     }).FirstOrDefault();
                     if (entity != null)
                     {
@@ -138,7 +139,8 @@ namespace TN.DVDCentral.BL
                             Cost = (float)entity.Cost,
                             FormatDescription = entity.FormatDescription,
                             DirectorName = entity.DirectorName,
-                            RatingDescription = entity.RatingDescription
+                            RatingDescription = entity.RatingDescription,
+                            ImagePath = entity.ImagePath
                         };
                     }
                     else
@@ -175,7 +177,8 @@ namespace TN.DVDCentral.BL
                          FormatDescription = f.Description,
                          DirectorName = d.FirstName + " " + d.LastName,
                          RatingDescription = r.Description,
-                         m.Cost
+                         m.Cost,
+                         m.ImagePath
                      })
                      .Distinct()
                      .ToList()
@@ -188,7 +191,8 @@ namespace TN.DVDCentral.BL
                          FormatDescription = movie.FormatDescription,
                          DirectorName = movie.DirectorName,
                          RatingDescription = movie.RatingDescription,
-                         Cost = (float)movie.Cost                         
+                         Cost = (float)movie.Cost,
+                         ImagePath = movie.ImagePath,
                      }));
                 }
                 return list;

@@ -1,4 +1,7 @@
-﻿namespace TN.DVDCentral.PL;
+﻿using System;
+using System.Collections.Generic;
+
+namespace TN.DVDCentral.PL;
 
 public partial class tblOrder
 {
