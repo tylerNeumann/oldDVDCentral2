@@ -51,4 +51,10 @@ body {
     border-width: 1px;
     border-style: solid;
 }
+
+#LoginHidden{
+    visibility:hidden;
+}
+#LogoutHidden{
+    visibility:hidden;
 }

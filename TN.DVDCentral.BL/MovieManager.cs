@@ -136,9 +136,9 @@ namespace TN.DVDCentral.BL
                             Title = entity.Title,
                             Description = entity.Description,
                             Cost = (float)entity.Cost,
-                            FormatDescription = entity.Description,
+                            FormatDescription = entity.FormatDescription,
                             DirectorName = entity.DirectorName,
-                            RatingDescription = entity.Description
+                            RatingDescription = entity.RatingDescription
                         };
                     }
                     else

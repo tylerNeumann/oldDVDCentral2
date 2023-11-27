@@ -1,11 +1,17 @@
 ﻿
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using TN.DVDCentral.UI.ViewModels;
 
 namespace TN.DVDCentral.UI.Controllers
 {
     public class MovieController : Controller
     {
+        private readonly IWebHostEnvironment _host;
+        public MovieController(IWebHostEnvironment host)
+        {
+            _host = host;
+        }
         public IActionResult Index()
         {
             ViewBag.Title = "List of Movies";
@@ -20,24 +26,25 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
-            if (Authentication.IsAuthenticated(HttpContext))
-            {
-                ViewBag.Title = "Create";
-                return View();
-            }
-
-            else
-            {
-                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
-            }
+            ViewBag.Title = "Create a movie";
+            MovieVM movieVM = new MovieVM();
+            movieVM.Movie = new Movie();
+            movieVM.FormatList = FormatManager.Load();
+            movieVM.RatingList = RatingManager.Load();
+            movieVM.GenreList = GenreManager.Load();
+            movieVM.DirectorList = DirectorManager.Load();
+                
+            if(Authentication.IsAuthenticated(HttpContext)) return View(movieVM);
+            else return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            
         }
 
         [HttpPost]
-        public IActionResult Create(Movie movie)
+        public IActionResult Create(MovieVM movieVM)
         {
             try
             {
-                int result = MovieManager.Insert(movie);
+                int result = MovieManager.Insert(movieVM.Movie);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -52,9 +59,18 @@ namespace TN.DVDCentral.UI.Controllers
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
-                var item = MovieManager.LoadById(id);
-                ViewBag.Title = "Edit";
-                return View(item);
+                
+                MovieVM movieVM = new MovieVM();
+
+                movieVM.Movie = MovieManager.LoadById(id);
+
+                movieVM.FormatList = FormatManager.Load();
+                movieVM.RatingList = RatingManager.Load();
+                movieVM.GenreList = GenreManager.Load();
+                movieVM.DirectorList = DirectorManager.Load();
+
+                ViewBag.Title = "Edit " + movieVM.Movie.Title;
+                return View(movieVM);
             }
 
             else
@@ -64,17 +80,27 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
         [HttpPost]
-        public IActionResult Edit(int id, Movie movie, bool rollback = false)
+        public IActionResult Edit(int id, MovieVM movieVM, bool rollback = false)
         {
             try
             {
-                int result = MovieManager.Insert(movie, rollback);
+                if(movieVM.File != null)
+                {
+                    movieVM.Movie.ImagePath = movieVM.File.FileName;
+                    string path = _host.WebRootPath + "\\images\\";
+                    using(var stream = System.IO.File.Create(path + movieVM.File.FileName))
+                    {
+                        movieVM.File.CopyTo(stream);
+                        ViewBag.Message = "file uploaded successfully...";
+                    }
+                }
+                int result = MovieManager.Update(movieVM.Movie, rollback);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(movie);
+                return View(movieVM);
             }
 
         }

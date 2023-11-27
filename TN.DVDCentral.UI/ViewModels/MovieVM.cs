@@ -7,5 +7,6 @@
         public List<Director> DirectorList { get; set; }
         public List<Rating> RatingList { get; set; }
         public List<Format> FormatList { get; set; }
+        public IFormFile File { get; set; }
     }
 }
