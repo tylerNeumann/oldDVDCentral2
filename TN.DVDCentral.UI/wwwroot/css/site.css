@@ -52,6 +52,12 @@ body {
     border-style: solid;
 }
 
+.sidebar ul {
+    list-style-type: none;
+    padding-left:5px;
+    padding-right:0px;
+}
+
 #LoginHidden{
     visibility:hidden;
 }
@@ -95,7 +101,4 @@ body {
     font-size: 50px;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
-}
-ul,li{
-    list-style: none;
 }
