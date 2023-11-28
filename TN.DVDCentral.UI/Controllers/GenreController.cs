@@ -12,7 +12,9 @@ namespace TN.DVDCentral.UI.Controllers
         }
         public IActionResult Browse(int id)
         {
-            return View(nameof(Index), GenreManager.Load(id));
+            var results = MovieManager.LoadById(id);
+            ViewBag.Title = "List of " + results.Description + " Declarations";
+            return View(nameof(Index), MovieManager.Load(id));
         }
         public IActionResult Details(int id)
         {
