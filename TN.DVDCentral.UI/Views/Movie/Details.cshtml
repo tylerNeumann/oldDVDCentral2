@@ -1,7 +1,6 @@
 ﻿@model TN.DVDCentral.BL.Models.Movie
 
 @{
-    ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -50,14 +49,16 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.InStkQty)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
         <dd class = "col-sm-10">
-            <label asp-for="ImagePath" class="control-label"></label>
-            <select asp-for="ImagePath" class="form-control"></select>
+            @* <label asp-for="ImagePath" class="control-label"></label> *@
             <img class="imagePropMedium"
-                 alt="Description"
+                 alt="@Model.Title"
                  id="movieImage"
                  onclick="('/images/@Model.ImagePath"
-                 src="~/images/ImagePath" />
+                 src="~/images/@Model.ImagePath" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </dd>
     </dl>

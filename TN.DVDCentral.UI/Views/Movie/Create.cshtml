@@ -53,10 +53,16 @@
                 <input asp-for="Movie.InStkQty" class="form-control" />
                 <span asp-validation-for="Movie.InStkQty" class="text-danger"></span>
             </div>
+            <div class="form-group"><label asp-for="Movie.ImagePath" class="control-label">Image</label></div>
             <div class="form-group">
-                <label asp-for="Movie.ImagePath" class="control-label"></label>
-                <input asp-for="Movie.ImagePath" class="form-control" />
+                
+                <img class="imagePropMedium" alt="@Model.Movie.Title" id="movieImage"
+                     src="~/images/@Model.Movie.ImagePath" />
                 <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.ImagePath" class="control-label">Image Path</label>
+                <input asp-for="Movie.ImagePath" class="form-control" />
             </div>
             <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />

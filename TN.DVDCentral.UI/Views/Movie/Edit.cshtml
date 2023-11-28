@@ -50,6 +50,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Movie.ImagePath" class="control-label"></label>
+                <img class="imagePropMedium" 
+                     alt="@Model.Movie.Title" 
+                     id="movieImage"
+                     src="~/images/@Model.Movie.ImagePath" />
                 <input asp-for="Movie.ImagePath" class="form-control" />
                 <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
@@ -63,4 +67,4 @@
 <div class="m-2">
     <a asp-action="Index">Back to List</a>
 </div>
-
+@* image week 13 vid 9 *@
