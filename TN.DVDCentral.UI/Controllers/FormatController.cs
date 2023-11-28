@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TN.DVDCentral.UI.Controllers
@@ -17,7 +18,20 @@ namespace TN.DVDCentral.UI.Controllers
             return View(FormatManager.LoadById(id));
         }
 
-        public IActionResult Create() { return View(); }
+        public IActionResult Create() 
+        {
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                ViewBag.Title = "Create a format";
+                return View();
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+            
+        }
 
         [HttpPost]
         public IActionResult Create(Format format)
@@ -37,9 +51,18 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id) 
         {
-            var item = FormatManager.LoadById(id);
-            ViewBag.Title = "Edita genre";
-            return View(item);
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                var item = FormatManager.LoadById(id);
+                ViewBag.Title = "Edit a format";
+                return View(item);
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+            
         }
         [HttpPost]
         public IActionResult Edit(int id, Format format, bool rollback = false)
@@ -59,9 +82,18 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Delete(int id) 
         {
-            var item = FormatManager.LoadById(id);
-            ViewBag.Title = "Deletea genre";
-            return View(item);
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                var item = FormatManager.LoadById(id);
+                ViewBag.Title = "Delete a format";
+                return View(item);
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+            
         }
         [HttpPost]
         public IActionResult Delete(int id, Format format, bool rollback = false)

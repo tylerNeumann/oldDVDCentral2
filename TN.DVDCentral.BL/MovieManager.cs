@@ -167,6 +167,8 @@ namespace TN.DVDCentral.BL
                      join f in dc.tblFormats on m.Id equals f.Id
                      join d in dc.tblDirectors on m.Id equals d.Id
                      join r in dc.tblRatings on m.Id equals r.Id
+                     join mg in dc.tblMovieGenres on m.Id equals mg.Id
+                     join g in dc.tblGenres on mg.Id equals g.Id
                      where m.Id == genreId || genreId == null
                      select new
                      {
@@ -178,7 +180,8 @@ namespace TN.DVDCentral.BL
                          DirectorName = d.FirstName + " " + d.LastName,
                          RatingDescription = r.Description,
                          m.Cost,
-                         m.ImagePath
+                         m.ImagePath,
+                         GenreDescription = g.Description
                      })
                      .Distinct()
                      .ToList()
@@ -193,6 +196,7 @@ namespace TN.DVDCentral.BL
                          RatingDescription = movie.RatingDescription,
                          Cost = (float)movie.Cost,
                          ImagePath = movie.ImagePath,
+                         GenreDescription = movie.GenreDescription
                      }));
                 }
                 return list;

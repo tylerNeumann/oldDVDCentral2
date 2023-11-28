@@ -17,6 +17,10 @@ namespace TN.DVDCentral.UI.Controllers
             ViewBag.Title = "List of Movies";
             return View(MovieManager.Load());
         }
+        public IActionResult NullViewModel()
+        {
+            return View();
+        }
         public IActionResult Details(int id)
         {
             var item = MovieManager.LoadById(id);
@@ -26,15 +30,22 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Title = "Create a movie";
-            MovieVM movieVM = new MovieVM();
-            movieVM.Movie = new Movie();
-            movieVM.FormatList = FormatManager.Load();
-            movieVM.RatingList = RatingManager.Load();
-            movieVM.GenreList = GenreManager.Load();
-            movieVM.DirectorList = DirectorManager.Load();
-                
-            if(Authentication.IsAuthenticated(HttpContext)) return View(movieVM);
+
+
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                ViewBag.Title = "Create a movie";
+                MovieVM movieVM = new MovieVM();
+
+                movieVM.Movie = new Movie();
+
+                movieVM.FormatList = FormatManager.Load();
+                movieVM.RatingList = RatingManager.Load();
+                movieVM.GenreList = GenreManager.Load();
+                movieVM.DirectorList = DirectorManager.Load();
+
+                return View(movieVM);
+            }
             else return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
             
         }
@@ -59,18 +70,27 @@ namespace TN.DVDCentral.UI.Controllers
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
-                
                 MovieVM movieVM = new MovieVM();
 
-                movieVM.Movie = MovieManager.LoadById(id);
+                if (movieVM != null)
+                {
+                    
+                    movieVM.Movie = MovieManager.LoadById(id);
 
-                movieVM.FormatList = FormatManager.Load();
-                movieVM.RatingList = RatingManager.Load();
-                movieVM.GenreList = GenreManager.Load();
-                movieVM.DirectorList = DirectorManager.Load();
+                    movieVM.FormatList = FormatManager.Load();
+                    movieVM.RatingList = RatingManager.Load();
+                    movieVM.GenreList = GenreManager.Load();
+                    movieVM.DirectorList = DirectorManager.Load();
 
-                ViewBag.Title = "Edit " + movieVM.Movie.Title;
-                return View(movieVM);
+                    ViewBag.Title = "Edit " + movieVM.Movie.Title;
+
+                    return View(movieVM);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(NullViewModel));
+                }
+                
             }
 
             else
@@ -84,11 +104,11 @@ namespace TN.DVDCentral.UI.Controllers
         {
             try
             {
-                if(movieVM.File != null)
+                if (movieVM.File != null)
                 {
                     movieVM.Movie.ImagePath = movieVM.File.FileName;
                     string path = _host.WebRootPath + "\\images\\";
-                    using(var stream = System.IO.File.Create(path + movieVM.File.FileName))
+                    using (var stream = System.IO.File.Create(path + movieVM.File.FileName))
                     {
                         movieVM.File.CopyTo(stream);
                         ViewBag.Message = "file uploaded successfully...";
@@ -96,13 +116,13 @@ namespace TN.DVDCentral.UI.Controllers
                 }
                 int result = MovieManager.Update(movieVM.Movie, rollback);
                 return RedirectToAction(nameof(Index));
+
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View(movieVM);
             }
-
         }
 
         public IActionResult Delete(int id)

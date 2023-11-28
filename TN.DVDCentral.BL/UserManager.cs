@@ -222,5 +222,31 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblUser entity = dc.tblUsers.FirstOrDefault(s => s.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Remove(entity);
+                        result = dc.SaveChanges();
+                    }
+                    else { throw new Exception("row doesn't exist"); }
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
