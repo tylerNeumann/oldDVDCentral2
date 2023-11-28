@@ -163,10 +163,10 @@ namespace TN.DVDCentral.BL
                          o.CustomerId,
                          o.UserId,
                          o.ShipDate,
-                         o.OrderDate,
-                         CustomerName = c.FirstName.ToString() + " " + c.LastName.ToString(),
-                         CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
-                         CustomerPhone = c.Phone
+                         o.OrderDate
+                         //CustomerName = c.FirstName.ToString() + " " + c.LastName.ToString(),
+                         //CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
+                         //CustomerPhone = c.Phone
                       })
                      .ToList()
                      .ForEach(order => list.Add(new Order
@@ -175,10 +175,10 @@ namespace TN.DVDCentral.BL
                          CustomerId = order.CustomerId,
                          UserId = order.UserId,
                          OrderDate = order.OrderDate,
-                         ShipDate = order.ShipDate,
-                         CustomerName = order.CustomerName,
-                         CustomerAddress = order.CustomerAddress,
-                         CustomerPhone = order.CustomerPhone
+                         ShipDate = order.ShipDate
+                         //CustomerName = order.CustomerName,
+                         //CustomerAddress = order.CustomerAddress,
+                         //CustomerPhone = order.CustomerPhone
                      }));
                     
                 }

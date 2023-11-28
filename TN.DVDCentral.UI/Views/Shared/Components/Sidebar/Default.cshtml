@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<TN.DVDCentral.BL.Models.Genre>
-@{
+
     <ul>
         @foreach(var genre in Model)
         {
@@ -13,4 +13,3 @@
         }
         <li><a asp-controller="Movie" asp-action="Index">All Movies</a></li>
     </ul>
-}
