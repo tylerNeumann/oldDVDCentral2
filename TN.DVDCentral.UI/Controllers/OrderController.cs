@@ -4,10 +4,10 @@ namespace TN.DVDCentral.UI.Controllers
 {
     public class OrderController : Controller
     {
-        public IActionResult Index(int? CustomerId = null)
+        public IActionResult Index()
         {
             ViewBag.Title = "List of Orders";
-            return View(OrderManager.LoadByCustomerId(CustomerId));
+            return View(OrderManager.Load());
         }
         public IActionResult Details(int id)
         {
