@@ -147,7 +147,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static List<Order> Load(int? CustomerId = null)
+        public static List<Order> LoadByCustomerId(int? CustomerId = null)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace TN.DVDCentral.BL
                          o.UserId,
                          o.ShipDate,
                          o.OrderDate,
-                         CustomerName = c.FirstName + " " + c.LastName,
+                         CustomerName = c.FirstName.ToString() + " " + c.LastName.ToString(),
                          CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
                          CustomerPhone = c.Phone
                       })
@@ -180,6 +180,7 @@ namespace TN.DVDCentral.BL
                          CustomerAddress = order.CustomerAddress,
                          CustomerPhone = order.CustomerPhone
                      }));
+                    
                 }
                 return list;
             }

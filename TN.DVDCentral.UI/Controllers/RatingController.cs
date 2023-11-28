@@ -13,11 +13,15 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Details(int id)
         {
             var item = RatingManager.LoadById(id);
-            ViewBag.Title = "Detais";
+            ViewBag.Title = "Rating Details";
             return View(item);
         }
 
-        public IActionResult Create() { return View(); }
+        public IActionResult Create() 
+        {
+            ViewBag.Title = "Create a rating";
+            return View(); 
+        }
 
         [HttpPost]
         public IActionResult Create(Rating rating)
@@ -25,7 +29,6 @@ namespace TN.DVDCentral.UI.Controllers
             try
             {
                 int result = RatingManager.Insert(rating);
-                ViewBag.Title = "Create";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -39,7 +42,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Edit(int id) 
         {
             var item = RatingManager.LoadById(id);
-            ViewBag.Title = "Edit";
+            ViewBag.Title = "Edit a rating";
             return View(item);
         }
         [HttpPost]
@@ -61,7 +64,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Delete(int id) 
         {
             var item = RatingManager.LoadById(id);
-            ViewBag.Title = "Delete";
+            ViewBag.Title = "Delete a rating";
             return View(item);
         }
         [HttpPost]

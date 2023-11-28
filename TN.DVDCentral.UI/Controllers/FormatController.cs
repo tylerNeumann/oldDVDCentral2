@@ -13,7 +13,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Details(int id)
         {
-            ViewBag.Title = "Detais";
+            ViewBag.Title = "Format Details";
             return View(FormatManager.LoadById(id));
         }
 
@@ -38,7 +38,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Edit(int id) 
         {
             var item = FormatManager.LoadById(id);
-            ViewBag.Title = "Edit";
+            ViewBag.Title = "Edita genre";
             return View(item);
         }
         [HttpPost]
@@ -60,7 +60,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Delete(int id) 
         {
             var item = FormatManager.LoadById(id);
-            ViewBag.Title = "Delete";
+            ViewBag.Title = "Deletea genre";
             return View(item);
         }
         [HttpPost]

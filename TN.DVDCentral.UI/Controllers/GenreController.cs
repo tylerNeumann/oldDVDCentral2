@@ -17,7 +17,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Details(int id)
         {
             var item = GenreManager.LoadById(id);
-            ViewBag.Title = "Detais";
+            ViewBag.Title = "Genre Details";
             return View(item);
         }
 
@@ -25,7 +25,7 @@ namespace TN.DVDCentral.UI.Controllers
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
-                ViewBag.Title = "Create";
+                ViewBag.Title = "Create a genre";
                 return View();
             }
 
@@ -55,7 +55,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = GenreManager.LoadById(id);
-                ViewBag.Title = "Edit";
+                ViewBag.Title = "Edit a genre";
                 return View(item);
             }
 
@@ -86,7 +86,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = GenreManager.LoadById(id);
-                ViewBag.Title = "Delete";
+                ViewBag.Title = "Delete a genre";
                 return View(item);
             }
 

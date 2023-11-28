@@ -1,7 +1,6 @@
 ﻿@model TN.DVDCentral.BL.Models.Order
 
 @{
-    ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -33,10 +32,10 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="m-2">
     <partial name="OrderItemsPartial" model="Model.OrderItems" />
 </div>
-<div>
+<div class="m-2">
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
 </div>

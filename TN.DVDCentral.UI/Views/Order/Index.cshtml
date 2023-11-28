@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<TN.DVDCentral.BL.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*should add the customer name in place of CustomerId*@
 <p class="m-2">
     <a asp-action="Create">Create New</a>
 </p>
@@ -13,6 +12,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
@@ -30,6 +32,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)

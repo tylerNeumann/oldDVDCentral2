@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using TN.DVDCentral.BL.Models;
 namespace TN.DVDCentral.UI.Controllers
 {
     public class OrderController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int? CustomerId = null)
         {
             ViewBag.Title = "List of Orders";
-            return View(OrderManager.Load());
+            return View(OrderManager.LoadByCustomerId(CustomerId));
         }
         public IActionResult Details(int id)
         {
-            ViewBag.Title = "Detais";
+            ViewBag.Title = "Order Details";
             return View(OrderManager.LoadById(id));
         }
 
@@ -20,7 +19,7 @@ namespace TN.DVDCentral.UI.Controllers
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
-                ViewBag.Title = "Create";
+                ViewBag.Title = "Create an order";
                 return View();
             }
 
@@ -51,7 +50,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = OrderManager.LoadById(id);
-                ViewBag.Title = "Edit";
+                ViewBag.Title = "Edit an order";
                 return View(item);
             }
 
@@ -82,7 +81,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = OrderManager.LoadById(id);
-                ViewBag.Title = "Delete";
+                ViewBag.Title = "Delete an order";
                 return View(item);
             }
 

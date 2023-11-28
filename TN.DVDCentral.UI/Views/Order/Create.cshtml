@@ -1,7 +1,6 @@
 ﻿@model TN.DVDCentral.BL.Models.Order
 
 @{
-    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -34,24 +33,19 @@
                 <input asp-for="CustomerName" class="form-control" />
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+@*             <div class="form-group">
                 <label asp-for="CustomerAddress" class="control-label"></label>
                 <input asp-for="CustomerAddress" class="form-control" />
                 <span asp-validation-for="CustomerAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerPhone" class="control-label"></label>
-                <input asp-for="CustomerPhone" class="form-control" />
-                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div> *@
+            <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div class="m-2">
     <a asp-action="Index">Back to List</a>
 </div>
 

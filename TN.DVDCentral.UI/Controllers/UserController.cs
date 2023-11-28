@@ -52,7 +52,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Create()
         {
 
-                ViewBag.Title = "Create";
+                ViewBag.Title = "Create a user";
                 return View();
 
         }
@@ -78,7 +78,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = UserManager.LoadById(id);
-                ViewBag.Title = "Edit";
+                ViewBag.Title = "Edit a user";
                 return View(item);
             }
 
@@ -93,6 +93,28 @@ namespace TN.DVDCentral.UI.Controllers
             try
             {
                 int result = UserManager.Insert(user, rollback);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(user);
+            }
+
+        }
+
+        public IActionResult DeleteAll()
+        {
+            var item = UserManager.DeleteAll();
+            ViewBag.Title = "Delete all users";
+            return View(item);
+        }
+        [HttpPost]
+        public IActionResult DeleteAll(User user, bool rollback = false)
+        {
+            try
+            {
+                int result = UserManager.DeleteAll();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
