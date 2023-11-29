@@ -102,3 +102,17 @@ body {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
 }
+
+.bg-dark {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,11,219,1) 35%);
+}
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.card-img {
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

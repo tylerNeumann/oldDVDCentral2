@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
+using System.Linq;
 using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL;
 
@@ -156,6 +157,50 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
+        //public static List<Movie> Load()
+        //{
+        //    try
+        //    {
+        //        List<Movie> list = new List<Movie>();
+        //        using (DVDCentralEntities dc = new DVDCentralEntities())
+        //        {
+        //            (from d in dc.tblMovies
+        //             select new
+        //             {
+        //                 d.Id,
+        //                 d.Cost,
+        //                 d.Description,
+        //                 d.DirectorId,
+        //                 d.FormatId,
+        //                 d.ImagePath,
+        //                 d.InStkQty,
+        //                 d.RatingId,
+        //                 d.Title 
+        //             })
+        //             .ToList()
+        //             .ForEach(movie => list.Add(new Movie
+        //             {
+        //                 Id = movie.Id,
+        //                 Cost = (float)movie.Cost,
+        //                 Description = movie.Description,
+        //                 DirectorId = movie.DirectorId,
+        //                 FormatId = movie.FormatId,
+        //                 ImagePath = movie.ImagePath,
+        //                 InStkQty = movie.InStkQty,                         
+        //                 RatingId = movie.RatingId,
+        //                 Title = movie.Title
+        //             }));
+        //        }
+        //        return list;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
+
         public static List<Movie> Load(int? genreId = null)
         {
             try
@@ -164,12 +209,12 @@ namespace TN.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from m in dc.tblMovies
-                     join f in dc.tblFormats on m.Id equals f.Id
-                     join d in dc.tblDirectors on m.Id equals d.Id
-                     join r in dc.tblRatings on m.Id equals r.Id
-                     join mg in dc.tblMovieGenres on m.Id equals mg.Id
-                     join g in dc.tblGenres on mg.Id equals g.Id
-                     where m.Id == genreId || genreId == null
+                     join f in dc.tblFormats on m.FormatId equals f.Id
+                     join d in dc.tblDirectors on m.DirectorId equals d.Id
+                     join r in dc.tblRatings on m.RatingId equals r.Id
+                     join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
+                     join g in dc.tblGenres on mg.GenreId equals g.Id
+                     where g.Id == genreId || genreId == null
                      select new
                      {
                          m.Id,

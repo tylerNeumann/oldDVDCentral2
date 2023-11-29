@@ -23,5 +23,6 @@ namespace TN.DVDCentral.BL.Models
         public int InStkQty { get; set; }
         [DisplayName("Image")]
         public string? ImagePath { get; set; } = string.Empty;
+        public int GenreId { get; set; }
     }
 }
