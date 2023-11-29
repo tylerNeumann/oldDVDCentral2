@@ -87,6 +87,13 @@
                     @await Component.InvokeAsync("SideBar")
                 </div>
             </div>
+
+            <div id="overlay" onclick="off()">
+                <div id="imgPropLarge">
+                    <img class="imagePropLarge" id="output"/>
+                </div>
+            </div>
+
             <div class="col-md-9 main body-content rounded-top">
                 <div class="header rounded-top">
                     <h4 class="p-2">@ViewBag.Title</h4>
@@ -115,9 +122,9 @@
         console.log("Off");
         document.getElementById("overlay").style.display = "none";
     }
-    function on() {
+    function on(picture) {
         console.log("On");
         document.getElementById("overlay").style.display = "block";
-
+        document.getElementById("output").src = picture;
     }
 </script>

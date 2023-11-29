@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="card-body">
-                    <h3> <img src="~/images/@item.ImagePath" id="movieImage" onclick="('/images/@item.ImagePath')" class="imagePropSmall" alt="@item.Description" /> </h3>
+                    <h3> <img src="~/images/@item.ImagePath" id="movieImage" onclick="on('/images/@item.ImagePath')" class="imagePropSmall" alt="@item.Title" /> </h3>
 
                     <h3> @Html.DisplayNameFor(model => model.Description) </h3>
                     <h3> @Html.DisplayFor(modelItem => item.Description) </h3>
