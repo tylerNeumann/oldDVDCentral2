@@ -177,6 +177,7 @@ namespace TN.DVDCentral.BL
         //                 d.RatingId,
         //                 d.Title 
         //             })
+        //             .Distinct()
         //             .ToList()
         //             .ForEach(movie => list.Add(new Movie
         //             {
