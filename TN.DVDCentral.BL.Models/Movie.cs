@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TN.DVDCentral.BL.Models
 {
@@ -18,11 +19,12 @@ namespace TN.DVDCentral.BL.Models
         [DisplayName("Genre Description")]
         public string GenreDescription { get; set; }
         public int RatingId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public float Cost { get; set; }
         [DisplayName("Quantity")]
         public int InStkQty { get; set; }
         [DisplayName("Image")]
-        public string? ImagePath { get; set; } = string.Empty;
+        public string? ImagePath { get; set; } = " ";
         public int GenreId { get; set; }
     }
 }

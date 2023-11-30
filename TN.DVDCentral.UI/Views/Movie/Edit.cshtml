@@ -2,7 +2,7 @@
 
 <div class="row m-2">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input hidden asp-for="Movie.Id" class="form-control" />
@@ -19,24 +19,31 @@
             </div>
             <div class="form-group">
                 <label asp-for="Movie.FormatDescription" class="control-label"></label>
-                <input asp-for="Movie.FormatDescription" class="form-control" />
-                <span asp-validation-for="Movie.FormatDescription" class="text-danger"></span>
+                <select asp-for="Movie.FormatId" class="form-control"
+                        asp-items="@(new SelectList(Model.FormatList,"Id", "Description"))"/>
+                <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movie.DirectorName" class="control-label"></label>
-                <input asp-for="Movie.DirectorName" class="form-control" />
-                <span asp-validation-for="Movie.DirectorName" class="text-danger"></span>
+                <select asp-for="Movie.DirectorId" class="form-control"
+                        asp-items="@(new SelectList(Model.DirectorList,"Id", "First", "Last"))"/>
+                <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movie.RatingDescription" class="control-label"></label>
-                <input asp-for="Movie.RatingDescription" class="form-control" />
-                <span asp-validation-for="Movie.RatingDescription" class="text-danger"></span>
+                <select asp-for="Movie.RatingId" class="form-control"
+                        asp-items="@(new SelectList(Model.RatingList,"Id", "Description"))"/>
+                <span asp-validation-for="Movie.RatingId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movie.GenreDescription" class="control-label"></label>
-                <select multiple asp-for="Movie.DirectorName" class="form-control"
-                        asp-items="@(new SelectList(Model.GenreList, "Id","Description"))"></select>
-                <span asp-validation-for="Movie.RatingDescription" class="text-danger"></span>
+                <select 
+                    asp-for="Movie.GenreId" 
+                    class="form-control" 
+                    multiple
+                    asp-items="@(new SelectList(Model.GenreList, "Id","Description"))">
+                </select>
+                <span asp-validation-for="Movie.GenreId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movie.Cost" class="control-label"></label>
@@ -55,6 +62,7 @@
                      id="movieImage"
                      src="~/images/@Model.Movie.ImagePath" />
                 <input asp-for="Movie.ImagePath" class="form-control" />
+                <input type="file" name="File" id="File" accept="image/" onchange="loadFile(event)"/>
                 <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
             <div class="form-group mt-2">
@@ -67,4 +75,16 @@
 <div class="m-2">
     <a asp-action="Index">Back to List</a>
 </div>
-@* image week 13 vid 9 *@
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('movieImage');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>

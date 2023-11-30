@@ -20,8 +20,7 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Browse(int id)
         {
             var results = GenreManager.LoadById(id);
-            ViewBag.Title = "List of " + results.Description + " Declarations";
-            //throw new Exception("hit browse");
+            ViewBag.Title = "List of " + results.Description + " movies";
             return View(nameof(Index), MovieManager.Load(id));
         }
         public IActionResult NullViewModel()

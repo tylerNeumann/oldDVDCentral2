@@ -27,7 +27,7 @@ namespace TN.DVDCentral.BL
                     entity.RatingId = movie.RatingId;
                     entity.Cost = movie.Cost;
                     entity.ImagePath = movie.ImagePath;
-                    entity.Id = movie.Id;
+                    movie.Id = entity.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();
@@ -227,7 +227,11 @@ namespace TN.DVDCentral.BL
                          RatingDescription = r.Description,
                          m.Cost,
                          m.ImagePath,
-                         GenreDescription = g.Description
+                         GenreDescription = g.Description,
+                         m.DirectorId,
+                         m.FormatId,
+                         m.RatingId,
+                         mg.GenreId
                      })
                      .Distinct()
                      .ToList()
@@ -242,7 +246,11 @@ namespace TN.DVDCentral.BL
                          RatingDescription = movie.RatingDescription,
                          Cost = (float)movie.Cost,
                          ImagePath = movie.ImagePath,
-                         GenreDescription = movie.GenreDescription
+                         GenreDescription = movie.GenreDescription,
+                         DirectorId = movie.DirectorId,
+                         FormatId = movie.FormatId,
+                         RatingId = movie.RatingId,
+                         GenreId = movie.GenreId
                      }));
                 }
                 return list;
