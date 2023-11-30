@@ -40,7 +40,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Update(MovieGenre movieGenreGenre, bool rollback = false)
+        public static int Update(MovieGenre movieGenre, int movieId, int genreId, bool rollback = false)
         {
             try
             {
@@ -49,13 +49,14 @@ namespace TN.DVDCentral.BL
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblMovieGenre tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(s => s.Id == movieGenreGenre.Id);
+
+                    tblMovieGenre tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.Id == movieGenre.Id);
                     if (tblMovieGenre != null)
                     {
                         tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
-                        tblMovieGenre.MovieId = movieGenreGenre.MovieId;
-                        tblMovieGenre.GenreId = movieGenreGenre.GenreId;
-                        tblMovieGenre.Id = movieGenreGenre.Id;
+                        tblMovieGenre.MovieId = movieId;
+                        tblMovieGenre.GenreId = genreId;
+                        tblMovieGenre.Id = movieGenre.Id;
                         result = dc.SaveChanges();
                     }
                     else
