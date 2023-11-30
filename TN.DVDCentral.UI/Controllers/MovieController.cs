@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.UI.ViewModels;
 
 namespace TN.DVDCentral.UI.Controllers
@@ -23,10 +24,7 @@ namespace TN.DVDCentral.UI.Controllers
             ViewBag.Title = "List of " + results.Description + " movies";
             return View(nameof(Index), MovieManager.Load(id));
         }
-        public IActionResult NullViewModel()
-        {
-            return View();
-        }
+
         public IActionResult Details(int id)
         {
             var item = MovieManager.LoadById(id);
@@ -76,27 +74,11 @@ namespace TN.DVDCentral.UI.Controllers
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
-                MovieVM movieVM = new MovieVM();
-
-                if (movieVM != null)
-                {
-                    
-                    movieVM.Movie = MovieManager.LoadById(id);
-
-                    movieVM.FormatList = FormatManager.Load();
-                    movieVM.RatingList = RatingManager.Load();
-                    movieVM.GenreList = GenreManager.Load();
-                    movieVM.DirectorList = DirectorManager.Load();
-
-                    ViewBag.Title = "Edit " + movieVM.Movie.Title;
-
-                    return View(movieVM);
-                }
-                else
-                {
-                    return RedirectToAction(nameof(NullViewModel));
-                }
+                MovieVM movieVM = new MovieVM(id);
+                ViewBag.Title = "Edit " + movieVM.Movie.Title;
+                HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
                 
+                return View(movieVM);                
             }
 
             else
@@ -110,6 +92,18 @@ namespace TN.DVDCentral.UI.Controllers
         {
             try
             {
+                IEnumerable<int> newGenreIds = new List<int>();
+                if(movieVM.GenreIds != null) newGenreIds = movieVM.GenreIds;
+
+                IEnumerable<int> oldGenreIds = new List<int>();
+                oldGenreIds = getObject();
+
+                IEnumerable<int> deletes = oldGenreIds.Except(newGenreIds);
+                IEnumerable<int> adds = newGenreIds.Except(oldGenreIds);
+
+                deletes.ToList().ForEach(d => MovieGenreManager.Delete(id, d));
+                adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
+
                 if (movieVM.File != null)
                 {
                     movieVM.Movie.ImagePath = movieVM.File.FileName;
@@ -128,6 +122,18 @@ namespace TN.DVDCentral.UI.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View(movieVM);
+            }
+        }
+
+        private IEnumerable<int> getObject()
+        {
+            if(HttpContext.Session.GetObject<IEnumerable<int>>("genreids") != null)
+            {
+                return HttpContext.Session.GetObject<IEnumerable<int>> ("genreids");
+            }
+            else
+            {
+                return null;
             }
         }
 

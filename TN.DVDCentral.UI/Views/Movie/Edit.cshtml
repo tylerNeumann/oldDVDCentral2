@@ -6,35 +6,46 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input hidden asp-for="Movie.Id" class="form-control" />
-
+            
+            @* Title *@
             <div class="form-group">
                 <label asp-for="Movie.Title" class="control-label"></label>
                 <input asp-for="Movie.Title" class="form-control" />
                 <span asp-validation-for="Movie.Title" class="text-danger"></span>
             </div>
+
+            @* Description *@
             <div class="form-group">
                 <label asp-for="Movie.Description" class="control-label"></label>
                 <input asp-for="Movie.Description" class="form-control" />
                 <span asp-validation-for="Movie.Description" class="text-danger"></span>
             </div>
+
+            @* Format *@
             <div class="form-group">
                 <label asp-for="Movie.FormatDescription" class="control-label"></label>
                 <select asp-for="Movie.FormatId" class="form-control"
-                        asp-items="@(new SelectList(Model.FormatList,"Id", "Description"))"/>
+                        asp-items="@(new SelectList(Model.FormatList,"Id", "Description"))"></select>
                 <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
             </div>
+
+            @* Director *@
             <div class="form-group">
                 <label asp-for="Movie.DirectorName" class="control-label"></label>
                 <select asp-for="Movie.DirectorId" class="form-control"
-                        asp-items="@(new SelectList(Model.DirectorList,"Id", "First", "Last"))"/>
+                        asp-items="@(new SelectList(Model.DirectorList,"Id", "FullName"))"></select>
                 <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
             </div>
+
+            @* Rating *@
             <div class="form-group">
                 <label asp-for="Movie.RatingDescription" class="control-label"></label>
                 <select asp-for="Movie.RatingId" class="form-control"
-                        asp-items="@(new SelectList(Model.RatingList,"Id", "Description"))"/>
+                        asp-items="@(new SelectList(Model.RatingList,"Id", "Description"))"></select>
                 <span asp-validation-for="Movie.RatingId" class="text-danger"></span>
             </div>
+
+            @* Genre *@
             <div class="form-group">
                 <label asp-for="Movie.GenreDescription" class="control-label"></label>
                 <select 
@@ -45,16 +56,22 @@
                 </select>
                 <span asp-validation-for="Movie.GenreId" class="text-danger"></span>
             </div>
+
+            @* Cost *@
             <div class="form-group">
                 <label asp-for="Movie.Cost" class="control-label"></label>
                 <input asp-for="Movie.Cost" class="form-control" />
                 <span asp-validation-for="Movie.Cost" class="text-danger"></span>
             </div>
+
+            @* Quantity *@
             <div class="form-group">
                 <label asp-for="Movie.InStkQty" class="control-label"></label>
                 <input asp-for="Movie.InStkQty" class="form-control" />
                 <span asp-validation-for="Movie.InStkQty" class="text-danger"></span>
             </div>
+
+            @* Image *@
             <div class="form-group">
                 <label asp-for="Movie.ImagePath" class="control-label"></label>
                 <img class="imagePropMedium" 
@@ -65,6 +82,7 @@
                 <input type="file" name="File" id="File" accept="image/" onchange="loadFile(event)"/>
                 <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
+
             <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

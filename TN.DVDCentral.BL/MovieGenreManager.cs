@@ -11,21 +11,23 @@ namespace TN.DVDCentral.BL
             public int MovieId { get; set; }
             public int GenreId { get; set; }
         }
-        public static int Insert(MovieGenre movieGenreGenre, bool rollback = false)
+        public static int Insert(int movieId, int genreId, bool rollback = false)
         {
             try
             {
-                int result =0;
+                int result = 0;
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblMovieGenre entity = new tblMovieGenre();
-                    entity.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
-                    entity.MovieId = movieGenreGenre.MovieId;
-                    entity.GenreId = movieGenreGenre.GenreId;
-                    entity.Id = movieGenreGenre.Id;
-                    dc.Add(entity);
+                    tblMovieGenre tblMovieGenre = new tblMovieGenre();
+
+                    tblMovieGenre.MovieId = movieId;
+                    tblMovieGenre.GenreId = genreId;
+
+                    tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+
+                    dc.tblMovieGenres.Add(tblMovieGenre);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();
                 }
@@ -47,13 +49,13 @@ namespace TN.DVDCentral.BL
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == movieGenreGenre.Id);
-                    if (entity != null)
+                    tblMovieGenre tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(s => s.Id == movieGenreGenre.Id);
+                    if (tblMovieGenre != null)
                     {
-                        entity.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
-                        entity.MovieId = movieGenreGenre.MovieId;
-                        entity.GenreId = movieGenreGenre.GenreId;
-                        entity.Id = movieGenreGenre.Id;
+                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                        tblMovieGenre.MovieId = movieGenreGenre.MovieId;
+                        tblMovieGenre.GenreId = movieGenreGenre.GenreId;
+                        tblMovieGenre.Id = movieGenreGenre.Id;
                         result = dc.SaveChanges();
                     }
                     else
@@ -71,7 +73,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(int movieId, int genreId, bool rollback = false)
         {
             try
             {
@@ -80,10 +82,39 @@ namespace TN.DVDCentral.BL
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == id);
-                    if (entity != null)
+
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId);
+                    if (tblMovieGenre != null)
                     {
-                        dc.Remove(entity);
+                        dc.Remove(tblMovieGenre);
+                        result = dc.SaveChanges();
+                    }
+                    else { throw new Exception("row doesn't exist"); }
+                    if (rollback) transaction.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Add(int movieId, int genreId, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId);
+                    if (tblMovieGenre != null)
+                    {
+                        dc.Add(tblMovieGenre);
                         result = dc.SaveChanges();
                     }
                     else { throw new Exception("row doesn't exist"); }
@@ -103,14 +134,14 @@ namespace TN.DVDCentral.BL
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(movieGenre => movieGenre.Id == id);
-                    if (entity != null)
+                    tblMovieGenre tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(movieGenre => movieGenre.Id == id);
+                    if (tblMovieGenre != null)
                     {
                         return new MovieGenre()
                         {
-                            Id = entity.Id,
-                            MovieId = entity.MovieId,
-                            GenreId = entity.GenreId
+                            Id = tblMovieGenre.Id,
+                            MovieId = tblMovieGenre.MovieId,
+                            GenreId = tblMovieGenre.GenreId
                         };
                     }
                     else
