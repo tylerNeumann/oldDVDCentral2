@@ -157,50 +157,6 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        //public static List<Movie> Load()
-        //{
-        //    try
-        //    {
-        //        List<Movie> list = new List<Movie>();
-        //        using (DVDCentralEntities dc = new DVDCentralEntities())
-        //        {
-        //            (from d in dc.tblMovies
-        //             select new
-        //             {
-        //                 d.Id,
-        //                 d.Cost,
-        //                 d.Description,
-        //                 d.DirectorId,
-        //                 d.FormatId,
-        //                 d.ImagePath,
-        //                 d.InStkQty,
-        //                 d.RatingId,
-        //                 d.Title 
-        //             })
-        //             .Distinct()
-        //             .ToList()
-        //             .ForEach(movie => list.Add(new Movie
-        //             {
-        //                 Id = movie.Id,
-        //                 Cost = (float)movie.Cost,
-        //                 Description = movie.Description,
-        //                 DirectorId = movie.DirectorId,
-        //                 FormatId = movie.FormatId,
-        //                 ImagePath = movie.ImagePath,
-        //                 InStkQty = movie.InStkQty,                         
-        //                 RatingId = movie.RatingId,
-        //                 Title = movie.Title
-        //             }));
-        //        }
-        //        return list;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-        //}
 
         public static List<Movie> Load(int? genreId = null)
         {
@@ -227,11 +183,11 @@ namespace TN.DVDCentral.BL
                          RatingDescription = r.Description,
                          m.Cost,
                          m.ImagePath,
-                         GenreDescription = g.Description,
+                         //GenreDescription = g.Description,
                          m.DirectorId,
                          m.FormatId,
                          m.RatingId,
-                         mg.GenreId
+                         //mg.GenreId
                      })
                      .Distinct()
                      .ToList()
@@ -246,11 +202,11 @@ namespace TN.DVDCentral.BL
                          RatingDescription = movie.RatingDescription,
                          Cost = (float)movie.Cost,
                          ImagePath = movie.ImagePath,
-                         GenreDescription = movie.GenreDescription,
+                         //GenreDescription = movie.GenreDescription,
                          DirectorId = movie.DirectorId,
                          FormatId = movie.FormatId,
                          RatingId = movie.RatingId,
-                         GenreId = movie.GenreId
+                         //GenreId = movie.GenreId
                      }));
                 }
                 return list;
