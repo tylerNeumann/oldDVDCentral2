@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using TN.DVDCentral.BL.Models;
 
 namespace TN.DVDCentral.UI.Controllers
 {
@@ -52,7 +53,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = GenreManager.LoadById(id);
-                ViewBag.Title = "Edit a genre";
+                ViewBag.Title = "Edit " + item.Description; ;
                 return View(item);
             }
 
@@ -72,6 +73,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Title = "Edit " + genre.Description;
                 ViewBag.Error = ex.Message;
                 return View(genre);
             }
@@ -83,7 +85,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 var item = GenreManager.LoadById(id);
-                ViewBag.Title = "Delete a genre";
+                ViewBag.Title = "Delete " + item.Description;
                 return View(item);
             }
 
@@ -103,6 +105,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Title = "Delete " + genre.Description;
                 ViewBag.Error = ex.Message;
                 return View(genre);
             }

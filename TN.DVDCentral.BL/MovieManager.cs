@@ -141,7 +141,8 @@ namespace TN.DVDCentral.BL
                             FormatDescription = entity.FormatDescription,
                             DirectorName = entity.DirectorName,
                             RatingDescription = entity.RatingDescription,
-                            ImagePath = entity.ImagePath
+                            ImagePath = entity.ImagePath,
+                            GenreList = GenreManager.Load(id)
                         };
                     }
                     else
@@ -158,7 +159,7 @@ namespace TN.DVDCentral.BL
             }
         }
 
-        public static List<Movie> Load(int? genreId = null)
+        public static List<Movie> Load(int? genreId = null) //genreId is an optional parameter and if not sent in is null in this instance or syntax
         {
             try
             {
@@ -171,7 +172,7 @@ namespace TN.DVDCentral.BL
                      join r in dc.tblRatings on m.RatingId equals r.Id
                      join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
                      join g in dc.tblGenres on mg.GenreId equals g.Id
-                     where g.Id == genreId || genreId == null
+                     where g.Id == genreId || genreId == null //allows you to merge filtered loads and unfiltered loads
                      select new
                      {
                          m.Id,

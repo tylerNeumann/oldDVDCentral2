@@ -148,37 +148,37 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        //public static List<Genre> Load(int? genreId = null)//genreId is an optional parameter and if not sent in is null in this instance or syntax
-        //{
-        //    try
-        //    {
-        //        List<Genre> list = new List<Genre>();
-        //        using (DVDCentralEntities dc = new DVDCentralEntities())
-        //        {/*join movies to genres*/
-        //            (from g in dc.tblGenres
-        //             join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
-        //             join m in dc.tblMovies on mg.Id equals m.Id
-        //             where g.Id == genreId || genreId == null //allows you to merge filtered loads and unfiltered loads
-        //             select new
-        //             {
-        //                 g.Id,
-        //                 g.Description
-        //             })
-        //             .Distinct()
-        //             .ToList()
-        //             .ForEach(genre => list.Add(new Genre
-        //             {
-        //                 Id = genre.Id,
-        //                 Description = genre.Description
-        //             }));
-        //        }
-        //        return list;
-        //    }
-        //    catch (Exception)
-        //    {
+        public static List<Genre> Load(int genreId)
+        {
+            try
+            {
+                List<Genre> list = new List<Genre>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {/*join movies to genres*/
+                    (from g in dc.tblGenres
+                     join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
+                     //join m in dc.tblMovies on mg.Id equals m.Id
+                     where mg.Id == genreId //|| genreId == null 
+                     select new
+                     {
+                         g.Id,
+                         g.Description
+                     })
+                     .Distinct()
+                     .ToList()
+                     .ForEach(genre => list.Add(new Genre
+                     {
+                         Id = genre.Id,
+                         Description = genre.Description
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
+            {
 
-        //        throw;
-        //    }
-        //}
+                throw;
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿@model TN.DVDCentral.BL.Models.Order
 
 @{
-    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -42,8 +41,12 @@
     </div>
 </div>
 
-<div>
+<div class="m-2">
     <a asp-action="Index">Back to List</a>
+</div>
+
+<div>
+    <partial name="OrderItemsPartial" model="Model.OrderItems"/>
 </div>
 
 @section Scripts {

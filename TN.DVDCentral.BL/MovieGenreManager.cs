@@ -151,6 +151,37 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
+        //public static List<MovieGenre> Load(int studnetId)
+        //{
+        //    try
+        //    {
+        //        List<MovieGenre> list = new List<MovieGenre>();
+        //        using (DVDCentralEntities dc = new DVDCentralEntities())
+        //        {
+        //            (from d in dc.tblMovieGenres
+
+        //             select new
+        //             {
+        //                 d.Id,
+        //                 d.GenreId,
+        //                 d.MovieId
+        //             })
+        //             .ToList()
+        //             .ForEach(movieGenre => list.Add(new MovieGenre
+        //             {
+        //                 Id = movieGenre.Id,
+        //                 GenreId = movieGenre.GenreId,
+        //                 MovieId = movieGenre.MovieId
+        //             }));
+        //        }
+        //        return list;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
         public static List<MovieGenre> Load()
         {
             try
