@@ -7,7 +7,8 @@ namespace TN.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Title = "List of Users";
+            return View(UserManager.Load());
         }
         public IActionResult Login(string returnUrl)
         {

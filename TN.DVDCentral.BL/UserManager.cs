@@ -248,5 +248,40 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
+        public static List<User> Load()
+        {
+            try
+            {
+                List<User> list = new List<User>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from u in dc.tblUsers
+                     select new
+                     {
+                         u.Id,
+                         u.UserName,
+                         u.Password,
+                         u.FirstName,
+                         u.LastName
+                     })
+                     .ToList()
+                     .ForEach(User => list.Add(new User
+                     {
+                         Id = User.Id,
+                         UserName = User.UserName,
+                         Password = User.Password,
+                         FirstName = User.FirstName,
+                         LastName = User.LastName
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
