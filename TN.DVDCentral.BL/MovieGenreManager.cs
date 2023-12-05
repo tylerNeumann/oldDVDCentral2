@@ -1,35 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL;
 
 namespace TN.DVDCentral.BL
 {
     public static class MovieGenreManager
     {
-        public class MovieGenre
-        {
-            public int Id { get; set; }
-            public int MovieId { get; set; }
-            public int GenreId { get; set; }
-        }
-        public static int Insert(int movieId, int genreId, bool rollback = false)
+        public static int Insert(int MovieId, int GenreId, bool rollback = false)
         {
             try
             {
                 int result = 0;
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
+
                     tblMovieGenre tblMovieGenre = new tblMovieGenre();
 
-                    tblMovieGenre.MovieId = movieId;
-                    tblMovieGenre.GenreId = genreId;
+                    tblMovieGenre.MovieId = MovieId;
+                    tblMovieGenre.GenreId = GenreId;
 
                     tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
 
-                    dc.tblMovieGenres.Add(tblMovieGenre);
+                    dc.Add(tblMovieGenre);
                     result = dc.SaveChanges();
-                    if (rollback) transaction.Rollback();
                 }
                 return result;
             }
@@ -157,6 +150,37 @@ namespace TN.DVDCentral.BL
 
                 throw;
             }
+        }
+        public static List<MovieGenre> Load()
+        {
+            try
+            {
+                List<MovieGenre> list = new List<MovieGenre>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from d in dc.tblMovieGenres
+                     select new
+                     {
+                         d.Id,
+                         d.GenreId,
+                         d.MovieId
+                     })
+                     .ToList()
+                     .ForEach(movieGenre => list.Add(new MovieGenre
+                     {
+                         Id = movieGenre.Id,
+                         GenreId = movieGenre.GenreId,
+                         MovieId = movieGenre.MovieId
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

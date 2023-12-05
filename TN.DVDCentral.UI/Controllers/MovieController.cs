@@ -41,13 +41,6 @@ namespace TN.DVDCentral.UI.Controllers
                 ViewBag.Title = "Create a movie";
                 MovieVM movieVM = new MovieVM();
 
-                movieVM.Movie = new Movie();
-
-                movieVM.FormatList = FormatManager.Load();
-                movieVM.RatingList = RatingManager.Load();
-                movieVM.GenreList = GenreManager.Load();
-                movieVM.DirectorList = DirectorManager.Load();
-
                 return View(movieVM);
             }
             else return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
@@ -55,13 +48,40 @@ namespace TN.DVDCentral.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(MovieVM movieVM)
+        public IActionResult Create(MovieVM movieVM, int id, bool rollback = false)
         {
             try
             {
-                int result = MovieManager.Insert(movieVM.Movie);
-                return RedirectToAction(nameof(Index));
+                
+
+                IEnumerable<int> newGenreIds = new List<int>();
+                if (movieVM.GenreIds != null)
+                {
+                    newGenreIds = movieVM.GenreIds;
+
+                    IEnumerable<int> adds = newGenreIds;
+                    newGenreIds = getObject();
+                    adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
+
+                    if (movieVM.File != null)
+                    {
+                        movieVM.Movie.ImagePath = movieVM.File.FileName;
+                        string path = _host.WebRootPath + "\\images\\";
+                        using (var stream = System.IO.File.Create(path + movieVM.File.FileName))
+                        {
+                            movieVM.File.CopyTo(stream);
+                            ViewBag.Message = "file uploaded successfully...";
+                        }
+                    }
+
+                    int result = MovieManager.Insert(movieVM.Movie, rollback); 
+                    return RedirectToAction(nameof(Index));
             }
+                else
+            {
+                throw new Exception("genreids is null");
+            }
+        }
             catch (Exception)
             {
 
@@ -93,29 +113,37 @@ namespace TN.DVDCentral.UI.Controllers
             try
             {
                 IEnumerable<int> newGenreIds = new List<int>();
-                if(movieVM.GenreIds != null) newGenreIds = movieVM.GenreIds;
-
-                IEnumerable<int> oldGenreIds = new List<int>();
-                oldGenreIds = getObject();
-
-                IEnumerable<int> deletes = oldGenreIds.Except(newGenreIds);
-                IEnumerable<int> adds = newGenreIds.Except(oldGenreIds);
-
-                deletes.ToList().ForEach(d => MovieGenreManager.Delete(id, d));
-                adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
-
-                if (movieVM.File != null)
+                if (movieVM.GenreIds != null)
                 {
-                    movieVM.Movie.ImagePath = movieVM.File.FileName;
-                    string path = _host.WebRootPath + "\\images\\";
-                    using (var stream = System.IO.File.Create(path + movieVM.File.FileName))
+                    newGenreIds = movieVM.GenreIds;
+
+                    IEnumerable<int> oldGenreIds = new List<int>();
+                    oldGenreIds = getObject();
+
+                    IEnumerable<int> deletes = oldGenreIds.Except(newGenreIds);
+                    IEnumerable<int> adds = newGenreIds.Except(oldGenreIds);
+
+                    deletes.ToList().ForEach(d => MovieGenreManager.Delete(id, d));
+                    adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
+
+                    if (movieVM.File != null)
                     {
-                        movieVM.File.CopyTo(stream);
-                        ViewBag.Message = "file uploaded successfully...";
+                        movieVM.Movie.ImagePath = movieVM.File.FileName;
+                        string path = _host.WebRootPath + "\\images\\";
+                        using (var stream = System.IO.File.Create(path + movieVM.File.FileName))
+                        {
+                            movieVM.File.CopyTo(stream);
+                            ViewBag.Message = "file uploaded successfully...";
+                        }
                     }
+                    int result = MovieManager.Update(movieVM.Movie, rollback);
+                    return RedirectToAction(nameof(Index));
                 }
-                int result = MovieManager.Update(movieVM.Movie, rollback);
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    throw new Exception("genreids is null");
+                }
+                
 
             }
             catch (Exception ex)
