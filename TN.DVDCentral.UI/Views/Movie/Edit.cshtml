@@ -52,9 +52,9 @@
                     asp-for="GenreIds" 
                     class="form-control" 
                     multiple
-                    asp-items="@(new SelectList(Model.GenreList, "Id","Description"))">
+                    asp-items="@(new MultiSelectList(Model.GenreList, "Id","Description"))">
                 </select>
-                <span asp-validation-for="GenreIds" class="text-danger"></span>
+                <span asp-validation-for="Movie.GenreList" class="text-danger"></span>
             </div>
 
             @* Cost *@
