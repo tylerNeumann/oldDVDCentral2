@@ -5,12 +5,12 @@ namespace TN.DVDCentral.UI.ViewModels
     public class MovieVM
     {
         public Movie Movie { get; set; }
-        public List<Genre> GenreList { get; set; } = new List<Genre>();
+        public List<Genre> GenreList { get; set; } = new List<Genre>(); //all of the genres
         public List<Director> DirectorList { get; set; } = new List<Director>();
         public List<Rating> RatingList { get; set; } = new List<Rating>();
         public List<Format> FormatList { get; set; } = new List<Format>();
         public MovieGenre MovieGenre { get; set; }
-        public IEnumerable<int> GenreIds { get; set; }
+        public IEnumerable<int> GenreIds { get; set; } //the new genres for the movie
 
         public IFormFile File { get; set; }
 
@@ -18,10 +18,10 @@ namespace TN.DVDCentral.UI.ViewModels
         {
             GenreList = GenreManager.Load();
 
-            //FormatList = FormatManager.Load();
-            //RatingList = RatingManager.Load();
-            //GenreList = GenreManager.Load();
-            //DirectorList = DirectorManager.Load();
+            FormatList = FormatManager.Load();
+            RatingList = RatingManager.Load();
+            GenreList = GenreManager.Load();
+            DirectorList = DirectorManager.Load();
         }
         public MovieVM(int id) 
         {

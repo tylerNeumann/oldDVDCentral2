@@ -142,7 +142,7 @@ namespace TN.DVDCentral.BL
                             DirectorName = entity.DirectorName,
                             RatingDescription = entity.RatingDescription,
                             ImagePath = entity.ImagePath,
-                            GenreList = GenreManager.Load(id)
+                            //GenreList = GenreManager.Load(id)
                         };
                     }
                     else

@@ -93,8 +93,10 @@ namespace TN.DVDCentral.UI.Controllers
         public IActionResult Edit(int id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
-            {
+            { 
+
                 MovieVM movieVM = new MovieVM(id);
+
                 ViewBag.Title = "Edit " + movieVM.Movie.Title;
                 HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
                 
@@ -148,6 +150,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Title = "Edit " + movieVM.Movie.Title;
                 ViewBag.Error = ex.Message;
                 return View(movieVM);
             }
@@ -190,6 +193,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Title = "Delete " + movie.Title;
                 ViewBag.Error = ex.Message;
                 return View(movie);
             }
