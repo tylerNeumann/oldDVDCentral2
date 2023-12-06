@@ -77,7 +77,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
-                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId);
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId + 1);
                     if (tblMovieGenre != null)
                     {
                         dc.Remove(tblMovieGenre);
