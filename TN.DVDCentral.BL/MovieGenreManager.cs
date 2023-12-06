@@ -117,18 +117,18 @@ namespace TN.DVDCentral.BL
                     if (tblMovieGenre != null)
                     {
                         dc.Add(tblMovieGenre);
-                        try
-                        {
+                        //try
+                        //{
                             result = dc.SaveChanges();
-                        }
-                        catch (Exception)
-                        {
+                        //}
+                        //catch (Exception)
+                        //{
 
-                           throw new Exception("results failed to save on add");
-                        }
+                        //   throw new Exception("results failed to save on add");
+                        //}
                         
                     }
-                    else { throw new Exception("row doesn't exist; movieId = " + movieId + "genreId = " + genreId + "Add"); }
+                    else { throw new Exception("row doesn't exist; movieId = " + movieId + "genreId = " + genreId + " Add"); }
                     if (rollback) transaction.Rollback();
                 }
                 return result;
