@@ -77,13 +77,21 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
-                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId + 1);
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.MovieId == movieId && mg.GenreId == genreId);
                     if (tblMovieGenre != null)
                     {
                         dc.Remove(tblMovieGenre);
-                        result = dc.SaveChanges();
+                        try
+                        {
+                            result = dc.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw new Exception("results failed to save on delete");
+                        }
                     }
-                    else { throw new Exception("row doesn't exist"); }
+                    else { throw new Exception("row doesn't exist; movieId = " + movieId  + " genreId = " + genreId + "Delete"); }
                     if (rollback) transaction.Rollback();
                 }
                 return result;
@@ -109,9 +117,18 @@ namespace TN.DVDCentral.BL
                     if (tblMovieGenre != null)
                     {
                         dc.Add(tblMovieGenre);
-                        result = dc.SaveChanges();
+                        try
+                        {
+                            result = dc.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+
+                           throw new Exception("results failed to save on add");
+                        }
+                        
                     }
-                    else { throw new Exception("row doesn't exist"); }
+                    else { throw new Exception("row doesn't exist; movieId = " + movieId + "genreId = " + genreId + "Add"); }
                     if (rollback) transaction.Rollback();
                 }
                 return result;
