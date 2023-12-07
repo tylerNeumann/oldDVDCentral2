@@ -148,7 +148,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static List<Genre> Load(int genreId)
+        public static List<Genre> Load(int movieId)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace TN.DVDCentral.BL
                     (from g in dc.tblGenres
                      join mg in dc.tblMovieGenres on g.Id equals mg.GenreId
                      //join m in dc.tblMovies on mg.Id equals m.Id
-                     where mg.Id == genreId //|| genreId == null 
+                     where mg.MovieId == movieId //|| genreId == null 
                      select new
                      {
                          g.Id,
