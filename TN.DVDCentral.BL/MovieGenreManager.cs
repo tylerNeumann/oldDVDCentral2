@@ -15,14 +15,31 @@ namespace TN.DVDCentral.BL
                 {
 
                     tblMovieGenre tblMovieGenre = new tblMovieGenre();
+                    if(MovieId !=0)
+                    {
+                        tblMovieGenre.MovieId = MovieId;
+                        tblMovieGenre.GenreId = GenreId;
 
-                    tblMovieGenre.MovieId = MovieId;
-                    tblMovieGenre.GenreId = GenreId;
+                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
 
-                    tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                        dc.Add(tblMovieGenre);
+                        result = dc.SaveChanges();
+                    }
+                    else if (MovieId == 0)
+                    {
+                        tblMovieGenre.MovieId = dc.tblMovies.Max(s => s.Id) + 1;
+                        tblMovieGenre.GenreId = GenreId;
 
-                    dc.Add(tblMovieGenre);
-                    result = dc.SaveChanges();
+                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+
+                        dc.Add(tblMovieGenre);
+                        result = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("movieId = 0");
+                    }
+                    
                 }
                 return result;
             }

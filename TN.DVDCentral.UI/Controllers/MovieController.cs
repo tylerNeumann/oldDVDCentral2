@@ -41,6 +41,8 @@ namespace TN.DVDCentral.UI.Controllers
                 ViewBag.Title = "Create a movie";
                 MovieVM movieVM = new MovieVM();
 
+                HttpContext.Session.SetObject("movieid", movieVM.MovieId);
+
                 return View(movieVM);
             }
             else return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
@@ -58,10 +60,10 @@ namespace TN.DVDCentral.UI.Controllers
                 if (movieVM.GenreIds != null)
                 {
                     newGenreIds = movieVM.GenreIds;
-
+                    movieVM.MovieId = GetObject();
                     IEnumerable<int> adds = newGenreIds;
                     newGenreIds = GetObject();
-                    adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
+                    adds.ToList().ForEach(a => MovieGenreManager.Insert(id, a));
 
                     if (movieVM.File != null)
                     {

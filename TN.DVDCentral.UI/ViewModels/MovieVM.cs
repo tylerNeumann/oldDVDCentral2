@@ -1,6 +1,4 @@
-﻿using TN.DVDCentral.BL.Models;
-
-namespace TN.DVDCentral.UI.ViewModels
+﻿namespace TN.DVDCentral.UI.ViewModels
 {
     public class MovieVM
     {
@@ -14,6 +12,7 @@ namespace TN.DVDCentral.UI.ViewModels
         public IEnumerable<int> RatingIds { get; set; }
         public IEnumerable<int> DirectorIds { get; set; }
         public IEnumerable<int> FormatIds { get; set; }
+        public IEnumerable<int> MovieId { get; set; }
         public IFormFile File { get; set; }
 
         public MovieVM() 
