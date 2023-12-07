@@ -17,6 +17,7 @@ namespace TN.DVDCentral.BL
         public static void Clear() { }
         public static void Checkout(ShoppingCart cart)
         {
+            //throw new Exception("you have checked out");
             //checkout will make a new order 
             // set order fields as needed
 
