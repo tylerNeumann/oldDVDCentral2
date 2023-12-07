@@ -92,7 +92,15 @@
                 <div>
                     @await Component.InvokeAsync("SideBar")
                 </div>
+                <div class="header p-1">
+                    <h4 class="p-2">Shopping cart</h4>
+                </div>
+                <div>
+                    @await Component.InvokeAsync("ShoppingCartComponent")
+                </div>
             </div>
+
+            
 
             <div id="overlay" onclick="off()">
                 <div id="imgPropLarge">
@@ -132,5 +140,16 @@
         console.log("On");
         document.getElementById("overlay").style.display = "block";
         document.getElementById("output").src = picture;
+    }
+</script>
+
+<script type="text/javascript">
+    function AddToCart(id) {
+        $.get("/ShoppingCart/Add/" + id, function (data) {
+            var cartcount = parseInt($("#cartcount").val()) + 1;
+            $("#cartcount").val(cartcount);
+            $("#cartcountdisp").text(cartcount + " items");
+            console.log(cartcount + " items");
+        });
     }
 </script>

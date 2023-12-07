@@ -4,7 +4,7 @@ namespace TN.DVDCentral.BL.Models
 {
     public class ShoppingCart
     {
-        //movie application specific - movie cost
+        //declaration application specific - declaration cost
         //IN DVDCENTRAL USE ITEMS.SUM
         const double ITEM_COST = 120.03;
         public List<Movie> Items { get; set; } = new List<Movie>();
