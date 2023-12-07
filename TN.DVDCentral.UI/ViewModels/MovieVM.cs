@@ -15,9 +15,11 @@
         public IEnumerable<int> MovieId { get; set; }
         public IFormFile File { get; set; }
 
-        public MovieVM() 
+        public MovieVM() //int movieId
         {
             GenreList = GenreManager.Load();
+
+            //Movie = MovieManager.LoadById(movieId);
 
             FormatList = FormatManager.Load();
             RatingList = RatingManager.Load();
