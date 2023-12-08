@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL;
@@ -13,7 +14,8 @@ namespace TN.DVDCentral.BL
             {
 
                 int result = 0;
-                List<OrderItem> OrderItems =new List<OrderItem>();
+                List<OrderItem> OrderItems;
+
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     
@@ -29,8 +31,9 @@ namespace TN.DVDCentral.BL
                     Order.ShipDate = order.ShipDate;
 
                     //declaration manager tues last week
-                    foreach(OrderItem item in order.OrderItems)
+                    foreach (OrderItem item in order.OrderItems)
                     {
+                        item.OrderId = Order.Id;
                         result += OrderItemManager.Insert(item, rollback);
                     }
 

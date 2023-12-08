@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks.Dataflow;
 using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL;
 
@@ -148,7 +149,7 @@ namespace TN.DVDCentral.BL
                     else
                     {
 
-                        throw new Exception();
+                        throw new Exception("join exploded");
                     }
                 }
             }

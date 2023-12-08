@@ -101,9 +101,9 @@ namespace TN.DVDCentral.UI.Controllers
 
                 ViewBag.Title = "Edit " + movieVM.Movie.Title;
                 HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
-                HttpContext.Session.SetObject("ratingids", movieVM.RatingIds);
-                HttpContext.Session.SetObject("directorids", movieVM.DirectorIds);
-                HttpContext.Session.SetObject("formatids", movieVM.FormatIds);
+                //HttpContext.Session.SetObject("ratingids", movieVM.RatingIds);
+                //HttpContext.Session.SetObject("directorids", movieVM.DirectorIds);
+                //HttpContext.Session.SetObject("formatids", movieVM.FormatIds);
                 return View(movieVM);                
             }
 

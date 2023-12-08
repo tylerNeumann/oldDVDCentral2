@@ -1,5 +1,7 @@
-﻿using System.Xml.Linq;
+﻿using System.Net.Http;
+using System.Xml.Linq;
 using TN.DVDCentral.BL.Models;
+using TN.DVDCentral.PL;
 
 namespace TN.DVDCentral.BL
 {
@@ -14,23 +16,38 @@ namespace TN.DVDCentral.BL
             if (cart != null) { cart.Items.Remove(movie); }
         }
 
-        public static void Clear() { }
+        public static void Clear(ShoppingCart cart) 
+        {
+            cart.Items.Clear();
+            cart = new ShoppingCart();
+        }
         public static void Checkout(ShoppingCart cart)
         {
+
             //throw new Exception("you have checked out");
             //checkout will make a new order 
-            // set order fields as needed
+            Order order = new Order();
 
-            //Foreach(Movie item in cart.Items
+            // set order fields as needed
+            order.OrderDate = DateTime.Now;
+            order.ShipDate = DateTime.Now.AddDays(3);
+            OrderItem orderItems = new OrderItem();
+            //int orderId = 0;
+            foreach (Movie item in cart.Items) 
+            {
+                orderItems.MovieId = item.Id;
+                orderItems.Quantity = item.InStkQty;
+                orderItems.Cost = item.Cost;
+                order.OrderItems.Add(orderItems);
+            }
             //
             //Set the orderitem fields from the item
-            //order.OrderItems.Add(orderItem)
+            //
 
-            //OrderManager.Insert(order)
+            OrderManager.Insert(order);
 
             //decrement tblMovie.InStkQty appropriately
-
-            cart = new ShoppingCart();
+            Clear(cart);
         }
     }
 }

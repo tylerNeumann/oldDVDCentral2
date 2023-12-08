@@ -23,6 +23,7 @@ namespace TN.DVDCentral.BL
                     entity.MovieId = orderItem.MovieId;
                     entity.Cost = orderItem.Cost;
                     entity.Id = orderItem.Id;
+                    //orderItem.Id = entity.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();

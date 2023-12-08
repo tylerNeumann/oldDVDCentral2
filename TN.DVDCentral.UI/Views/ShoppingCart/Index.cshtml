@@ -11,34 +11,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Items[0].Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Items[0].Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Items[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].FormatDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].FormatId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].DirectorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].DirectorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].RatingDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].GenreDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].RatingId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Items[0].Cost)
@@ -56,34 +32,10 @@
 @foreach (var item in Model.Items) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormatDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormatId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DirectorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DirectorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RatingDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenreDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RatingId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
@@ -96,7 +48,7 @@
             </td>
             <td>
                     @Html.ActionLink("Remove", "Remove", new { id=item.Id })
-                    <input class="btn-sm btn-primary" type="button" onclick="checkout" value="Check Out">
+                    <Button class="btn-sm btn-primary" type="submit" OnClick="Checkout" Text="Check Out">
             </td>
         </tr>
 }
