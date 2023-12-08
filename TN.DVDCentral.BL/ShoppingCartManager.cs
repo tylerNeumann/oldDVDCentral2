@@ -36,7 +36,7 @@ namespace TN.DVDCentral.BL
             foreach (Movie item in cart.Items) 
             {
                 orderItems.MovieId = item.Id;
-                orderItems.Quantity = item.InStkQty;
+                orderItems.Quantity = item.InStkQty; // need to set order quantity to one and decrement the stock
                 orderItems.Cost = item.Cost;
                 order.OrderItems.Add(orderItems);
             }

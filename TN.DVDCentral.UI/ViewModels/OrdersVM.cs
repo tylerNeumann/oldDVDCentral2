@@ -1,7 +1,9 @@
 ﻿namespace TN.DVDCentral.UI.ViewModels
 {
-    public class CustomerOrdersVM
+    public class OrdersVM
     {
         public List<Order> OrderList;
+        public IEnumerable<Customer> CustomerList;
+        
     }
 }
