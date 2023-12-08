@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
 using System.Xml.Linq;
+using TN.DVDCentral.BL.Models;
 
 namespace TN.DVDCentral.UI.Controllers
 {
@@ -53,10 +55,29 @@ namespace TN.DVDCentral.UI.Controllers
 
         public IActionResult Checkout()
         {
-            cart = GetShoppingCart();
-            ShoppingCartManager.Checkout(cart);
-            HttpContext.Session.SetObject("cart", null);
-            return View();
+            if (Authentication.IsAuthenticated(HttpContext))
+            {
+                cart = GetShoppingCart();
+                ShoppingCartManager.Checkout(cart);
+                HttpContext.Session.SetObject("cart", null);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+        }
+
+        private User GetObject()//might not be string
+        {
+            if (HttpContext.Session.GetObject<User>("user") != null)
+            {
+                return HttpContext.Session.GetObject<User>("user");
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -35,10 +35,10 @@ namespace TN.DVDCentral.BL
                     {
                         item.OrderId = Order.Id;
                         result += OrderItemManager.Insert(item, rollback);
-                    }
+                    } 
 
                     // Back fill the ID
-                    Order.Id = order.Id;
+                    order.Id = Order.Id;
 
                     dc.tblOrders.Add(Order);
                     result += dc.SaveChanges();

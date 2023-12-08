@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Security.Authentication;
 using System.Xml.Linq;
 using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL;
@@ -31,10 +32,13 @@ namespace TN.DVDCentral.BL
             // set order fields as needed
             order.OrderDate = DateTime.Now;
             order.ShipDate = DateTime.Now.AddDays(3);
-            OrderItem orderItems = new OrderItem();
+            User user = new User();
+            user.Id = 
+            order.UserId = user.Id;
             //int orderId = 0;
             foreach (Movie item in cart.Items) 
             {
+                OrderItem orderItems = new OrderItem();
                 orderItems.MovieId = item.Id;
                 orderItems.Quantity = item.InStkQty; // need to set order quantity to one and decrement the stock
                 orderItems.Cost = item.Cost;
