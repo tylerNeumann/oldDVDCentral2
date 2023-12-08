@@ -58,7 +58,10 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 cart = GetShoppingCart();
-                ShoppingCartManager.Checkout(cart);
+                IEnumerable<int> userid = new List<int>();
+                userid = GetObject().ToList();
+                //int userid = 0;
+                ShoppingCartManager.Checkout(cart, userid);
                 HttpContext.Session.SetObject("cart", null);
                 return View();
             }
@@ -68,11 +71,11 @@ namespace TN.DVDCentral.UI.Controllers
             }
         }
 
-        private User GetObject()//might not be string
+        private IEnumerable<int> GetObject()//might not be string
         {
-            if (HttpContext.Session.GetObject<User>("user") != null)
+            if (HttpContext.Session.GetObject<IEnumerable<int>>("user") != null)
             {
-                return HttpContext.Session.GetObject<User>("user");
+                return HttpContext.Session.GetObject<IEnumerable<int>>("user");
             }
             else
             {

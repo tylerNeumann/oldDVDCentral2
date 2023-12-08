@@ -22,7 +22,7 @@ namespace TN.DVDCentral.BL
             cart.Items.Clear();
             cart = new ShoppingCart();
         }
-        public static void Checkout(ShoppingCart cart)
+        public static void Checkout(ShoppingCart cart, int userid)
         {
 
             //throw new Exception("you have checked out");
@@ -32,9 +32,9 @@ namespace TN.DVDCentral.BL
             // set order fields as needed
             order.OrderDate = DateTime.Now;
             order.ShipDate = DateTime.Now.AddDays(3);
-            User user = new User();
-            user.Id = 
-            order.UserId = user.Id;
+            //User user = new User();
+            //user.Id = UserId;
+            order.UserId = userid;
             //int orderId = 0;
             foreach (Movie item in cart.Items) 
             {
