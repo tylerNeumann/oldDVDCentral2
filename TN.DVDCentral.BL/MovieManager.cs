@@ -114,9 +114,9 @@ namespace TN.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     var entity = (from m in dc.tblMovies
-                                    join f in dc.tblFormats on m.Id equals f.Id
-                                    join d in dc.tblDirectors on m.Id equals d.Id
-                                    join r in dc.tblRatings on m.Id equals r.Id
+                                    join f in dc.tblFormats on m.FormatId equals f.Id
+                                    join d in dc.tblDirectors on m.DirectorId equals d.Id
+                                    join r in dc.tblRatings on m.RatingId equals r.Id
                                     where m.Id == id
                                     select new
                                     {
