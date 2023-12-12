@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
+using System.Linq;
 using System.Xml.Linq;
 using TN.DVDCentral.BL.Models;
 
@@ -59,9 +60,11 @@ namespace TN.DVDCentral.UI.Controllers
             {
                 cart = GetShoppingCart();
                 IEnumerable<int> userid = new List<int>();
-                userid = GetObject().ToList();
+                userid = GetObject();
+                //IEnumerable<int> oldGenreIds = new List<int>();
+                //oldGenreIds = GetObject();
                 //int userid = 0;
-                ShoppingCartManager.Checkout(cart, userid);
+                userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
                 HttpContext.Session.SetObject("cart", null);
                 return View();
             }

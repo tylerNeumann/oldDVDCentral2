@@ -6,17 +6,18 @@ namespace TN.DVDCentral.BL.Models
     {
         //declaration application specific - declaration cost
         //IN DVDCENTRAL USE ITEMS.SUM
-        const double ITEM_COST = 120.03;
+        List<double> ITEM_COST = new List<double>();
         public List<Movie> Items { get; set; } = new List<Movie>();
         public int Quantity { get { return Items.Count; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Subtotal { get { return Items.Count * ITEM_COST; } }
+        public double Subtotal { get { return 0; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Tax { get { return Subtotal * .055; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Total { get { return Subtotal + Tax; } }
+        public List<User> Users { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace TN.DVDCentral.BL.Models
         public string? City { get; set; }
         public string? State { get; set; }
         public string? ZIP { get; set; }
-        public string? Phone { get; set; } 
+        public string? Phone { get; set; }
+        //[DisplayName("Last Name")]
     }
 }

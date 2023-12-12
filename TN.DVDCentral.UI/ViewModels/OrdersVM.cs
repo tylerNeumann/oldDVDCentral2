@@ -4,6 +4,7 @@
     {
         public List<Order> OrderList;
         public IEnumerable<Customer> CustomerList;
+        public IEnumerable<User> UserList;
         
     }
 }
