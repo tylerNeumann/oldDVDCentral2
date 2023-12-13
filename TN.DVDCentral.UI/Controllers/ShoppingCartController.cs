@@ -59,12 +59,13 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 cart = GetShoppingCart();
-                IEnumerable<int> userid = new List<int>();
-                userid = GetObject();
+                //IEnumerable<int> userid = new List<int>();
+                //userid = GetObject();
                 //IEnumerable<int> oldGenreIds = new List<int>();
                 //oldGenreIds = GetObject();
                 //int userid = 0;
-                userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
+                //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
+                ShoppingCartManager.Checkout(cart);
                 HttpContext.Session.SetObject("cart", null);
                 return View();
             }

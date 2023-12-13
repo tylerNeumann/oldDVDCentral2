@@ -48,7 +48,7 @@
             </td>
             <td>
                     @Html.ActionLink("Remove", "Remove", new { id=item.Id })
-                    <Button class="btn-sm btn-primary" type="submit" OnClick="Checkout" Text="Check Out">
+                    <a class=" btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Checkout" Text="Check Out"> Checkout </a>
             </td>
         </tr>
 }
