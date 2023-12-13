@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using TN.DVDCentral.UI.ViewModels;
 namespace TN.DVDCentral.UI.Controllers
 {
     public class OrderController : Controller
@@ -11,8 +12,11 @@ namespace TN.DVDCentral.UI.Controllers
         }
         public IActionResult Details(int id)
         {
+            OrdersVM ordersVM = new OrdersVM(id);
+            HttpContext.Session.SetObject("customerids", ordersVM.CustomerIds);
+            
             ViewBag.Title = "Order Details";
-            return View(OrderManager.LoadById(id));
+            return View(ordersVM);
         }
 
         public IActionResult Create()

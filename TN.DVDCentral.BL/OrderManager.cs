@@ -33,8 +33,10 @@ namespace TN.DVDCentral.BL
                     //declaration manager tues last week
                     foreach (OrderItem item in order.OrderItems)
                     {
+                        
                         item.OrderId = Order.Id;
                         result += OrderItemManager.Insert(item, rollback);
+                        //item.ImagePath = item.MovieId
                     } 
 
                     // Back fill the ID

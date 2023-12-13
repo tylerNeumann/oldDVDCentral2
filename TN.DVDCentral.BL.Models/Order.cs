@@ -11,5 +11,6 @@
         public string? CustomerName { get; set; }
         public string? CustomerAddress { get; set; }
         public string? CustomerPhone { get; set; }
+        public List<Customer> CustomerIds { get; set; } = new List<Customer>();
     }
 }

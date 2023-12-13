@@ -7,7 +7,7 @@
 <p class="m-2">
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table id="directors" class="table">
     <thead>
         <tr>
             <th>
@@ -43,3 +43,12 @@
 }
     </tbody>
 </table>
+<script type="text/javascript" class="init">
+    console.log("hit it");
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#directors').DataTable({
+            "LengthMenu": [[5, 10, 25, 30, -1], [5, 10, 25, 30, "All"]]
+        });
+    });
+</script>
