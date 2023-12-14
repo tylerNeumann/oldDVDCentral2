@@ -9,6 +9,7 @@ namespace TN.DVDCentral.BL.Models
         public string? FirstName { get; set; }
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
+        [DisplayName("Customer Name")]
         public string? FullName { get { return LastName + ", " + FirstName; } }
         public int UserId { get; set; }
         public string? Address { get; set; }

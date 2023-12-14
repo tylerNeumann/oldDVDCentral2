@@ -9,6 +9,9 @@
       //  public IEnumerable<User> UserList;
         public ShoppingCart ShoppingCart;
         public List<OrderItem> Items;
+        //public double Subtotal;
+        //public double Tax;
+        //public double Total;
         public IEnumerable<int> CustomerIds { get; set; } 
 
 

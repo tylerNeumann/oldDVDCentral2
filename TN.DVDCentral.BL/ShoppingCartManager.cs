@@ -22,13 +22,14 @@ namespace TN.DVDCentral.BL
             cart.Items.Clear();
             cart = new ShoppingCart();
         }
+
         public static void Checkout(ShoppingCart cart)//int userid
         {
 
             //throw new Exception("you have checked out");
             //checkout will make a new order 
             Order order = new Order();
-
+            
             // set order fields as needed
             order.OrderDate = DateTime.Now;
             order.ShipDate = DateTime.Now.AddDays(3);
@@ -38,6 +39,7 @@ namespace TN.DVDCentral.BL
             order.UserId = 1;
             order.CustomerId = 1;
             
+            
             //int orderId = 0;
             foreach (Movie item in cart.Items) 
             {
@@ -46,7 +48,9 @@ namespace TN.DVDCentral.BL
                 orderItems.Quantity = 1; // need to set order quantity to one and decrement the stock
                 item.InStkQty -= 1;
                 orderItems.Cost = item.Cost;
+                cart.Subtotal += item.Cost;
                 order.OrderItems.Add(orderItems);
+
             }
             //
             //Set the orderitem fields from the item

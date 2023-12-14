@@ -65,6 +65,8 @@ namespace TN.DVDCentral.UI.Controllers
                 //oldGenreIds = GetObject();
                 //int userid = 0;
                 //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
+                cart.Tax = cart.Subtotal * 0.55;
+                cart.Total = cart.Subtotal + cart.Tax;
                 ShoppingCartManager.Checkout(cart);
                 HttpContext.Session.SetObject("cart", null);
                 return View();
