@@ -38,7 +38,7 @@ namespace TN.DVDCentral.BL
             //order.UserId = userid;
             order.UserId = 1;
             order.CustomerId = 1;
-            
+
             
             //int orderId = 0;
             foreach (Movie item in cart.Items) 
@@ -48,10 +48,12 @@ namespace TN.DVDCentral.BL
                 orderItems.Quantity = 1; // need to set order quantity to one and decrement the stock
                 item.InStkQty -= 1;
                 orderItems.Cost = item.Cost;
-                cart.Subtotal += item.Cost;
+                order.Subtotal += item.Cost; 
                 order.OrderItems.Add(orderItems);
 
             }
+            order.Tax = order.Subtotal * 0.55;
+            order.Total = order.Tax + order.Subtotal;
             //
             //Set the orderitem fields from the item
             //

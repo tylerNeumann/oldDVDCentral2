@@ -9,12 +9,17 @@
       //  public IEnumerable<User> UserList;
         public ShoppingCart ShoppingCart;
         public List<OrderItem> Items;
-        public double Subtotal;
-        public double Tax;
-        public double Total;
+        //public double Subtotal;
+        //public double Tax;
+        //public double Total;
         public IEnumerable<int> CustomerIds { get; set; } 
 
-
+        public OrdersVM()
+        {
+             
+        CustomerList = CustomerManager.Load();
+        Items = OrderItemManager.Load();
+    }
         public OrdersVM(int id)
         {
             Customer = CustomerManager.LoadById(1);

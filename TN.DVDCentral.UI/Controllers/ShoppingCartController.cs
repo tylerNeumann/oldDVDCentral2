@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using System.Linq;
 using System.Xml.Linq;
 using TN.DVDCentral.BL.Models;
+using TN.DVDCentral.UI.ViewModels;
 
 namespace TN.DVDCentral.UI.Controllers
 {
@@ -65,12 +66,7 @@ namespace TN.DVDCentral.UI.Controllers
                 //oldGenreIds = GetObject();
                 //int userid = 0;
                 //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
-                foreach(Movie movie in cart.Items)
-                {
-                    cart.Subtotal += movie.Cost;
-                }
-                cart.Tax = cart.Subtotal * 0.55;
-                cart.Total = cart.Subtotal + cart.Tax;
+                OrdersVM ordersVM = new OrdersVM();
                 ShoppingCartManager.Checkout(cart);
                 HttpContext.Session.SetObject("cart", null);
                 return View();
@@ -92,16 +88,5 @@ namespace TN.DVDCentral.UI.Controllers
                 return null;
             }
         }
-
-        public void CalcSubtotal()
-        {
-            double subtotal = 0;
-            foreach (Movie movie in cart.Items)
-            {
-                subtotal += movie.Cost;
-            }
-            HttpContext.Session.SetObject("subtotal", subtotal);
-        }
-
     }
 }

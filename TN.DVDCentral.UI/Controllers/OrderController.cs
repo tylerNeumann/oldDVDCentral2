@@ -12,11 +12,11 @@ namespace TN.DVDCentral.UI.Controllers
         }
         public IActionResult Details(int id)
         {
-            OrdersVM ordersVM = new OrdersVM(id);
-            HttpContext.Session.SetObject("customerids", ordersVM.CustomerIds);
+            var item = OrderManager.LoadById(id);
+           // HttpContext.Session.SetObject("customerids", item.CustomerIds);
             
             ViewBag.Title = "Order Details";
-            return View(ordersVM);
+            return View(item);
         }
 
         public IActionResult Create()

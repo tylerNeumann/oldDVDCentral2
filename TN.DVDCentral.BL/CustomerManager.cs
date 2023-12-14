@@ -26,7 +26,7 @@ namespace TN.DVDCentral.BL
                     entity.State = customer.State;
                     entity.ZIP = customer.ZIP;
                     entity.Phone = customer.Phone;
-                    entity.Id = customer.Id;
+                    customer.Id = entity.Id;
                     dc.Add(entity);
                     result = dc.SaveChanges();
                     if (rollback) transaction.Rollback();
@@ -52,7 +52,7 @@ namespace TN.DVDCentral.BL
                     tblCustomer entity = dc.tblCustomers.FirstOrDefault(s => s.Id == customer.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblCustomers.Any() ? dc.tblCustomers.Max(s => s.Id) + 1 : 1;
+                        
                         entity.FirstName = customer.FirstName;
                         entity.LastName = customer.LastName;
                         entity.UserId = customer.UserId;
@@ -61,7 +61,6 @@ namespace TN.DVDCentral.BL
                         entity.State = customer.State;
                         entity.ZIP = customer.ZIP;
                         entity.Phone = customer.Phone;
-                        entity.Id = customer.Id;
                         result = dc.SaveChanges();
                     }
                     else
