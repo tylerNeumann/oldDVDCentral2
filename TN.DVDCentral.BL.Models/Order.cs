@@ -19,15 +19,16 @@ namespace TN.DVDCentral.BL.Models
         public string? CustomerPhone { get; set; }
         public List<Customer> CustomerIds { get; set; } = new List<Customer>();
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Subtotal { get; set; }
+        public double Subtotal { get { return OrderItems.Sum(oi => (oi.Quantity * oi.Cost)); } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Tax { get; set; }
+        public double Tax { get { return Subtotal * 0.55; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Total { get; set; }
+        public double Total { get { return Subtotal + Tax; } }
 
         [DisplayName("User Name")]
         public string? UserName { get; set; }
     }
 }
+

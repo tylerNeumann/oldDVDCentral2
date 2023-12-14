@@ -11,7 +11,7 @@ namespace TN.DVDCentral.BL.Models
         public int Quantity { get { return Items.Count; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Subtotal { get; set; }
+        public double Subtotal { get { return Items.Sum(i => (i.Cost)); } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Tax { get; set; }

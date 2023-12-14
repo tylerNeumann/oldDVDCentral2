@@ -48,12 +48,11 @@ namespace TN.DVDCentral.BL
                 orderItems.Quantity = 1; // need to set order quantity to one and decrement the stock
                 item.InStkQty -= 1;
                 orderItems.Cost = item.Cost;
-                order.Subtotal += item.Cost; 
+
                 order.OrderItems.Add(orderItems);
 
             }
-            order.Tax = order.Subtotal * 0.55;
-            order.Total = order.Tax + order.Subtotal;
+            
             //
             //Set the orderitem fields from the item
             //
