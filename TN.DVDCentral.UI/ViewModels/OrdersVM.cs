@@ -9,9 +9,9 @@
       //  public IEnumerable<User> UserList;
         public ShoppingCart ShoppingCart;
         public List<OrderItem> Items;
-        //public double Subtotal;
-        //public double Tax;
-        //public double Total;
+        public double Subtotal;
+        public double Tax;
+        public double Total;
         public IEnumerable<int> CustomerIds { get; set; } 
 
 
@@ -23,6 +23,7 @@
             //GenreIds = Movie.GenreList.Select(g => g.Id);
             Order = OrderManager.LoadById(id);
             Items = OrderItemManager.LoadByOrderId(id);
+            
         }
     }
     

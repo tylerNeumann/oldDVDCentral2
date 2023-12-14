@@ -65,6 +65,10 @@ namespace TN.DVDCentral.UI.Controllers
                 //oldGenreIds = GetObject();
                 //int userid = 0;
                 //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
+                foreach(Movie movie in cart.Items)
+                {
+                    cart.Subtotal += movie.Cost;
+                }
                 cart.Tax = cart.Subtotal * 0.55;
                 cart.Total = cart.Subtotal + cart.Tax;
                 ShoppingCartManager.Checkout(cart);
@@ -88,5 +92,16 @@ namespace TN.DVDCentral.UI.Controllers
                 return null;
             }
         }
+
+        public void CalcSubtotal()
+        {
+            double subtotal = 0;
+            foreach (Movie movie in cart.Items)
+            {
+                subtotal += movie.Cost;
+            }
+            HttpContext.Session.SetObject("subtotal", subtotal);
+        }
+
     }
 }
