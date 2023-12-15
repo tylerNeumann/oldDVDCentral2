@@ -182,5 +182,32 @@ namespace TN.DVDCentral.BL
             }
 
         }
+
+        public static List<Customer> LoadByUserId(int? UserId = null) 
+        {
+            List<Customer> list = new List<Customer>();
+            using (DVDCentralEntities dc = new DVDCentralEntities())
+            {
+                (from c in dc.tblCustomers
+                 join u in dc.tblUsers on c.UserId equals u.Id
+                 where c.UserId == UserId
+                 select new
+                 {
+                    c.Id,
+                    c.UserId,
+                    c.FirstName,
+                    c.LastName
+                 })
+                 .ToList()
+                 .ForEach(customer => list.Add(new Customer
+                 {
+                     Id= customer.Id,
+                     UserId = customer.UserId,
+                     FirstName= customer.FirstName,
+                     LastName = customer.LastName
+                 }));
+            }
+                return list;
+        }
     }
 }

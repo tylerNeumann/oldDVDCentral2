@@ -60,12 +60,7 @@ namespace TN.DVDCentral.UI.Controllers
             if (Authentication.IsAuthenticated(HttpContext))
             {
                 cart = GetShoppingCart();
-                //IEnumerable<int> userid = new List<int>();
-                //userid = GetObject();
-                //IEnumerable<int> oldGenreIds = new List<int>();
-                //oldGenreIds = GetObject();
-                //int userid = 0;
-                //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
+                
                 ShoppingCartManager.Checkout(cart);
                 HttpContext.Session.SetObject("cart", null);
                 return View();
@@ -76,16 +71,38 @@ namespace TN.DVDCentral.UI.Controllers
             }
         }
 
-        private IEnumerable<int> GetObject()//might not be string
+        private int GetObject()//might not be string
         {
-            if (HttpContext.Session.GetObject<IEnumerable<int>>("user") != null)
+            if (HttpContext.Session.GetObject<int>("user") != null)
             {
-                return HttpContext.Session.GetObject<IEnumerable<int>>("user");
+                return HttpContext.Session.GetObject<int>("user");
             }
             else
             {
-                return null;
+                return 0;
             }
+        }
+
+        public ActionResult AssignToCustomer()
+        {
+            CustomerVM customerVM = new CustomerVM();
+            Customer customer = new Customer();
+            customerVM.Cart = GetShoppingCart();
+            int userid = GetObject();
+
+            customerVM.Customers = CustomerManager.Load();
+
+            HttpContext.Session.SetObject("userid", null);
+
+            customerVM.Customers = CustomerManager.LoadByUserId(userid);
+            if(customerVM.Customers.Any()) { customer = customerVM.Customers.FirstOrDefault(u => u.UserId == userid); }
+
+            HttpContext.Session.SetObject("customerVM", null);
+
+            string ReturnUrl = "";
+            ViewData[ReturnUrl] = UriHelper.GetDisplayUrl(HttpContext.Request);
+
+            return View(customerVM);
         }
     }
 }

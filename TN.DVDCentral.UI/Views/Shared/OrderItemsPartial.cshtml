@@ -18,7 +18,7 @@
                         <td>@Html.DisplayFor(modelItem => item.MovieTitle)</td>
                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                         <td>@Html.DisplayFor(modelItem => item.Cost)</td>
-                <td><a class=" btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="DeleteOrderItem" Text="Delete OrderItem"> Delete Order Item </a></td>
+                <td><a class=" btn btn-sm btn-primary" asp-controller="OrderItem" asp-route-id="@item.Id" asp-action="Delete" Text="Delete Order Item"> Delete Order Item </a></td>
                     </tr>
                 }
         </tbody>

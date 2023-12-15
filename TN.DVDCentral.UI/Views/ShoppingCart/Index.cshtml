@@ -48,9 +48,18 @@
             </td>
             <td>
                     @Html.ActionLink("Remove", "Remove", new { id=item.Id })
-                    <a class=" btn btn-sm btn-primary" asp-route-id="@item.Id" asp-action="Checkout" Text="Check Out"> Checkout </a>
+                    
             </td>
         </tr>
 }
+
+        
     </tbody>
+    <div>
+    <tfoot>
+        <tr><a class=" btn btn-sm btn-primary" asp-route-id="cart.id" asp-action="AssignToCustomer" Text="Check Out"> Checkout </a></tr>
+    </tfoot>
+    </div>
+    
+    
 </table>

@@ -9,7 +9,7 @@ namespace TN.DVDCentral.UI.Controllers
             ViewBag.Title = "List of Order Items";
             return View(OrderItemManager.Load());
         }
-        public IActionResult DeleteOrderItem(int id)
+        public IActionResult Delete(int id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
@@ -25,7 +25,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
         [HttpPost]
-        public IActionResult DeleteOrderItem(int id, OrderItem orderitem, bool rollback = false)
+        public IActionResult Delete(int id, OrderItem orderitem, bool rollback = false)
         {
             Order order = new Order();
             try
