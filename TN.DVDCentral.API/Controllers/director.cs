@@ -6,24 +6,24 @@ namespace TN.DVDCentral.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class director : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<BL.Models.Customer> Get() 
+        public IEnumerable<BL.Models.Director> Get() 
         {
-            return CustomerManager.Load();
+            return DirectorManager.Load();
         }
         [HttpGet("{id}")]
-        public BL.Models.Customer Get(int id)
+        public BL.Models.Director Get(int id)
         {
-            return CustomerManager.LoadById(id);
+            return DirectorManager.LoadById(id);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] BL.Models.Customer customer)
+        public IActionResult Post([FromBody] BL.Models.Director director)
         {
             try
             {
-                int results = CustomerManager.Insert(customer);
+                int results = DirectorManager.Insert(director);
                 return Ok(results);
             }
             catch (Exception ex)
@@ -34,11 +34,11 @@ namespace TN.DVDCentral.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] BL.Models.Customer customer)
+        public IActionResult Put(int id, [FromBody] BL.Models.Director director)
         {
             try
             {
-                int results = CustomerManager.Update(customer);
+                int results = DirectorManager.Update(director);
                 return Ok(results);
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace TN.DVDCentral.API.Controllers
         {
             try
             {
-                int results = CustomerManager.Delete(id);
+                int results = DirectorManager.Delete(id);
                 return Ok(results);
             }
             catch (Exception ex)

@@ -125,7 +125,21 @@ namespace TN.DVDCentral.BL
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblOrder entity = dc.tblOrders.FirstOrDefault(order => order.Id == id);
+                    
+                    var entity = (from o in dc.tblOrders
+                                  join c in dc.tblCustomers on o.CustomerId equals c.Id
+                                  join u in dc.tblUsers on c.UserId equals u.Id
+                                  where o.Id == id
+                                  select new
+                                  {
+                                      o.Id,
+                                      CustomerName = c.LastName + ", " + c.FirstName,
+                                      UserName = u.UserName,
+                                      o.ShipDate,
+                                      o.OrderDate,
+                                      o.CustomerId,
+                                      o.UserId
+                                  }).FirstOrDefault();                                  
                     if (entity != null)
                     {
                         return new Order()
@@ -135,6 +149,8 @@ namespace TN.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderDate = entity.OrderDate,
+                            CustomerName = entity.CustomerName,
+                            UserName= entity.UserName,
                             OrderItems = OrderItemManager.LoadByOrderId(entity.Id)
                             
                         };

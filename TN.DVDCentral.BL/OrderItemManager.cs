@@ -183,7 +183,8 @@ namespace TN.DVDCentral.BL
                          d.Quantity,
                          d.MovieId,
                          d.Cost,
-                         m.Title
+                         m.Title,
+                         m.ImagePath
                      })
                      .ToList()
                      .ForEach(orderItem => list.Add(new OrderItem
@@ -193,7 +194,8 @@ namespace TN.DVDCentral.BL
                          Quantity = orderItem.Quantity,
                          MovieId = orderItem.MovieId,
                          Cost = (float)orderItem.Cost,
-                         MovieTitle = orderItem.Title
+                         MovieTitle = orderItem.Title,
+                         ImagePath = orderItem.ImagePath
                      }));
                 }
                 return list;
