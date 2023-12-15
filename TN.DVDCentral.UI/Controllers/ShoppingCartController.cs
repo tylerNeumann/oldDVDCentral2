@@ -66,7 +66,6 @@ namespace TN.DVDCentral.UI.Controllers
                 //oldGenreIds = GetObject();
                 //int userid = 0;
                 //userid.ToList().ForEach(u =>ShoppingCartManager.Checkout(cart,u));
-                OrdersVM ordersVM = new OrdersVM();
                 ShoppingCartManager.Checkout(cart);
                 HttpContext.Session.SetObject("cart", null);
                 return View();

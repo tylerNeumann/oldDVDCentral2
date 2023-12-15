@@ -110,42 +110,5 @@ namespace TN.DVDCentral.UI.Controllers
             }
 
         }
-        public IActionResult DeleteOrderItem(int id)
-        {
-            if (Authentication.IsAuthenticated(HttpContext))
-            {
-                try
-                {
-                    var item = OrderItemManager.LoadById(id);
-                    ViewBag.Title = "Delete an order item";
-                    return View(item);
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = ex.Message;
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            else
-            {
-                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
-            }
-        }
-        [HttpPost]
-        public IActionResult Delete(int id, OrderItem orderItem, bool rollback = false)
-        {
-            try
-            {
-                int result = OrderItemManager.Delete(id, rollback);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Title = "Delete " + orderItem.MovieTitle;
-                ViewBag.Error = ex.Message;
-                return View(orderItem);
-            }
-
-        }
     }
 }
