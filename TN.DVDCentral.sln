@@ -22,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.UI", "TN.DVDCentral.UI\TN.DVDCentral.UI.csproj", "{2CB20F01-0BFF-4166-847D-2A1073C78AA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TN.DVDCentral.API", "TN.DVDCentral.API\TN.DVDCentral.API.csproj", "{5576E436-9659-4F1E-819B-F2FDED60A7AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.API", "TN.DVDCentral.API\TN.DVDCentral.API.csproj", "{5576E436-9659-4F1E-819B-F2FDED60A7AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TN.DVDCentral.PL2", "TN.DVDCentral.PL2\TN.DVDCentral.PL2.csproj", "{649B588F-3B80-4CFD-B0D7-F39A82FC974E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{5576E436-9659-4F1E-819B-F2FDED60A7AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5576E436-9659-4F1E-819B-F2FDED60A7AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5576E436-9659-4F1E-819B-F2FDED60A7AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{649B588F-3B80-4CFD-B0D7-F39A82FC974E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649B588F-3B80-4CFD-B0D7-F39A82FC974E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649B588F-3B80-4CFD-B0D7-F39A82FC974E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649B588F-3B80-4CFD-B0D7-F39A82FC974E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
