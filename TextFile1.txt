@@ -12,3 +12,7 @@ Install-Package Microsoft.EntityFrameworkCore.Design -ProjectName TN.DVDCentral.
 Uninstall-Package Microsoft.EntityFrameworkCore.Design -RemoveDependencies
 
 "Data Source=server-21296-500189307.database.windows.net;Initial Catalog=dvdcentraldb;User ID=500189307db;Password=Test123!;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+
+
+Add-Migration CreateDatabase
+Update-Database
