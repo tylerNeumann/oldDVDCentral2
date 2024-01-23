@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TN.DVDCentral.MigrationHandler": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:58867;http://localhost:58868"
+    }
+  }
+}
