@@ -25,6 +25,6 @@ public class tblMovie
     public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
 
     public virtual tblDirector Director { get; set; }
-    public virtual tblDirector Rating { get; set; }
-    public virtual tblDirector Format { get; set; }
+    public virtual tblRating Rating { get; set; }
+    public virtual tblFormat Format { get; set; }
 }
