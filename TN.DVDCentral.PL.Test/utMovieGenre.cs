@@ -13,9 +13,9 @@
         public void InsertTest()
         {
             tblMovieGenre entity = new tblMovieGenre();
-            entity.MovieId = Guid.NewGuid();
+            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
             entity.Id = Guid.NewGuid();
-            entity.GenreId = Guid.NewGuid();
+            entity.GenreId = dc.tblGenres.FirstOrDefault().Id;
             dc.Add(entity);
             int results = dc.SaveChanges();
         }

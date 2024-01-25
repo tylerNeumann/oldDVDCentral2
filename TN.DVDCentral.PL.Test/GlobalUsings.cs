@@ -9,3 +9,4 @@ global using System.Reflection;
 global using Newtonsoft.Json;
 global using Microsoft.Extensions.Configuration;
 global using TN.DVDCentral.PL2.Entities;
+global using TN.DVDCentral.PL2.Data;

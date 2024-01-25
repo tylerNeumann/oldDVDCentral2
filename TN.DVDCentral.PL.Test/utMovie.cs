@@ -17,9 +17,9 @@
             entity.Quantity = 1;
             entity.Id = Guid.NewGuid();
             entity.ImagePath = "asdgfhg";
-            entity.FormatId = Guid.NewGuid();
-            entity.DirectorId = Guid.NewGuid();
-            entity.RatingId = Guid.NewGuid();
+            entity.FormatId = dc.tblFormats.FirstOrDefault().Id;
+            entity.DirectorId = dc.tblDirectors.FirstOrDefault().Id;
+            entity.RatingId = dc.tblRatings.FirstOrDefault().Id;
             entity.Title = "asdf";
             entity.Description = "sfd";
             dc.Add(entity);

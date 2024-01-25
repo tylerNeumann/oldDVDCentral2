@@ -1,8 +1,4 @@
-﻿
-
-using TN.DVDCentral.PL2.Data;
-
-namespace TN.DVDCentral.PL.Test
+﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
     public class utBase
