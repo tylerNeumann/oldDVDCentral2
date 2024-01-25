@@ -1,26 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-
-namespace TN.DVDCentral.PL.Test
+﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovie
+    public class utMovie:utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-        [TestInitialize]
-        public void Initailize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
 
         [TestMethod]
         public void LoadTest() 
@@ -32,12 +14,12 @@ namespace TN.DVDCentral.PL.Test
         public void InsertTest() 
         {
             tblMovie entity = new tblMovie();
-            entity.InStkQty = 1;
-            entity.Id = 99;
+            entity.Quantity = 1;
+            entity.Id = Guid.NewGuid();
             entity.ImagePath = "asdgfhg";
-            entity.FormatId = 1;
-            entity.DirectorId = 1;
-            entity.RatingId = 1;
+            entity.FormatId = Guid.NewGuid();
+            entity.DirectorId = Guid.NewGuid();
+            entity.RatingId = Guid.NewGuid();
             entity.Title = "asdf";
             entity.Description = "sfd";
             dc.Add(entity);
@@ -48,7 +30,7 @@ namespace TN.DVDCentral.PL.Test
         public void UpdateTest() 
         {
             tblMovie entity = dc.tblMovies.FirstOrDefault();
-            entity.InStkQty = 99;
+            entity.Quantity = 99;
             int results = dc.SaveChanges();
             Assert.AreEqual(1, results);
         }
@@ -56,7 +38,7 @@ namespace TN.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest() 
         {
-            tblMovie entity = dc.tblMovies.Where(e => e.Id == 1).FirstOrDefault();
+            tblMovie entity = dc.tblMovies.FirstOrDefault();
             dc.Remove(entity);
             int results = dc.SaveChanges();
             Assert.AreNotEqual(0, results);

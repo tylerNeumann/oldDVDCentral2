@@ -1,26 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-
-namespace TN.DVDCentral.PL.Test
+﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utRating
+    public class utRating :utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-        [TestInitialize]
-        public void Initailize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
 
         [TestMethod]
         public void LoadTest()
@@ -33,7 +15,7 @@ namespace TN.DVDCentral.PL.Test
         {
             tblRating entity = new tblRating();
             entity.Description = "description";
-            entity.Id = 1111;
+            entity.Id = Guid.NewGuid();
             dc.Add(entity);
             int result = dc.SaveChanges();
             Assert.AreEqual(1, result);
@@ -51,7 +33,7 @@ namespace TN.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest() 
         {
-            tblRating entity = dc.tblRatings.Where(e => e.Id == 1).FirstOrDefault();
+            tblRating entity = dc.tblRatings.FirstOrDefault();
             dc.Remove(entity);
             int result = dc.SaveChanges();
             Assert.AreEqual(1, result);

@@ -1,28 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Transactions;
-
-namespace TN.DVDCentral.PL.Test
+﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utFormat
+    public class utFormat:utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-        [TestInitialize]
-        public void Initailize()
-        {
-            dc= new DVDCentralEntities(); 
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
-
+       
         [TestMethod]
         public void LoadTest()
         {
@@ -37,7 +18,7 @@ namespace TN.DVDCentral.PL.Test
         { 
             tblFormat entity = new tblFormat();
             entity.Description = "Description";
-            entity.Id = 111;
+            entity.Id = Guid.NewGuid();
             dc.Add(entity);
             int result = dc.SaveChanges();
             Assert.AreEqual(1, result);
@@ -55,7 +36,7 @@ namespace TN.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest() 
         { 
-            tblFormat entity = dc.tblFormats.Where(e => e.Id == 1).FirstOrDefault();
+            tblFormat entity = dc.tblFormats.FirstOrDefault();
             dc.Remove(entity);
             int result = dc.SaveChanges();
             Assert.AreNotEqual(0, result);
@@ -63,3 +44,4 @@ namespace TN.DVDCentral.PL.Test
     }
 
 }
+//OrderBy(e => e.Id == 1).LastOrDefault()

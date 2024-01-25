@@ -1,2 +1,11 @@
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using TN.DVDCentral.PL;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using System.Transactions;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.EntityFrameworkCore;
+global using System.Diagnostics;
+global using System.Reflection;
+global using Newtonsoft.Json;
+global using Microsoft.Extensions.Configuration;
+global using TN.DVDCentral.PL2.Entities;

@@ -1,27 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-
-namespace TN.DVDCentral.PL.Test
+﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovieGenre
+    public class utMovieGenre : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-        [TestInitialize]
-        public void Initailize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
-
         [TestMethod]
         public void LoadTest()
         {
@@ -32,9 +13,9 @@ namespace TN.DVDCentral.PL.Test
         public void InsertTest()
         {
             tblMovieGenre entity = new tblMovieGenre();
-            entity.MovieId = 99;
-            entity.Id = 99;
-            entity.GenreId = 99;
+            entity.MovieId = Guid.NewGuid();
+            entity.Id = Guid.NewGuid();
+            entity.GenreId = Guid.NewGuid();
             dc.Add(entity);
             int results = dc.SaveChanges();
         }
@@ -43,7 +24,7 @@ namespace TN.DVDCentral.PL.Test
         public void UpdateTest()
         {
             tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault();
-            entity.MovieId = 9999;
+            
             int results = dc.SaveChanges();
             Assert.AreEqual(1, results);
         }
@@ -51,7 +32,7 @@ namespace TN.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            tblMovieGenre entity = dc.tblMovieGenres.Where(e => e.Id == 1).FirstOrDefault();
+            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault();
             dc.Remove(entity);
             int results = dc.SaveChanges();
             Assert.AreNotEqual(0, results);

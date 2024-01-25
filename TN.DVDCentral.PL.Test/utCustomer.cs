@@ -1,26 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿
 
 namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utCustomer
+    public class utCustomer : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-        [TestInitialize]
-        public void Initailize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
 
         [TestMethod]
         public void LoadTest()
@@ -33,9 +17,9 @@ namespace TN.DVDCentral.PL.Test
         {
             tblCustomer entity = new tblCustomer();
             entity.FirstName = "test";
-            entity.Id = 99;
+            entity.Id = Guid.NewGuid();
             entity.LastName = "test";
-            entity.UserId = 99;
+            entity.UserId = Guid.NewGuid();
             entity.Address = "test";
             entity.City = "test";
             entity.State = "Te";
@@ -49,7 +33,7 @@ namespace TN.DVDCentral.PL.Test
         public void UpdateTest()
         {
             tblCustomer entity = dc.tblCustomers.FirstOrDefault();
-            entity.UserId = 9999;
+            
             int results = dc.SaveChanges();
             Assert.AreEqual(1, results);
         }
@@ -57,7 +41,7 @@ namespace TN.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            tblCustomer entity = dc.tblCustomers.Where(e => e.Id == 1).FirstOrDefault();
+            tblCustomer entity = dc.tblCustomers.FirstOrDefault();
             dc.Remove(entity);
             int results = dc.SaveChanges();
             Assert.AreNotEqual(0, results);
