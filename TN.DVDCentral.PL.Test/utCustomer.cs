@@ -19,7 +19,7 @@ namespace TN.DVDCentral.PL.Test
             entity.FirstName = "test";
             entity.Id = Guid.NewGuid();
             entity.LastName = "test";
-            entity.UserId = Guid.NewGuid();
+            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
             entity.Address = "test";
             entity.City = "test";
             entity.State = "Te";

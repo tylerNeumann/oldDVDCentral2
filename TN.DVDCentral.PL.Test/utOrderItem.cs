@@ -10,18 +10,18 @@
             Assert.AreEqual(3, dc.tblOrderItems.Count());
         }
 
-        //[TestMethod]
-        //public void InsertTest()
-        //{
-        //    tblOrderItem entity = new tblOrderItem();
-        //    entity.Quantity = 99;
-        //    entity.Id = Guid.NewGuid();
-        //    entity.OrderId = dc.tblOrders.FirstOrDefault().Id;
-        //    entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
-        //    entity.Cost = 99;
-        //    dc.Add(entity);
-        //    int results = dc.SaveChanges();
-        //}
+        [TestMethod]
+        public void InsertTest()
+        {
+            tblOrderItem entity = new tblOrderItem();
+            entity.Quantity = 99;
+            entity.Id = Guid.NewGuid();
+            entity.OrderId = dc.tblOrders.FirstOrDefault().Id;
+            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
+            entity.Cost = 99;
+            dc.Add(entity);
+            int results = dc.SaveChanges();
+        }
 
         [TestMethod]
         public void UpdateTest()
