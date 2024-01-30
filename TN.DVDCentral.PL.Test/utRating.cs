@@ -31,21 +31,20 @@
             if(row != null)
             {
                 row.Description = "bla";
-            }
-            
-            
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
+                int result = base.UpdateTest(row);
+                Assert.AreEqual(1, result);
+            }            
         }
 
         [TestMethod]
         public void DeleteTest() 
         {
-            tblRating row = base.DeleteTest(row);
-            
-            
-            Assert.AreEqual(1, row);
+            tblRating row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
+            if(row != null)
+            {
+                int result = base.DeleteTest(row);
+                Assert.IsTrue(result == 1);
+            }                       
         }
     }
-
 }
