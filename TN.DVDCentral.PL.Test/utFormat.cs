@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utFormat:utBase<tblFormat>
+    public class utFormat : utBase<tblFormat>
     {
 
         [TestMethod]
@@ -45,6 +45,6 @@
                 Assert.IsTrue(result == 1);
             }
         }
-
     }
+}
 //OrderBy(e => e.Id == 1).LastOrDefault()
