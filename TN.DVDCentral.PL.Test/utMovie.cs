@@ -7,19 +7,21 @@
         [TestMethod]
         public void LoadTest() 
         {
-            Assert.AreEqual(3, dc.tblMovies.Count());
+            int expected = 7;
+            var movies = base.LoadTest();
+            Assert.AreEqual(expected, movies.Count());
         }
 
         [TestMethod]
         public void InsertTest() 
         {
             tblMovie entity = new tblMovie();
-            entity.Quantity = 1;
             entity.Id = Guid.NewGuid();
+            entity.Quantity = 1;            
             entity.ImagePath = "asdgfhg";
-            entity.FormatId = dc.tblFormats.FirstOrDefault().Id;
-            entity.DirectorId = dc.tblDirectors.FirstOrDefault().Id;
-            entity.RatingId = dc.tblRatings.FirstOrDefault().Id;
+            entity.RatingId = base.LoadTest().FirstOrDefault().RatingId;
+            entity.FormatId = base.LoadTest().FirstOrDefault().FormatId;
+            entity.DirectorId = base.LoadTest().FirstOrDefault().DirectorId;
             entity.Title = "asdf";
             entity.Description = "sfd";
             dc.Add(entity);
@@ -27,17 +29,27 @@
         }
 
         [TestMethod]
-        public void UpdateTest() 
+        public void UpdateTest()
         {
-            tblMovie entity = dc.tblMovies.FirstOrDefault();
-            entity.Quantity = 99;
-            int results = dc.SaveChanges();
-            Assert.AreEqual(1, results);
+            tblMovie row = base.LoadTest().FirstOrDefault();
+            if (row != null)
+            {
+                row.Description = "bla";
+                int result = base.UpdateTest(row);
+                Assert.AreEqual(1, result);
+            }
         }
 
         [TestMethod]
         public void DeleteTest() 
         {
+            tblMovie row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
+            if (row != null)
+            {
+                int result = base.DeleteTest(row);
+                Assert.IsTrue(result == 1);
+            }
+
             tblMovie entity = dc.tblMovies.FirstOrDefault();
             dc.Remove(entity);
             int results = dc.SaveChanges();

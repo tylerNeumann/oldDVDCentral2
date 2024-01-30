@@ -3,42 +3,46 @@
     [TestClass]
     public class utGenre:utBase<tblGenre>
     {
-        
-
         [TestMethod]
-        public void LoadTest() 
+        public void LoadTest()
         {
-            Assert.AreEqual(4, dc.tblGenres.Count());
+            int expected = 4;
+            var ratings = base.LoadTest();
+            Assert.AreEqual(expected, ratings.Count());
         }
-
         [TestMethod]
-        public void InsertTest() 
+        public void InsertTest()
         {
-            tblGenre entity = new tblGenre();
-            entity.Description = "Description";
-            entity.Id = Guid.NewGuid();
-            dc.tblGenres.Add(entity);
-            int result = dc.SaveChanges();
+            int result = base.InsertTest(new tblGenre
+            {
+                Id = Guid.NewGuid(),
+                Description = "XXXXXXX"
+            });
+
             Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void UpdateTest() 
+        public void UpdateTest()
         {
-            tblGenre entity = dc.tblGenres.FirstOrDefault();
-            entity.Description = "Description";
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+            tblGenre row = base.LoadTest().FirstOrDefault();
+            if (row != null)
+            {
+                row.Description = "bla";
+                int result = base.UpdateTest(row);
+                Assert.AreEqual(1, result);
+            }
         }
 
         [TestMethod]
-        public void DeleteTest() 
+        public void DeleteTest()
         {
-            tblGenre entity = dc.tblGenres.FirstOrDefault();
-            dc.Remove(entity);
-            int result = dc.SaveChanges();
-            Assert.AreNotEqual(0, result);
+            tblGenre row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
+            if (row != null)
+            {
+                int result = base.DeleteTest(row);
+                Assert.IsTrue(result == 1);
+            }
         }
     }
-    
 }

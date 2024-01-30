@@ -3,45 +3,48 @@
     [TestClass]
     public class utFormat:utBase<tblFormat>
     {
-       
+
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblFormats.Count());
-            //void id = 0;
-            //void results = 0;
-            //Assert.AreEqual(3, results)
+            int expected = 4;
+            var ratings = base.LoadTest();
+            Assert.AreEqual(expected, ratings.Count());
         }
-
         [TestMethod]
-        public void InsertTest() 
-        { 
-            tblFormat entity = new tblFormat();
-            entity.Description = "Description";
-            entity.Id = Guid.NewGuid();
-            dc.Add(entity);
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
-        }
-
-        [TestMethod]
-        public void UpdateTest() 
+        public void InsertTest()
         {
-            tblFormat entity = dc.tblFormats.FirstOrDefault();
-            entity.Description = "D";
-            int result = dc.SaveChanges();
+            int result = base.InsertTest(new tblFormat
+            {
+                Id = Guid.NewGuid(),
+                Description = "XXXXXXX"
+            });
+
             Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void DeleteTest() 
-        { 
-            tblFormat entity = dc.tblFormats.FirstOrDefault();
-            dc.Remove(entity);
-            int result = dc.SaveChanges();
-            Assert.AreNotEqual(0, result);
+        public void UpdateTest()
+        {
+            tblFormat row = base.LoadTest().FirstOrDefault();
+            if (row != null)
+            {
+                row.Description = "bla";
+                int result = base.UpdateTest(row);
+                Assert.AreEqual(1, result);
+            }
         }
-    }
 
-}
+        [TestMethod]
+        public void DeleteTest()
+        {
+            tblFormat row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
+            if (row != null)
+            {
+                int result = base.DeleteTest(row);
+                Assert.IsTrue(result == 1);
+            }
+        }
+
+    }
 //OrderBy(e => e.Id == 1).LastOrDefault()
