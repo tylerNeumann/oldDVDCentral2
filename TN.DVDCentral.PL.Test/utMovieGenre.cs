@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovieGenre : utBase
+    public class utMovieGenre : utBase<tblMovieGenre>
     {
         [TestMethod]
         public void LoadTest()

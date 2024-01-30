@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utGenre:utBase
+    public class utGenre:utBase<tblGenre>
     {
         
 

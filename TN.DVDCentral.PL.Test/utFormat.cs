@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utFormat:utBase
+    public class utFormat:utBase<tblFormat>
     {
        
         [TestMethod]

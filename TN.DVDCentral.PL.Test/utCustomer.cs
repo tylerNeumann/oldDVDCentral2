@@ -3,7 +3,7 @@
 namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utCustomer : utBase
+    public class utCustomer : utBase<tblUser>
     {
 
         [TestMethod]

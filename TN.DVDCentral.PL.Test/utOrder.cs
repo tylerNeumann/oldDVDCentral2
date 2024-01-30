@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utOrder : utBase
+    public class utOrder : utBase<tblOrder>
     {
 
         [TestMethod]

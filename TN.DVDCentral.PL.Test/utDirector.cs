@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utDirector : utBase
+    public class utDirector : utBase<tblDirector>
     {
         
 
