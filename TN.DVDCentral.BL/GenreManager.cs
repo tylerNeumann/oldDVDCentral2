@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.PL;
-using TN.DVDCentral.BL.Models;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class GenreManager
     {
@@ -17,7 +12,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblGenre entity = new tblGenre();
-                    entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Description = genre.Description;
                     entity.Id = genre.Id;
                     dc.Add(entity);
@@ -45,7 +40,7 @@ namespace TN.DVDCentral.BL
                     tblGenre entity = dc.tblGenres.FirstOrDefault(s => s.Id == genre.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.Description = genre.Description;
                         entity.Id = genre.Id;
                         result = dc.SaveChanges();

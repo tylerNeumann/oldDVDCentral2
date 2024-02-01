@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class RatingManager
     {
@@ -17,7 +12,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblRating entity = new tblRating();
-                    entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Description = rating.Description;
                     entity.Id = rating.Id;
                     dc.Add(entity);

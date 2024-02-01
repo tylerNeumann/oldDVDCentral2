@@ -1,13 +1,13 @@
-﻿using TN.DVDCentral.BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.PL;
-
+﻿
 namespace TN.DVDCentral.BL
 {
-    public static class CustomerManager
+    public  class CustomerManager : GenericManager<tblCustomer>
     {
-        public static int Insert(Customer customer, bool rollback = false)
+        public CustomerManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+
+        public  int Insert(Customer customer, bool rollback = false)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblCustomer entity = new tblCustomer();
-                    entity.Id = dc.tblCustomers.Any() ? dc.tblCustomers.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.FirstName = customer.FirstName;
                     entity.LastName = customer.LastName;
                     entity.UserId = customer.UserId;
@@ -40,7 +40,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Update(Customer customer, bool rollback = false)
+        public  int Update(Customer customer, bool rollback = false)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(int id, bool rollback = false)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static Customer LoadById(int id)
+        public  Customer LoadById(int id)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static List<Customer> Load()
+        public  List<Customer> Load()
         {
             try
             {
@@ -183,7 +183,7 @@ namespace TN.DVDCentral.BL
 
         }
 
-        public static List<Customer> LoadByUserId(int? UserId = null) 
+        public  List<Customer> LoadByUserId(int? UserId = null) 
         {
             List<Customer> list = new List<Customer>();
             using (DVDCentralEntities dc = new DVDCentralEntities())

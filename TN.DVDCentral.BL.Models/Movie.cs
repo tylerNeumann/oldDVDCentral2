@@ -5,20 +5,20 @@ namespace TN.DVDCentral.BL.Models
 {
     public class Movie
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         [DisplayName("Format Description")]
         public string FormatDescription { get; set; }
-        public int FormatId { get; set; }
+        public Guid FormatId { get; set; }
         [DisplayName("Director")]
         public string DirectorName { get; set; }
-        public int DirectorId { get; set; }
+        public Guid DirectorId { get; set; }
         [DisplayName("Rating Description")]
         public string RatingDescription { get; set; }
         [DisplayName("Genre Description")]
         public string GenreDescription { get; set; }
-        public int RatingId { get; set; }
+        public Guid RatingId { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]
         public float Cost { get; set; }
         [DisplayName("Quantity")]

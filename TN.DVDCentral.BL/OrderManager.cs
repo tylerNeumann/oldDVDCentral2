@@ -1,10 +1,4 @@
-﻿using Microsoft.Build.Framework;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class OrderManager
     {
@@ -24,7 +18,7 @@ namespace TN.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
                     tblOrder Order = new tblOrder();
-                    Order.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
+                    Order.Id = Guid.NewGuid();
                     Order.CustomerId = order.CustomerId;
                     Order.UserId = order.UserId;
                     Order.OrderDate = order.OrderDate;
@@ -70,7 +64,7 @@ namespace TN.DVDCentral.BL
                     tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == order.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.CustomerId = order.CustomerId;
                         entity.UserId = order.UserId;
                         entity.OrderDate = order.OrderDate;

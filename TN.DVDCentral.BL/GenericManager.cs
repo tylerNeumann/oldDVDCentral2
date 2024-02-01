@@ -1,10 +1,6 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using TN.DVDCentral.PL2.Data;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
-    public abstract class GenericManager<T> where T : class
+    public abstract class GenericManager<T> where T : class, IEntity
     {
         protected DbContextOptions<DVDCentralEntities> options;
 
@@ -15,11 +11,32 @@ namespace TN.DVDCentral.BL
 
         public List<T> Load() 
         {
-            return null;
+            try
+            {
+                return new DVDCentralEntities(options) 
+                    .Set<T>()
+                    .ToList<T>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public List<T> LoadById(Guid id)
         {
-            return null;
+            try
+            {
+
+                return new DVDCentralEntities(options).Set<T>()
+                    .Where(t => t.Id == id)
+                    .FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int Insert(T entity, bool rollback = false)

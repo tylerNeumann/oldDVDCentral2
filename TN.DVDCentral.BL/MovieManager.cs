@@ -1,11 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks.Dataflow;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class MovieManager
     {
@@ -19,8 +12,8 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblMovie entity = new tblMovie();
-                    entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
-                    entity.InStkQty = movie.InStkQty;
+                    entity.Id = Guid.NewGuid();
+                    entity.Quantity = movie.InStkQty;
                     entity.Title = movie.Title;
                     entity.Description = movie.Description;
                     entity.FormatId = movie.FormatId;
@@ -54,7 +47,7 @@ namespace TN.DVDCentral.BL
                     tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == movie.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.InStkQty = movie.InStkQty;
                         entity.Title = movie.Title;
                         entity.Description = movie.Description;

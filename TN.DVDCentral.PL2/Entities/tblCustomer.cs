@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace TN.DVDCentral.PL2.Entities;
 
-namespace TN.DVDCentral.PL2.Entities;
-
-public class tblCustomer
+public class tblCustomer : IEntity
 {
     public Guid Id { get; set; }
 

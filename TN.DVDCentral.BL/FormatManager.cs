@@ -1,13 +1,13 @@
-﻿using TN.DVDCentral.BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.PL;
-
+﻿
 namespace TN.DVDCentral.BL
 {
-    public static class FormatManager
+    public class FormatManager : GenericManager<tblFormat>
     {
-        public static int Insert(Format format, bool rollback = false)
+        public FormatManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+
+        public  int Insert(Format format, bool rollback = false)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblFormat entity = new tblFormat();
-                    entity.Id = dc.tblFormats.Any() ? dc.tblFormats.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Description = format.Description;
                     entity.Id = format.Id;
                     dc.Add(entity);
@@ -33,7 +33,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Update(Format format, bool rollback = false)
+        public  int Update(Format format, bool rollback = false)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace TN.DVDCentral.BL
                     tblFormat entity = dc.tblFormats.FirstOrDefault(s => s.Id == format.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblFormats.Any() ? dc.tblFormats.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.Description = format.Description;
                         entity.Id = format.Id;
                         result = dc.SaveChanges();
@@ -65,7 +65,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(int id, bool rollback = false)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static Format LoadById(int id)
+        public  Format LoadById(int id)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static List<Format> Load()
+        public  List<Format> Load()
         {
             try
             {

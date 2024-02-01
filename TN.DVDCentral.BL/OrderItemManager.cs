@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class OrderItemManager
     {
@@ -17,7 +12,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblOrderItem entity = new tblOrderItem();
-                    entity.Id = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.OrderId = orderItem.OrderId;
                     entity.Quantity = orderItem.Quantity;
                     entity.MovieId = orderItem.MovieId;
@@ -50,7 +45,7 @@ namespace TN.DVDCentral.BL
                     tblOrderItem entity = dc.tblOrderItems.FirstOrDefault(s => s.Id == orderItem.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.OrderId = orderItem.OrderId;
                         entity.Quantity = orderItem.Quantity;
                         entity.MovieId = orderItem.MovieId;

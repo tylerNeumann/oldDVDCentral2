@@ -2,10 +2,10 @@
 {
     public class OrderItem
     {
-        public int Id { get; set; }
-        public int OrderId { get; set; }
+        public Guid Id { get; set; }
+        public Guid OrderId { get; set; }
         public int Quantity { get; set; }
-        public int MovieId { get; set; }
+        public Guid MovieId { get; set; }
         public float Cost { get; set; }
         public string MovieTitle { get; set; }
         public string? ImagePath { get; set; } = " ";

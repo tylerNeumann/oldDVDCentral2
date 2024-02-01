@@ -1,10 +1,4 @@
-﻿using System.Net.Http;
-using System.Security.Authentication;
-using System.Xml.Linq;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class ShoppingCartManager
     {

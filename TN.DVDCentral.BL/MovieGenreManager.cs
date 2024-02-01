@@ -1,12 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public static class MovieGenreManager
     {
-        public static int Insert(int MovieId, int GenreId, bool rollback = false)
+        public static int Insert(Guid MovieId, Guid GenreId, bool rollback = false)
         {
             try
             {
@@ -20,7 +16,7 @@ namespace TN.DVDCentral.BL
                         tblMovieGenre.MovieId = MovieId;
                         tblMovieGenre.GenreId = GenreId;
 
-                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                        tblMovieGenre.Id = Guid.NewGuid();
 
                         dc.Add(tblMovieGenre);
                         result = dc.SaveChanges();
@@ -30,7 +26,7 @@ namespace TN.DVDCentral.BL
                         tblMovieGenre.MovieId = dc.tblMovies.Max(s => s.Id) + 1;
                         tblMovieGenre.GenreId = GenreId;
 
-                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                        tblMovieGenre.Id = Guid.NewGuid();
 
                         dc.Add(tblMovieGenre);
                         result = dc.SaveChanges();
@@ -63,7 +59,7 @@ namespace TN.DVDCentral.BL
                     tblMovieGenre tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(mg => mg.Id == movieGenre.Id);
                     if (tblMovieGenre != null)
                     {
-                        tblMovieGenre.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                        tblMovieGenre.Id = Guid.NewGuid();
                         tblMovieGenre.MovieId = movieId;
                         tblMovieGenre.GenreId = genreId;
                         tblMovieGenre.Id = movieGenre.Id;

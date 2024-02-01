@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System.Security.Cryptography;
-using System.Text;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL;
+﻿
 
 namespace TN.DVDCentral.BL
 {
@@ -54,7 +50,7 @@ namespace TN.DVDCentral.BL
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblUser entity = new tblUser();
-                    entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.FirstName = user.FirstName;
                     entity.LastName = user.LastName;
                     entity.UserName = user.UserName;
@@ -167,7 +163,7 @@ namespace TN.DVDCentral.BL
                     tblUser entity = dc.tblUsers.FirstOrDefault(s => s.Id == user.Id);
                     if (entity != null)
                     {
-                        entity.Id = dc.tblUsers.Any() ? dc.tblUsers.Max(s => s.Id) + 1 : 1;
+                        entity.Id = Guid.NewGuid();
                         entity.FirstName = user.FirstName;
                         entity.LastName = user.LastName;
                         entity.UserName = user.UserName;

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace TN.DVDCentral.PL2.Entities
+﻿namespace TN.DVDCentral.PL2.Entities
 {
-    public class tblCart
+    public class tblCart : IEntity
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
