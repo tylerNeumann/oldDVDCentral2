@@ -62,7 +62,7 @@
             }
             
         }
-        public  int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -87,7 +87,7 @@
 
                 throw;
             } }
-        public  Director LoadById(int id)
+        public  Director LoadById(Guid id)
         {
             try
             {
@@ -122,8 +122,8 @@
                 List<Director> rows = new List<Director>();
                 
                     
-                     base().Load()
-                     .ForEach(director => list.Add(new Director
+                     base.Load()
+                     .ForEach(director => rows.Add(new Director
                      {
                          Id = director.Id,
                          FirstName = director.FirstName,

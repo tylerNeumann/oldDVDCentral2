@@ -1,8 +1,11 @@
 ﻿namespace TN.DVDCentral.BL
 {
-    public static class RatingManager
+    public  class RatingManager : GenericManager<tblRating>
     {
-        public static int Insert(Rating rating, bool rollback = false)
+        public RatingManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+        public  int Insert(Rating rating, bool rollback = false)
         {
             try
             {
@@ -28,7 +31,7 @@
             }
 
         }
-        public static int Update(Rating rating, bool rollback = false)
+        public  int Update(Rating rating, bool rollback = false)
         {
             try
             {
@@ -59,7 +62,7 @@
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -85,7 +88,7 @@
                 throw;
             }
         }
-        public static Rating LoadById(int id)
+        public  Rating LoadById(Guid id)
         {
             try
             {
@@ -113,7 +116,7 @@
                 throw;
             }
         }
-        public static List<Rating> Load()
+        public  List<Rating> Load()
         {
             try
             {

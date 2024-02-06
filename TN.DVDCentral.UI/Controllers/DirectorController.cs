@@ -1,9 +1,7 @@
-﻿using TN.DVDCentral.UI.Models;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.VisualStudio.Web.CodeGeneration.Design;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TN.DVDCentral.UI.Controllers
 {

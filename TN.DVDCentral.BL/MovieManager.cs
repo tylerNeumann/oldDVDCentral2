@@ -1,8 +1,11 @@
 ﻿namespace TN.DVDCentral.BL
 {
-    public static class MovieManager
+    public  class MovieManager : GenericManager<tblMovie>
     {
-        public static int Insert(Movie movie, bool rollback = false)
+        public MovieManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+        public  int Insert(Movie movie, bool rollback = false)
         {
             try
             {
@@ -13,7 +16,7 @@
                     if (rollback) transaction = dc.Database.BeginTransaction();
                     tblMovie entity = new tblMovie();
                     entity.Id = Guid.NewGuid();
-                    entity.Quantity = movie.InStkQty;
+                    entity.Quantity = movie.Quantity;
                     entity.Title = movie.Title;
                     entity.Description = movie.Description;
                     entity.FormatId = movie.FormatId;
@@ -35,7 +38,7 @@
             }
 
         }
-        public static int Update(Movie movie, bool rollback = false)
+        public  int Update(Movie movie, bool rollback = false)
         {
             try
             {
@@ -48,7 +51,7 @@
                     if (entity != null)
                     {
                         entity.Id = Guid.NewGuid();
-                        entity.InStkQty = movie.InStkQty;
+                        entity.Quantity = movie.Quantity      ;
                         entity.Title = movie.Title;
                         entity.Description = movie.Description;
                         entity.FormatId = movie.FormatId;
@@ -74,7 +77,7 @@
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -100,7 +103,7 @@
                 throw;
             }
         }
-        public static Movie LoadById(int id)
+        public  Movie LoadById(Guid id)
         {
             try
             {
@@ -114,7 +117,7 @@
                                     select new
                                     {
                                         m.Id,
-                                        m.InStkQty,
+                                        m.Quantity,
                                         m.Title,
                                         m.Description, 
                                         FormatDescription = f.Description,
@@ -128,7 +131,7 @@
                         return new Movie()
                         {
                             Id = entity.Id,
-                            InStkQty = entity.InStkQty,
+                            Quantity = entity.Quantity,
                             Title = entity.Title,
                             Description = entity.Description,
                             Cost = (float)entity.Cost,
@@ -153,7 +156,7 @@
             }
         }
 
-        public static List<Movie> Load(int? genreId = null) //genreId is an optional parameter and if not sent in is null in this instance or syntax
+        public  List<Movie> Load(Guid? genreId = null) //genreId is an optional parameter and if not sent in is null in this instance or syntax
         {
             try
             {
@@ -170,7 +173,7 @@
                      select new
                      {
                          m.Id,
-                         m.InStkQty,
+                         m.Quantity,
                          m.Title,
                          m.Description,
                          FormatDescription = f.Description,
@@ -189,7 +192,7 @@
                      .ForEach(movie => list.Add(new Movie
                      {
                          Id = movie.Id,
-                         InStkQty = movie.InStkQty,
+                         Quantity = movie.Quantity,
                          Title = movie.Title,
                          Description = movie.Description,
                          FormatDescription = movie.FormatDescription,

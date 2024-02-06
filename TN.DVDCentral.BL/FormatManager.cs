@@ -65,7 +65,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public  int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public  Format LoadById(int id)
+        public  Format LoadById(Guid id)
         {
             try
             {

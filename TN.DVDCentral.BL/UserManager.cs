@@ -4,6 +4,7 @@ namespace TN.DVDCentral.BL
 {
     public class LoginFailureException : Exception
     {
+        
         public LoginFailureException() : base("Cannot log in with these credentials. Your IP Address has been saved.")
         {
             
@@ -13,8 +14,11 @@ namespace TN.DVDCentral.BL
 
         }
     }
-    public class UserManager
+    public class UserManager : GenericManager<tblUser>
     {
+        public UserManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
         public static string GetHash(string password)
         {
             using(var hasher = SHA1.Create())
@@ -186,7 +190,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static User LoadById(int id)
+        public static User LoadById(Guid id)
         {
             try
             {
@@ -218,7 +222,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {

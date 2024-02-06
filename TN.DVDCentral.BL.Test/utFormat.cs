@@ -7,6 +7,7 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            List<Format> formats = new FormatManager(options).Load();
             Assert.AreEqual(3, FormatManager.Load().Count());
         }
         [TestMethod]

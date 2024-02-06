@@ -1,8 +1,11 @@
 ﻿namespace TN.DVDCentral.BL
 {
-    public static class OrderItemManager
+    public  class OrderItemManager : GenericManager<tblOrderItem>
     {
-        public static int Insert(OrderItem orderItem, bool rollback = false)
+        public OrderItemManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+        public  int Insert(OrderItem orderItem, bool rollback = false)
         {
             try
             {
@@ -33,7 +36,7 @@
             }
 
         }
-        public static int Update(OrderItem orderItem, bool rollback = false)
+        public  int Update(OrderItem orderItem, bool rollback = false)
         {
             try
             {
@@ -68,7 +71,7 @@
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -94,7 +97,7 @@
                 throw;
             }
         }
-        public static OrderItem LoadById(int id)
+        public  OrderItem LoadById(Guid id)
         {
             try
             {
@@ -125,7 +128,7 @@
                 throw;
             }
         }
-        public static List<OrderItem> Load()
+        public  List<OrderItem> Load()
         {
             try
             {
@@ -161,7 +164,7 @@
 
         }
 
-        public static List<OrderItem> LoadByOrderId(int orderId)
+        public  List<OrderItem> LoadByOrderId(Guid orderId)
         {
             try
             {

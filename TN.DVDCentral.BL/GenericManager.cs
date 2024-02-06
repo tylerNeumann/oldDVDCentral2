@@ -23,7 +23,7 @@
                 throw;
             }
         }
-        public List<T> LoadById(Guid id)
+        public T LoadById(Guid id)
         {
             try
             {
@@ -41,7 +41,38 @@
 
         public int Insert(T entity, bool rollback = false)
         {
-            return 0;
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
+                {
+                    // Check if genre already exists - do not allow ....
+                    //bool inUse = dc.tblGenres.Any(e => e.Description.Trim().ToUpper() == entity.Description.Trim().ToUpper());
+
+                    //if (inUse && !rollback)
+                    //{
+                    //    throw new Exception("This entity already exists.");
+                    //}
+
+                    IDbContextTransaction dbTransaction = null;
+                    if (rollback) dbTransaction = dc.Database.BeginTransaction();
+
+                    entity.Id = Guid.NewGuid();
+
+                    dc.Set<T>().Add(entity);
+                    results = dc.SaveChanges();
+
+                    if (rollback) dbTransaction.Rollback();
+
+                }
+
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int Update(T entity, bool rollback = false)

@@ -78,7 +78,7 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public  int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public  Customer LoadById(int id)
+        public  Customer LoadById(Guid id)
         {
             try
             {
@@ -183,7 +183,7 @@ namespace TN.DVDCentral.BL
 
         }
 
-        public  List<Customer> LoadByUserId(int? UserId = null) 
+        public  List<Customer> LoadByUserId(Guid? UserId = null) 
         {
             List<Customer> list = new List<Customer>();
             using (DVDCentralEntities dc = new DVDCentralEntities())

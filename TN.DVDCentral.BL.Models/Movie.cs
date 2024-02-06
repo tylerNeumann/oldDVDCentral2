@@ -22,7 +22,7 @@ namespace TN.DVDCentral.BL.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
         public float Cost { get; set; }
         [DisplayName("Quantity")]
-        public int InStkQty { get; set; }
+        public int Quantity { get; set; }
         [DisplayName("Image")]
         public string? ImagePath { get; set; } = " ";
         //public int GenreId { get; set; }

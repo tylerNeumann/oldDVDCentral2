@@ -1,8 +1,12 @@
 ﻿namespace TN.DVDCentral.BL
 {
-    public static class GenreManager
+    public  class GenreManager : GenericManager<tblGenre>
     {
-        public static int Insert(Genre genre, bool rollback = false)
+        public GenreManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+
+        public  int Insert(Genre genre, bool rollback = false)
         {
             try
             {
@@ -28,7 +32,7 @@
             }
 
         }
-        public static int Update(Genre genre, bool rollback = false)
+        public  int Update(Genre genre, bool rollback = false)
         {
             try
             {
@@ -60,7 +64,7 @@
             }
 
         }
-        public static int Delete(int id, bool rollback = false)
+        public  int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -86,7 +90,7 @@
                 throw;
             }
         }
-        public static Genre LoadById(int id)
+        public  Genre LoadById(Guid id)
         {
             try
             {
@@ -114,7 +118,7 @@
                 throw;
             }
         }
-        public static List<Genre> Load()
+        public  List<Genre> Load()
         {
             try
             {
@@ -143,7 +147,7 @@
             }
 
         }
-        public static List<Genre> Load(int movieId)
+        public  List<Genre> Load(Guid movieId)
         {
             try
             {

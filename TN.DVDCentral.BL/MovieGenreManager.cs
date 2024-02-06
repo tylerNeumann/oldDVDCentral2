@@ -1,41 +1,30 @@
 ﻿namespace TN.DVDCentral.BL
 {
-    public static class MovieGenreManager
+    public  class MovieGenreManager : GenericManager<tblMovieGenre>
     {
-        public static int Insert(Guid MovieId, Guid GenreId, bool rollback = false)
+        public MovieGenreManager(DbContextOptions<DVDCentralEntities> options) : base(options)
+        {
+        }
+        public  int Insert(Guid MovieId, Guid GenreId, bool rollback = false)
         {
             try
             {
                 int result = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
+                    IDbContextTransaction transaction = null;
+                    if(rollback) transaction = dc.Database.BeginTransaction();
+                    tblMovieGenre row = new tblMovieGenre();
 
-                    tblMovieGenre tblMovieGenre = new tblMovieGenre();
-                    if(MovieId !=0)
-                    {
-                        tblMovieGenre.MovieId = MovieId;
-                        tblMovieGenre.GenreId = GenreId;
+                    row.Id = Guid.NewGuid();
+                    row.MovieId = MovieId;
+                    row.GenreId = GenreId;
 
-                        tblMovieGenre.Id = Guid.NewGuid();
+                    dc.Add(row);
 
-                        dc.Add(tblMovieGenre);
-                        result = dc.SaveChanges();
-                    }
-                    else if (MovieId == 0)
-                    {
-                        tblMovieGenre.MovieId = dc.tblMovies.Max(s => s.Id) + 1;
-                        tblMovieGenre.GenreId = GenreId;
+                    result = dc.SaveChanges();
 
-                        tblMovieGenre.Id = Guid.NewGuid();
-
-                        dc.Add(tblMovieGenre);
-                        result = dc.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new Exception("movieId = 0");
-                    }
-                    
+                    if (rollback) transaction.Rollback();
                 }
                 return result;
             }
@@ -46,7 +35,7 @@
             }
 
         }
-        public static int Update(MovieGenre movieGenre, int movieId, int genreId, bool rollback = false)
+        public  int Update(MovieGenre movieGenre, Guid movieId, Guid genreId, bool rollback = false)
         {
             try
             {
@@ -80,7 +69,7 @@
             }
 
         }
-        public static int Delete(int movieId, int genreId, bool rollback = false)
+        public  int Delete(Guid movieId, Guid genreId, bool rollback = false)
         {
             try
             {
@@ -116,7 +105,7 @@
             }
         }
 
-        public static int Add(int movieId, int genreId, bool rollback = false)
+        public  int Add(Guid movieId, Guid genreId, bool rollback = false)
         {
             try
             {
@@ -152,7 +141,7 @@
                 throw;
             }
         }
-        public static MovieGenre LoadById(int id)
+        public  MovieGenre LoadById(Guid id)
         {
             try
             {
@@ -181,7 +170,7 @@
                 throw;
             }
         }
-        //public static List<MovieGenre> Load(int studnetId)
+        //public  List<MovieGenre> Load(int studnetId)
         //{
         //    try
         //    {
@@ -212,7 +201,7 @@
         //        throw;
         //    }
         //}
-        public static List<MovieGenre> Load()
+        public  List<MovieGenre> Load()
         {
             try
             {
