@@ -8,8 +8,8 @@
         public void LoadTest()
         {
             int expected = 4;
-            var ratings = base.LoadTest();
-            Assert.AreEqual(expected, ratings.Count());
+            var formats = base.LoadTest();
+            Assert.AreEqual(expected, formats.Count());
         }
         [TestMethod]
         public void InsertTest()
