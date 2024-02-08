@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TN.DVDCentral.BL;
+using TN.DVDCentral.PL2.Data;
 
 namespace TN.DVDCentral.API.Controllers
 {
@@ -8,6 +10,8 @@ namespace TN.DVDCentral.API.Controllers
     [ApiController]
     public class director : ControllerBase
     {
+        private readonly DbContextOptions<DVDCentralEntities> options;
+        private readonly ILogger<director> logger;
         [HttpGet]
         public IEnumerable<BL.Models.Director> Get() 
         {

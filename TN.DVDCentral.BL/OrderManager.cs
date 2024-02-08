@@ -7,20 +7,17 @@
         }
         public  int Insert(Order order, bool rollback = false)
         {
-            try
-            {
-
                 int result = 0;
                 List<OrderItem> OrderItems;
 
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     
                     IDbContextTransaction transaction = null;
                     
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
-                    tblOrder Order = new tblOrder();
+                    tblOrder row = new tblOrder();
                     Order.Id = Guid.NewGuid();
                     Order.CustomerId = order.CustomerId;
                     Order.UserId = order.UserId;
@@ -29,9 +26,14 @@
 
                     //declaration manager tues last week
                     foreach (OrderItem item in order.OrderItems)
-                    {
+                    { 
+                        item.OrderId = row.Id;
+                        tblOrderItem oirow = new tblOrderItem();
+
+                        oirow.Id = Guid.NewGuid();
+                        oirow.OrderId = item.OrderId;
                         
-                        item.OrderId = Order.Id;
+                    
                         result += OrderItemManager.Insert(item, rollback);
                         //item.ImagePath = item.MovieId
                     } 
@@ -45,11 +47,6 @@
                     if (rollback) transaction.Rollback();
                 } 
                 return result;
-            }
-            catch (Exception)
-            {
-
-                throw;
             }
         }
 
@@ -181,7 +178,8 @@
                          o.CustomerId,
                          o.UserId,
                          o.ShipDate,
-                         o.OrderDate
+                         o.OrderDate,
+                         
                          //CustomerName = c.FirstName.ToString() + " " + c.LastName.ToString(),
                          //CustomerAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZIP,
                          //CustomerPhone = c.Phone
@@ -216,14 +214,16 @@
                 List<Order> list = new List<Order>();
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    (from d in dc.tblOrders
+                    (from o in dc.tblOrders
                      select new
                      {
-                         d.Id,
-                         d.CustomerId,
-                         d.UserId,
-                         d.ShipDate,
-                         d.OrderDate
+                         o.Id,
+                         o.CustomerId,
+                         o.UserId,
+                         o.ShipDate,
+                         o.OrderDate,
+                         CustomerFirstName = o.Customer.FirstName,
+                         CustomerLastName = o.Customer.LastName,
                      })
                      .ToList()
                      .ForEach(order => list.Add(new Order
