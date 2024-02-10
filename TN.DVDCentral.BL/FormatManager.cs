@@ -11,25 +11,13 @@ namespace TN.DVDCentral.BL
         {
             try
             {
-                int result = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblFormat entity = new tblFormat();
-                    entity.Id = Guid.NewGuid();
-                    entity.Description = format.Description;
-                    entity.Id = format.Id;
-                    dc.Add(entity);
-                    result = dc.SaveChanges();
-                    if (rollback) transaction.Rollback();
-                }
-                return result;
+                tblFormat row = new tblFormat { Description = format.Description };
+                format.Id = row.Id;
+                return base.Insert(row, rollback);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
 
         }
@@ -37,31 +25,19 @@ namespace TN.DVDCentral.BL
         {
             try
             {
-                int result = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                int results = base.Update(new tblFormat
                 {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblFormat entity = dc.tblFormats.FirstOrDefault(s => s.Id == format.Id);
-                    if (entity != null)
-                    {
-                        entity.Id = Guid.NewGuid();
-                        entity.Description = format.Description;
-                        entity.Id = format.Id;
-                        result = dc.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new Exception("row doesn't exist");
-                    }
-                    if (rollback) transaction.Rollback();
-                }
-                return result;
+                    Id = format.Id,
+                    Description = format.Description
+                }, rollback);
+
+
+                return results;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }
@@ -69,82 +45,56 @@ namespace TN.DVDCentral.BL
         {
             try
             {
-                int result = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblFormat entity = dc.tblFormats.FirstOrDefault(s => s.Id == id);
-                    if (entity != null)
-                    {
-                        dc.Remove(entity);
-                        result = dc.SaveChanges();
-                    }
-                    else { throw new Exception("row doesn't exist"); }
-                    if (rollback) transaction.Rollback();
-                }
-                return result;
+                return base.Delete(id, rollback);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
         public  Format LoadById(Guid id)
         {
             try
             {
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    tblFormat entity = dc.tblFormats.FirstOrDefault(format => format.Id == id);
-                    if (entity != null)
+                tblFormat row = base.LoadById(id);
+                    if (row != null)
                     {
-                        return new Format()
+                        Format format = new Format
                         {
-                            Id = entity.Id,
-                            Description = entity.Description
+                            Id = row.Id,
+                            Description = row.Description
                         };
+                    return format;
                     }
                     else
                     {
-
-                        throw new Exception();
+                        throw new Exception("row not found");
                     }
-                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
         public  List<Format> Load()
         {
             try
             {
-                List<Format> list = new List<Format>();
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    (from d in dc.tblFormats
-                     select new
-                     {
-                         d.Id,
-                         d.Description
-                     })
-                     .ToList()
-                     .ForEach(format => list.Add(new Format
-                     {
-                         Id = format.Id,
-                         Description = format.Description
-                     }));
-                }
-                return list;
+                List<Format> rows = new List<Format>();
+                base.Load()
+                    .ForEach(d => rows.Add(new Format
+                    {
+                        Id = d.Id,
+                        Description = d.Description
+                    }));
+                return rows;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }

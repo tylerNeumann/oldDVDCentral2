@@ -1,32 +1,28 @@
-﻿namespace TN.DVDCentral.BL
+﻿using TN.DVDCentral.PL2.Entities;
+
+namespace TN.DVDCentral.BL
 {
     public class DirectorManager : GenericManager<tblDirector>
     {
-        public DirectorManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+        public DirectorManager(DbContextOptions<DVDCentralEntities> options) : base(options) 
+        {
+        
+        }
         public  int Insert(Director director, bool rollback = false)
         {
             try
             {
-                int result = 0;
-                using(DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblDirector entity = new tblDirector();
-                    entity.Id = Guid.NewGuid();
-                    entity.FirstName = director.FirstName;
-                    entity.LastName = director.LastName;
-                    entity.Id = director.Id;
-                    dc.Add(entity);
-                    result = dc.SaveChanges();
-                    if(rollback) transaction.Rollback();
-                }
-                return result;
+                
+                    tblDirector row = new tblDirector { FirstName = director.FirstName, LastName = director.LastName};
+            
+                    director.Id = row.Id;
+                    
+                    return base.Insert(row, rollback);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
            
         }
@@ -34,31 +30,17 @@
         {
             try
             {
-                int result = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                return base.Update(new tblDirector
                 {
-                    IDbContextTransaction transaction = null;
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    tblDirector entity = dc.tblDirectors.FirstOrDefault(s => s.Id == director.Id);
-                    if(entity != null)
-                    {
-                        entity.FirstName = director.FirstName;
-                        entity.LastName = director.LastName;
-                        entity.Id = director.Id;
-                        result = dc.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new Exception("row doesn't exist");
-                    }
-                    if (rollback) transaction.Rollback();
-                }
-                return result;
+                    Id = director.Id,
+                    FirstName = director.FirstName,
+                    LastName = director.LastName
+                }, rollback);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             
         }
@@ -66,55 +48,14 @@
         {
             try
             {
-                int result = 0;
-                using(DVDCentralEntities dc = new DVDCentralEntities())
-                {  
-                    IDbContextTransaction transaction = null;
-                    if(rollback) transaction = dc.Database.BeginTransaction();
-                    tblDirector entity = dc.tblDirectors.FirstOrDefault(s => s.Id == id);
-                    if (entity != null)
-                    {
-                        dc.Remove(entity);
-                        result = dc.SaveChanges();
-                    }
-                    else { throw new Exception("row doesn't exist"); }
-                    if (rollback) transaction.Rollback();
-                }
-                return result;
+                return base.Delete(id,rollback);
             }
-            catch (Exception)
-            {
-
-                throw;
-            } }
-        public  Director LoadById(Guid id)
-        {
-            try
-            {
-                using(DVDCentralEntities dc = new DVDCentralEntities())
-                {  
-                    tblDirector entity = dc.tblDirectors.FirstOrDefault(director => director.Id == id);
-                    if(entity != null)
-                    {
-                        return new Director()
-                        {
-                            Id = entity.Id,
-                            FirstName = entity.FirstName,
-                            LastName = entity.LastName
-                        };
-                    }
-                    else {
-
-                        throw new Exception();
-                    }
-                }
+            catch (Exception ex) 
+            { 
+                throw ex; 
             }
-            catch (Exception)
-            {
-
-                throw;
-            } 
         }
+        
         public  List<Director> Load() 
         {
             try
@@ -123,21 +64,48 @@
                 
                     
                      base.Load()
-                     .ForEach(director => rows.Add(new Director
-                     {
-                         Id = director.Id,
-                         FirstName = director.FirstName,
-                         LastName = director.LastName
-                     }));
+                        .ForEach(d => rows.Add(new Director
+                        {
+                            Id = d.Id,
+                            FirstName = d.FirstName,
+                            LastName = d.LastName
+                        }));
                 
                 return rows;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
              
+        }
+
+        public Director LoadById(Guid id)
+        {
+            try
+            {
+                tblDirector row = base.LoadById(id);
+                if (row != null)
+                {
+                    Director director = new Director()
+                    {
+                        Id = row.Id,
+                        FirstName = row.FirstName,
+                        LastName = row.LastName
+                    };
+                    return director;
+                }
+                else
+                {
+
+                    throw new Exception("row wasn't found");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
