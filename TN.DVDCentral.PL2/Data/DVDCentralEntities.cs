@@ -122,9 +122,9 @@ namespace TN.DVDCentral.PL2.Data
 
             List<tblCartItem> cartItems = new List<tblCartItem>
             {
-                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[0], MovieId = movieId[0], Qty = 1},
-                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[0], MovieId = movieId[1], Qty = 2},
-                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[1], MovieId = movieId[1], Qty = 1}
+                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[0], MovieId = movieId[0], Quantity = 1},
+                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[0], MovieId = movieId[1], Quantity = 2},
+                new tblCartItem {Id = Guid.NewGuid(), CartId = cartId[1], MovieId = movieId[1], Quantity = 1}
             };
             modelBuilder.Entity<tblCartItem>().HasData(cartItems);
         }

@@ -1,5 +1,6 @@
 ﻿namespace TN.DVDCentral.API.Test
 {
+    [TestClass]
     public class utFormat : utBase
     {
         [TestMethod]

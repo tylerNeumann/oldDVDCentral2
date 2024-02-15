@@ -19,4 +19,6 @@ public class tblCustomer : IEntity
     public string ZIP { get; set; }
 
     public string Phone { get; set; }
+
+    public virtual ICollection<tblOrder> Orders { get; set; }
 }

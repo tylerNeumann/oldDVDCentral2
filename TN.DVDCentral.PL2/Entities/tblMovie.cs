@@ -20,7 +20,7 @@ public class tblMovie : IEntity
 
     public string ImagePath { get; set; }
     public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
-
+    public virtual ICollection<tblOrderItem> OrderItems { get; set; }
     public virtual tblDirector Director { get; set; }
     public virtual tblRating Rating { get; set; }
     public virtual tblFormat Format { get; set; }
