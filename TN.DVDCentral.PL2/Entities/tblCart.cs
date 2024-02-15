@@ -4,6 +4,6 @@
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public tblUser User { get; set; }
+        public virtual tblUser User { get; set; }
     }
 }
