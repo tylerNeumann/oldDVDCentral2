@@ -3,48 +3,59 @@
 namespace TN.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utCustomer : utBase<tblUser>
+    public class utCustomer : utBase<tblCustomer>
     {
 
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblCustomers.Count());
+            int expected = 3;
+            var customers = base.LoadTest();
+            Assert.AreEqual(expected, customers.Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            tblCustomer entity = new tblCustomer();
-            entity.FirstName = "test";
-            entity.Id = Guid.NewGuid();
-            entity.LastName = "test";
-            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
-            entity.Address = "test";
-            entity.City = "test";
-            entity.State = "Te";
-            entity.ZIP = "test";
-            entity.Phone = "test";
-            dc.Add(entity);
-            int results = dc.SaveChanges();
+            tblCustomer newRow = new tblCustomer();
+            newRow.FirstName = "test";
+            newRow.Id = Guid.NewGuid();
+            newRow.LastName = "test";
+            newRow.UserId = dc.tblUsers.FirstOrDefault().Id;
+            newRow.Address = "test";
+            newRow.City = "test";
+            newRow.State = "Te";
+            newRow.ZIP = "test";
+            newRow.Phone = "test";
+            dc.Add(newRow);
+            int rowsAffected = InsertTest(newRow);
+            Assert.AreEqual(1,rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            tblCustomer entity = dc.tblCustomers.FirstOrDefault();
+            tblCustomer row = base.LoadTest().FirstOrDefault();
+            if(row != null )
+            {
+                row.FirstName = "test";
+                row.LastName = "test";
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
             
-            int results = dc.SaveChanges();
-            Assert.AreEqual(1, results);
+            
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            tblCustomer entity = dc.tblCustomers.FirstOrDefault();
-            dc.Remove(entity);
-            int results = dc.SaveChanges();
-            Assert.AreNotEqual(0, results);
+            tblCustomer row = base.LoadTest().FirstOrDefault(x => x.Orders.Count == 0);
+            if(row != null )
+            {
+                int rowsAffected = DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 
