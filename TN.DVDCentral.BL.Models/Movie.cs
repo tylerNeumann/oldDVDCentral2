@@ -12,7 +12,7 @@ namespace TN.DVDCentral.BL.Models
         public string FormatDescription { get; set; }
         public Guid FormatId { get; set; }
         [DisplayName("Director")]
-        public string DirectorName { get; set; }
+        public string DirectorFullName { get; set; }
         public Guid DirectorId { get; set; }
         [DisplayName("Rating Description")]
         public string RatingDescription { get; set; }
@@ -20,13 +20,13 @@ namespace TN.DVDCentral.BL.Models
         public string GenreDescription { get; set; }
         public Guid RatingId { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public float Cost { get; set; }
+        public double Cost { get; set; }
         [DisplayName("Quantity")]
         public int Quantity { get; set; }
         [DisplayName("Image")]
         public string? ImagePath { get; set; } = " ";
         //public int GenreId { get; set; }
-        public List<Genre> GenreList { get; set; } = new List<Genre>();
+        public List<Genre> Genres { get; set; } = new List<Genre>();
         public List<Rating> RatingList { get; set; } = new List<Rating>();
         public List<Director> DirectorList { get; set; } = new List<Director>();
         public List<Format> FormatList { get; set; } = new List<Format>();

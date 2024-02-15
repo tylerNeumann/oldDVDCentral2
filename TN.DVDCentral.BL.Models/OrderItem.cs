@@ -6,7 +6,7 @@
         public Guid OrderId { get; set; }
         public int Quantity { get; set; }
         public Guid MovieId { get; set; }
-        public float Cost { get; set; }
+        public double Cost { get; set; }
         public string MovieTitle { get; set; }
         public string? ImagePath { get; set; } = " ";
     }

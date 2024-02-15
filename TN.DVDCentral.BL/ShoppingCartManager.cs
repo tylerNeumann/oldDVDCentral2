@@ -7,11 +7,16 @@
         }
         public  void Add(ShoppingCart cart, Movie movie)
         {
-            if (cart != null) { cart.Items.Add(movie); }
+            if (!cart.Items.Any(n => n.Id == movie.Id)) cart.Items.Add(movie);
+            else cart.Items.Where(n => n.Id == movie.Id).FirstOrDefault().Quantity++;
         }
         public  void Remove(ShoppingCart cart, Movie movie)
         {
-            if (cart != null) { cart.Items.Remove(movie); }
+            cart.Remove(movie);
+        }
+        public void AssignToCustomer()
+        {
+
         }
 
         public  void Clear(ShoppingCart cart) 
@@ -20,44 +25,24 @@
             cart = new ShoppingCart();
         }
 
-        public  void Checkout(ShoppingCart cart)//int userid
+        public int Checkout(ShoppingCart cart, bool rollback = false)
         {
-
-            //throw new Exception("you have checked out");
-            //checkout will make a new order 
             Order order = new Order();
-            
-            // set order fields as needed
+            order.CustomerId = cart.CustomerId;
             order.OrderDate = DateTime.Now;
+            order.UserId = cart.UserId;
             order.ShipDate = DateTime.Now.AddDays(3);
-            //User user = new User();
-            //user.Id = UserId;
-            //order.UserId = userid;
-            //order.UserId = 1;
-            //order.CustomerId = 1;
-
             
-            //int orderId = 0;
-            foreach (Movie item in cart.Items) 
+            foreach (var item in cart.Items) 
             {
-                OrderItem orderItems = new OrderItem();
-                orderItems.MovieId = item.Id;
-                orderItems.Quantity = 1; // need to set order quantity to one and decrement the stock
-                item.Quantity -= 1;
-                orderItems.Cost = item.Cost;
-
-                order.OrderItems.Add(orderItems);
-
+                order.OrderItems.Add(new OrderItem
+                {
+                    Cost = item.Cost,
+                    MovieId = item.Id,
+                    Quantity = item.Quantity
+                });
             }
-            
-            //
-            //Set the orderitem fields from the item
-            //
-
-            OrderManager.Insert(order);
-
-            //decrement tblMovie.InStkQty appropriately
-            Clear(cart);
+            return new OrderManager(options).Insert(order, rollback);
         }
     }
 }

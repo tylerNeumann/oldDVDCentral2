@@ -1,5 +1,7 @@
 ﻿
 
+using TN.DVDCentral.BL.Models;
+
 namespace TN.DVDCentral.BL
 {
     public class LoginFailureException : Exception
@@ -19,24 +21,73 @@ namespace TN.DVDCentral.BL
         public UserManager(DbContextOptions<DVDCentralEntities> options) : base(options)
         {
         }
-        public static string GetHash(string password)
+        public string GetHash(string password)
         {
-            using(var hasher = SHA1.Create())
+            using(var hasher = new System.Security.Cryptography.SHA1Managed())
             {
-                var hashbytes = Encoding.UTF8.GetBytes(password);
-                string hashedpassword = Convert.ToBase64String(hasher.ComputeHash(hashbytes));
-                return hashedpassword;
+                var hashbytes = System.Text.Encoding.UTF8.GetBytes(password);
+                return Convert.ToBase64String(hasher.ComputeHash(hashbytes));                
             }
         }
-        public static int DeleteAll() 
+        public void Seed()
+        {
+            List<User> users = Load();
+            foreach(User user in users) 
+            {
+                if(user.Password.Length != 28) Update(user);
+            }
+            if(users.Count == 0)
+            {
+                Insert(new User { UserName = "tneumann", FirstName = "Tyler", LastName = "Neumann", Password = "ginger" });
+                Insert(new User { UserName = "bfoote", FirstName = "Brian", LastName = "Foote", Password = "maple" });
+            }
+        }
+        public bool Login(User user)
         {
             try
             {
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                if (!string.IsNullOrEmpty(user.UserName))
                 {
-                    dc.tblUsers.RemoveRange(dc.tblUsers.ToList());
-                    return dc.SaveChanges();
+                    if (!string.IsNullOrEmpty(user.Password))
+                    {
+                        using (DVDCentralEntities dc = new DVDCentralEntities(options))
+                        {
+                            tblUser userRow = dc.tblUsers.FirstOrDefault(u => u.UserName == user.UserName);
+                            if (userRow != null)
+                            {
+                                if (userRow.Password == GetHash(user.Password))
+                                {
+                                    //Login successful
+                                    user.UserName = userRow.UserName;
+                                    user.FirstName = userRow.FirstName;
+                                    user.LastName = userRow.LastName;
+                                    user.Password = userRow.Password;
+                                    return true;
+                                }
+                                else
+                                {
+                                    throw new LoginFailureException("Cannot log in with these credentials.  Your IP address has been saved.");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("user couldn't found.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Password was not set.");
+                    }
                 }
+                else
+                {
+                    throw new Exception("UserName was not set.");
+                }
+            }
+            catch (LoginFailureException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -44,7 +95,57 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static int Insert(User user, bool rollback = false)
+        public List<User> Load()
+        {
+            try
+            {
+                List<User> users = new List<User>();
+                base.Load()
+                    .ForEach(u => users
+                    .Add(new User
+                    {
+                        Id = u.Id,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        UserName = u.UserName,
+                        Password = u.Password
+                    }));
+                return users;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public User LoadById(Guid id)
+        {
+            try
+            {
+                User user = new User();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    user = (from u in dc.tblUsers
+                            where u.Id == id
+                            select new User
+                            {
+                                Id = u.Id,
+                                FirstName = u.FirstName,
+                                LastName = u.LastName,
+                                UserName = u.UserName,
+                                Password = u.Password
+                            }).FirstOrDefault();
+                }
+                return user;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public int Insert(User user, bool rollback = false)
         {
             try
             {
@@ -76,86 +177,10 @@ namespace TN.DVDCentral.BL
             
            
         }
-        public static bool Login(User user)
-        {
-            try
-            {
-                if(!string.IsNullOrEmpty(user.UserName))
-                {
-                    if(!string.IsNullOrEmpty(user.Password))
-                    {
-                        using (DVDCentralEntities dc = new DVDCentralEntities())
-                        {
-                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u  => u.UserName == user.UserName);
-                            if (tblUser != null) 
-                            { 
-                                if(tblUser.Password == GetHash(user.Password))
-                                {
-                                    //Login successful
-                                    user.UserName = tblUser.UserName;
-                                    user.FirstName = tblUser.FirstName;
-                                    user.LastName = tblUser.LastName;
-                                    return true;
-                                }
-                                else
-                                {
-                                    throw new LoginFailureException();
-                                }
-                            }
-                            else 
-                            {
-                                throw new Exception("UserName wasn't found.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Password was not set.");
-                    }
-                }
-                else
-                {
-                    throw new Exception("UserName was not set.");
-                }
-            }
-            catch (LoginFailureException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public static void Seed()
-        {
-            using (DVDCentralEntities dc = new DVDCentralEntities())
-            {
-                if(!dc.tblUsers.Any())
-                {
-                    User user = new User()
-                    {
-                        UserName = "tneumann",
-                        FirstName = "Tyler",
-                        LastName = "Neumann",
-                        Password = "ginger"
-                    };
-                    Insert(user);
-
-                    user = new User()
-                    {
-                        UserName = "bfoote",
-                        FirstName = "Brian",
-                        LastName = "Foote",
-                        Password = "maple"
-                    };
-                    Insert(user);
-                }
-                
-            }
-        }
-        public static int Update(User user, bool rollback = false)
+        
+        
+        
+        public int Update(User user, bool rollback = false)
         {
             try
             {
@@ -190,39 +215,8 @@ namespace TN.DVDCentral.BL
             }
 
         }
-        public static User LoadById(Guid id)
-        {
-            try
-            {
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    tblUser entity = dc.tblUsers.FirstOrDefault(user => user.Id == id);
-                    if (entity != null)
-                    {
-                        return new User()
-                        {
-                            Id = entity.Id,
-                            FirstName = entity.FirstName,
-                            LastName = entity.LastName,
-                            UserName = entity.UserName,
-                            Password = entity.Password,
-
-                        };
-                    }
-                    else
-                    {
-
-                        throw new Exception();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public static int Delete(Guid id, bool rollback = false)
+        
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -248,41 +242,22 @@ namespace TN.DVDCentral.BL
                 throw;
             }
         }
-        public static List<User> Load()
-        {
-            try
-            {
-                List<User> list = new List<User>();
-                using (DVDCentralEntities dc = new DVDCentralEntities())
-                {
-                    (from u in dc.tblUsers
-                     select new
-                     {
-                         u.Id,
-                         u.UserName,
-                         u.Password,
-                         u.FirstName,
-                         u.LastName
-                     })
-                     .ToList()
-                     .ForEach(User => list.Add(new User
-                     {
-                         Id = User.Id,
-                         UserName = User.UserName,
-                         Password = User.Password,
-                         FirstName = User.FirstName,
-                         LastName = User.LastName
-                     }));
-                }
-                return list;
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
+        //public static int DeleteAll()
+        //{
+        //    try
+        //    {
+        //        using (DVDCentralEntities dc = new DVDCentralEntities())
+        //        {
+        //            dc.tblUsers.RemoveRange(dc.tblUsers.ToList());
+        //            return dc.SaveChanges();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-        }
-        
+        //        throw;
+        //    }
+        //}
     }
 }

@@ -7,17 +7,23 @@ namespace TN.DVDCentral.BL.Models
     {
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
+        public Guid UserId { get; set; }
+
         [DisplayName("Order Date")]
         public DateTime OrderDate { get; set; }
-        public Guid UserId { get; set; }
+        
         [DisplayName("Ship Date")]
         public DateTime ShipDate { get; set; }
+
         public List<OrderItem> OrderItems { get; set;} = new List<OrderItem>();
+
         [DisplayName("Customer Name")]
-        public string? CustomerName { get; set; }
+        public string? CustomerFullName { get; set; }
         public string? CustomerAddress { get; set; }
         public string? CustomerPhone { get; set; }
+
         public List<Customer> Customer { get ; set; } = new List<Customer>();
+
         //public Customer Customer { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Subtotal { get { return OrderItems.Sum(oi => (oi.Quantity * oi.Cost)); } }
@@ -30,6 +36,9 @@ namespace TN.DVDCentral.BL.Models
 
         [DisplayName("User Name")]
         public string? UserName { get; set; }
+
+        [DisplayName("User Full Name")]
+        public string? UserFullName { get; set;}
     }
 }
 
