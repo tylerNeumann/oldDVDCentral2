@@ -20,7 +20,7 @@
             return new DirectorManager(options).Load();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public Director Get(Guid id)
         {
             return new DirectorManager(options).LoadById(id);

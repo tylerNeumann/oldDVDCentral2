@@ -20,7 +20,7 @@
             return new MovieManager(options).Load();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public Movie Get(Guid id)
         {
             return new MovieManager(options).LoadById(id);

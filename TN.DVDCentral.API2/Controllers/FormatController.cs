@@ -20,14 +20,14 @@
             return new FormatManager(options).Load();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public Format Get(Guid id)
         {
             return new FormatManager(options).LoadById(id);
         }
 
         [HttpPost("{rollback?}")]
-        public int Post([FromBody] Format format, bool rollback = false) 
+        public int Post([FromBody] Format format, bool rollback = false)
         {
             try
             {
@@ -41,7 +41,7 @@
         }
 
         [HttpPut("{id}/{rollback?}")]
-        public int Put(Guid id,[FromBody] Format format, bool rollback = false)
+        public int Put(Guid id, [FromBody] Format format, bool rollback = false)
         {
             try
             {
