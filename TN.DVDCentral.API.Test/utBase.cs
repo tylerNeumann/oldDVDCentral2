@@ -37,7 +37,7 @@
         [TestMethod]
         public async Task DeleteTestAsync<T>(KeyValuePair<string, string> filter)
         {
-            int id = await GetId<T>(filter);
+            Guid id = await GetId<T>(filter);
             bool rollback = true;
             HttpResponseMessage response = client.DeleteAsync(typeof(T).Name + "/" + id + "/" + rollback).Result;
             string result = response.Content.ReadAsStringAsync().Result;
@@ -45,12 +45,12 @@
 
         }
 
-        private async Task<int> GetId<T>(KeyValuePair<string, string> filter)
+        private async Task<Guid> GetId<T>(KeyValuePair<string, string> filter)
         {
             // return the id of the filter combination (ie VIN, "123456")
             string result;
             dynamic items;
-            int id = 0;
+            Guid id = Guid.Empty;
 
             var response1 = await client.GetStringAsync(typeof(T).Name);
             items = (JArray)JsonConvert.DeserializeObject(response1);
@@ -65,7 +65,7 @@
             {
                 if (v.GetType().GetProperty(key).GetValue(v, null).ToString() == value)
                 {
-                    id = (int)v.GetType().GetProperty("Id").GetValue(v, null);
+                    id = (Guid)v.GetType().GetProperty("Id").GetValue(v, null);
                 }
             }
 
@@ -100,12 +100,12 @@
             string value = filter.Value;
             var field = values[0].GetType().GetProperty(key);
 
-            int id = 0;
+            Guid id = Guid.Empty;
             foreach (T v in values)
             {
                 if (v.GetType().GetProperty(key).GetValue(v, null).ToString() == value)
                 {
-                    id = (int)v.GetType().GetProperty("Id").GetValue(v, null);
+                    id = (Guid)v.GetType().GetProperty("Id").GetValue(v, null);
                     PropertyInfo prop = v.GetType().GetProperty("Id");
                     prop.SetValue(item, id, null);
                     break;
@@ -127,7 +127,7 @@
         [TestMethod]
         public async Task LoadByIdTestAsync<T>(KeyValuePair<string, string> filter)
         {
-            int id = await GetId<T>(filter);
+            Guid id = await GetId<T>(filter);
             dynamic items;
             var response = client.GetStringAsync(typeof(T).Name + "/" + id).Result;
             items = JsonConvert.DeserializeObject(response);
