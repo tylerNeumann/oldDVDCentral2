@@ -7,38 +7,50 @@
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblOrderItems.Count());
+            int expected = 3;
+            var orderItems = base.LoadTest();
+            Assert.AreEqual(expected, orderItems.Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            tblOrderItem entity = new tblOrderItem();
-            entity.Quantity = 99;
-            entity.Id = Guid.NewGuid();
-            entity.OrderId = dc.tblOrders.FirstOrDefault().Id;
-            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
-            entity.Cost = 99;
-            dc.Add(entity);
-            int results = dc.SaveChanges();
+            tblOrderItem newRow = new tblOrderItem();
+
+            newRow.Id = Guid.NewGuid();
+            newRow.OrderId = dc.tblOrders.FirstOrDefault().Id;
+            newRow.MovieId = dc.tblMovies.FirstOrDefault().Id;
+            newRow.Quantity = 99;
+            newRow.Cost = 99;
+
+            int rowsAffected = InsertTest(newRow);
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            tblOrderItem entity = dc.tblOrderItems.FirstOrDefault();
-            
-            int results = dc.SaveChanges();
-            Assert.AreEqual(1, results);
+            tblOrderItem row = dc.tblOrderItems.FirstOrDefault();
+            if(row != null)
+            {
+                row.MovieId = dc.tblMovies.FirstOrDefault().Id;
+                row.Quantity = 100;
+                row.Cost = 10.99;
+
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            tblOrderItem entity = dc.tblOrderItems.FirstOrDefault();
-            dc.Remove(entity);
-            int results = dc.SaveChanges();
-            Assert.AreNotEqual(0, results);
+            tblOrderItem row = dc.tblOrderItems.FirstOrDefault();
+            if (row != null)
+            {
+                int rowsAffected = DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 

@@ -100,7 +100,7 @@
         {
             string message = "Results:\r\n";
             string errMessage = "Errors:\r\n";
-            bool results = true;
+            bool rowsAffected = true;
             List<Structure> structures = new List<Structure>();
 
             structures = ReadStructures();
@@ -120,18 +120,18 @@
                 foreach (ColumnInfo column in structure1.ColumnInfos)
                 {
 
-                    results = CheckColumnDefinition(tableType,
+                    rowsAffected = CheckColumnDefinition(tableType,
                                                     column.Name,
                                                     column.DataType,
                                                     ref message,
-                                                    ref errMessage) ? results : false;
+                                                    ref errMessage) ? rowsAffected : false;
                 }
             }
 
 
             Debug.WriteLine(message);
             //TestContext.Out.WriteLine(message);
-            Assert.IsTrue(results, errMessage);
+            Assert.IsTrue(rowsAffected, errMessage);
 
         }
 
@@ -143,8 +143,8 @@
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri("https://fvtcdp.azurewebsites.net/api/");
                 HttpResponseMessage response = client.GetAsync("TableStructure/DVDCentralV2").Result;
-                string result = response.Content.ReadAsStringAsync().Result;
-                structures = JsonConvert.DeserializeObject<List<Structure>>(result);
+                string rowsAffected = response.Content.ReadAsStringAsync().Result;
+                structures = JsonConvert.DeserializeObject<List<Structure>>(rowsAffected);
                 //TestContext.Out.WriteLine(structures.Count + " structures found.");
                 Debug.WriteLine(structures.Count + " structures found.");
             }

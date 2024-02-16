@@ -7,38 +7,48 @@
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblOrders.Count());
+            int expected = 3;
+            var orders = base.LoadTest();
+            Assert.AreEqual(expected, orders.Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            tblOrder entity = new tblOrder();
-            entity.Id = Guid.NewGuid();
-            entity.CustomerId = dc.tblCustomers.FirstOrDefault().Id;
-            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
-            entity.OrderDate = DateTime.Now;
-            entity.ShipDate = DateTime.Now;
-            dc.Add(entity);
-            int results = dc.SaveChanges();
+            tblOrder newRow = new tblOrder();
+
+            newRow.Id = Guid.NewGuid();
+            newRow.CustomerId = dc.tblCustomers.FirstOrDefault().Id;
+            newRow.UserId = dc.tblUsers.FirstOrDefault().Id;
+            newRow.OrderDate = DateTime.Now;
+            newRow.ShipDate = DateTime.Now;
+
+            int rowsAffected = InsertTest(newRow);
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            tblOrder entity = dc.tblOrders.FirstOrDefault();
-            entity.CustomerId = dc.tblCustomers.FirstOrDefault().Id;
-            int results = dc.SaveChanges();
-            Assert.AreEqual(1, results);
+            tblOrder row = dc.tblOrders.FirstOrDefault();
+            if(row != null)
+            {
+                row.OrderDate = DateTime.Now;
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
+            
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            tblOrder entity = dc.tblOrders.FirstOrDefault();
-            dc.Remove(entity);
-            int results = dc.SaveChanges();
-            Assert.AreNotEqual(0, results);
+            tblOrder row = base.LoadTest().FirstOrDefault();
+            if (row != null)
+            {
+                int rowsAffected = DeleteTest(row);
+                Assert.AreNotEqual(0, rowsAffected);
+            }
         }
     }
 

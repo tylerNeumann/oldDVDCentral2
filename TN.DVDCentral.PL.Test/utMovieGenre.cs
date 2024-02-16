@@ -6,36 +6,48 @@
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(5, dc.tblMovieGenres.Count());
+            int expected = 13;
+            var movieGenres = base.LoadTest();
+            Assert.AreEqual(expected, movieGenres.Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            tblMovieGenre entity = new tblMovieGenre();
-            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
-            entity.Id = Guid.NewGuid();
-            entity.GenreId = dc.tblGenres.FirstOrDefault().Id;
-            dc.Add(entity);
-            int results = dc.SaveChanges();
+            tblMovieGenre newRow = new tblMovieGenre();
+
+            newRow.Id = Guid.NewGuid();
+            newRow.MovieId = base.LoadTest().FirstOrDefault().MovieId;
+            newRow.GenreId = base.LoadTest().FirstOrDefault().GenreId;
+
+            int rowsAffected = InsertTest(newRow);
+            Assert.AreEqual(1, rowsAffected);
+            
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault();
-            
-            int results = dc.SaveChanges();
-            Assert.AreEqual(1, results);
+            tblMovieGenre row = dc.tblMovieGenres.FirstOrDefault();
+            if(row != null)
+            {
+                row.MovieId = base.LoadTest().FirstOrDefault().MovieId;
+                row.GenreId = base.LoadTest().FirstOrDefault().GenreId;
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault();
-            dc.Remove(entity);
-            int results = dc.SaveChanges();
-            Assert.AreNotEqual(0, results);
+            tblMovieGenre row = dc.tblMovieGenres.FirstOrDefault();
+            if (row != null) 
+            { 
+                int rowsAffected = DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
+            
         }
     }
 

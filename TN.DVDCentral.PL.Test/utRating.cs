@@ -15,13 +15,13 @@
         [TestMethod]
         public void InsertTest() 
         {
-            int result = base.InsertTest(new tblRating 
+            int rowsAffected = base.InsertTest(new tblRating 
                 { 
                     Id = Guid.NewGuid(),
                     Description = "XXXXXXX"
                 });
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
@@ -31,8 +31,8 @@
             if(row != null)
             {
                 row.Description = "bla";
-                int result = base.UpdateTest(row);
-                Assert.AreEqual(1, result);
+                int rowsAffected = base.UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
             }            
         }
 
@@ -40,10 +40,11 @@
         public void DeleteTest() 
         {
             tblRating row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
+
             if(row != null)
             {
-                int result = base.DeleteTest(row);
-                Assert.IsTrue(result == 1);
+                int rowsAffected = base.DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
             }                       
         }
     }

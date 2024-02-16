@@ -9,29 +9,30 @@
         {
             int expected = 4;
             var formats = base.LoadTest();
+            Assert.AreEqual(2, formats[1].tblMovies.Count);
             Assert.AreEqual(expected, formats.Count());
         }
         [TestMethod]
         public void InsertTest()
         {
-            int result = base.InsertTest(new tblFormat
+            int rowsAffected = base.InsertTest(new tblFormat
             {
                 Id = Guid.NewGuid(),
                 Description = "XXXXXXX"
             });
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            tblFormat row = base.LoadTest().FirstOrDefault();
+            tblFormat row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
             if (row != null)
             {
                 row.Description = "bla";
-                int result = base.UpdateTest(row);
-                Assert.AreEqual(1, result);
+                int rowsAffected = base.UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
             }
         }
 
@@ -41,8 +42,9 @@
             tblFormat row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
             if (row != null)
             {
-                int result = base.DeleteTest(row);
-                Assert.IsTrue(result == 1);
+                dc.tblFormats.Remove(row);
+                int rowsAffected = dc.SaveChanges();
+                Assert.IsTrue(rowsAffected == 1);
             }
         }
     }

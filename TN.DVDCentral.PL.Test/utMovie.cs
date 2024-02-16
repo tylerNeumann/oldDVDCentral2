@@ -15,17 +15,20 @@
         [TestMethod]
         public void InsertTest() 
         {
-            tblMovie entity = new tblMovie();
-            entity.Id = Guid.NewGuid();
-            entity.Quantity = 1;            
-            entity.ImagePath = "asdgfhg";
-            entity.RatingId = base.LoadTest().FirstOrDefault().RatingId;
-            entity.FormatId = base.LoadTest().FirstOrDefault().FormatId;
-            entity.DirectorId = base.LoadTest().FirstOrDefault().DirectorId;
-            entity.Title = "asdf";
-            entity.Description = "sfd";
-            dc.Add(entity);
-            int results =  dc.SaveChanges();
+            tblMovie newRow = new tblMovie();
+
+            newRow.Id = Guid.NewGuid();
+            newRow.Title = "asdf";
+            newRow.Description = "sfd";
+            newRow.Cost = 9.99;
+            newRow.RatingId = base.LoadTest().FirstOrDefault().RatingId;
+            newRow.FormatId = base.LoadTest().FirstOrDefault().FormatId;
+            newRow.DirectorId = base.LoadTest().FirstOrDefault().DirectorId;
+            newRow.Quantity = 1;            
+            newRow.ImagePath = "none";
+            
+            int rowsAffecteds =  InsertTest(newRow);
+            Assert.AreEqual(1, rowsAffecteds);
         }
 
         [TestMethod]
@@ -35,8 +38,8 @@
             if (row != null)
             {
                 row.Description = "bla";
-                int result = base.UpdateTest(row);
-                Assert.AreEqual(1, result);
+                int rowsAffected = base.UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
             }
         }
 
@@ -46,14 +49,9 @@
             tblMovie row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
             if (row != null)
             {
-                int result = base.DeleteTest(row);
-                Assert.IsTrue(result == 1);
+                int rowsAffected = base.DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
             }
-
-            tblMovie entity = dc.tblMovies.FirstOrDefault();
-            dc.Remove(entity);
-            int results = dc.SaveChanges();
-            Assert.AreNotEqual(0, results);
         }
     }
 
