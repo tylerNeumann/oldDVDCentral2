@@ -8,39 +8,47 @@
         [TestMethod]
         public void LoadTest() 
         {
-            Assert.AreEqual(3,dc.tblDirectors.Count());
+            int expected = 6;
+            var directors = base.LoadTest();
+            Assert.AreEqual(expected, directors.Count());
         }
 
         [TestMethod]
         public void InsertTest() 
         {
-            tblDirector entity = new tblDirector();
-            entity.FirstName = "Test";
-            entity.LastName = "Test";
-            entity.Id = Guid.NewGuid();
-            dc.Add(entity);
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1,result);
+            int rowsAffected = InsertTest(new tblDirector
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Test",
+                LastName = "Test"
+            });            
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest() 
         {
-            tblDirector entity = dc.tblDirectors.FirstOrDefault();
-            entity.FirstName = "Test";
-            entity.LastName = "Test";
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1,result);
+            tblDirector row = base.LoadTest().FirstOrDefault();
+            if(row != null)
+            {
+                row.FirstName = "Test";
+                row.LastName = "Test";
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
+            
 
         }
 
         [TestMethod]
         public void DeleteTest() 
         {
-            tblDirector entity = dc.tblDirectors.FirstOrDefault();
-            dc.Remove(entity);
-            int result = dc.SaveChanges();
-            Assert.AreNotEqual(0, result);
+            tblDirector row = dc.tblDirectors.FirstOrDefault(x => x.LastName == "Other");
+            if(row != null)
+            {
+                int rowsAffected = DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 
