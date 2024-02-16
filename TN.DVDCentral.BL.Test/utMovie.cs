@@ -3,12 +3,13 @@
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utMovie
+    public class utMovie : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, MovieManager.Load().Count());
+            List<Movie> movies = new MovieManager(options).Load();
+            Assert.AreEqual(3, movies.Count());
         }
         [TestMethod]
         public void InsertTest()
@@ -18,31 +19,31 @@ namespace TN.DVDCentral.BL.Test
             {
                 Title = "Test",
                 Description = "Test",
-                FormatId = 99,
-                DirectorId = 99,
-                RatingId = 99,
+                FormatId = new FormatManager(options).Load().FirstOrDefault().Id,
+                DirectorId = new DirectorManager(options).Load().FirstOrDefault().Id,
+                RatingId = new RatingManager(options).Load().FirstOrDefault().Id,
                 Cost = 20.00f,
-                InStkQty = 10,
+                Quantity = 10,
                 ImagePath = "test"
             };
-            int results = MovieManager.Insert(movie, true);
-            Assert.AreEqual(1, results);
+            int results = new MovieManager(options).Insert(movie, true);
+            Assert.IsTrue(results > 0);
         }
         [TestMethod]
         public void UpdateTest()
         {
             int id = 0;
-            Movie movie = MovieManager.LoadById(2);
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
             movie.Title = "Test";
-            int results = MovieManager.Update(movie, true);
-            Assert.AreEqual(1, results);
+
+            Assert.IsTrue(new MovieManager(options).Update(movie, true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = MovieManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+
+            Assert.IsTrue(new MovieManager(options).Delete(movie.Id, true) > 0);
         }
     }
 }

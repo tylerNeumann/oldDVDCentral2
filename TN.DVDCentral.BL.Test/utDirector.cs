@@ -1,41 +1,46 @@
-﻿
-namespace TN.DVDCentral.BL.Test
+﻿namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utDirector
+    public class utDirector : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, DirectorManager.Load().Count());
+            List<Director> directors = new DirectorManager(options).Load();
+            int expected = 6;
+            Assert.AreEqual(expected, directors.Count());
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
+            
             Director director = new Director
             {
                 FirstName = "Test",
                 LastName = "Test"
             };
-            int results = DirectorManager.Insert(director, true);
-            Assert.AreEqual(1, results);
+            int result = new DirectorManager(options).Insert(director, true);
+            Assert.IsTrue(result > 0);
         }
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
-            Director director = DirectorManager.LoadById(2);
+            
+            Director director = new DirectorManager(options).Load().FirstOrDefault();
             director.FirstName = "Test";
-            int results = DirectorManager.Update(director, true);
-            Assert.AreEqual(1, results);
+            
+            Assert.IsTrue(new DirectorManager(options).Update(director,true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = DirectorManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Director director = new DirectorManager(options).Load().FirstOrDefault(x => x.FirstName == "Other");
+            Assert.IsTrue(new DirectorManager(options).Delete(director.Id, true) > 0);
+        }
+        public void LoadByIdTest()
+        {
+            Director director = new DirectorManager(options).Load().FirstOrDefault(x => x.FirstName == "Other");
+            Assert.AreEqual(new DirectorManager(options).LoadById(director.Id).Id, director.Id);
         }
     }
 }

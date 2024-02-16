@@ -2,12 +2,13 @@
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utCustomer
+    public class utCustomer : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, CustomerManager.Load().Count());
+            List<Customer> customers = new CustomerManager(options).Load();
+            Assert.AreEqual(3, customers.Count());
         }
         [TestMethod]
         public void InsertTest()
@@ -17,31 +18,31 @@ namespace TN.DVDCentral.BL.Test
             {
                 FirstName = "Test",
                 LastName = "Test",
-                UserId = 99,
+                UserId = new UserManager(options).Load().FirstOrDefault().Id,
                 Address = "test",
                 City = "test",
                 State = "Te",
                 ZIP = "test",
                 Phone = "test"
             };
-            int results = CustomerManager.Insert(customer, true);
+            int results = new CustomerManager(options).Insert(customer, true);
             Assert.AreEqual(1, results);
         }
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
-            Customer customer = CustomerManager.LoadById(2);
+            
+            Customer customer = new CustomerManager(options).Load().FirstOrDefault();
             customer.Address = "Test123";
-            int results = CustomerManager.Update(customer, true);
-            Assert.AreEqual(1, results);
+
+            Assert.IsTrue(new CustomerManager(options).Update(customer, true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = CustomerManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Customer customer = new CustomerManager(options).Load().FirstOrDefault();
+
+            Assert.IsTrue(new CustomerManager(options).Delete(customer.Id, true) > 0); ;
         }
     }
 }

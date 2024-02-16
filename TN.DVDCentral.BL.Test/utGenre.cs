@@ -3,12 +3,13 @@
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utGenre
+    public class utGenre : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(4, GenreManager.Load().Count());
+            List<Genre> genres = new GenreManager(options).Load();
+            Assert.AreEqual(4, genres.Count());
         }
         [TestMethod]
         public void InsertTest()
@@ -18,24 +19,23 @@ namespace TN.DVDCentral.BL.Test
             {
                 Description = "Test"
             };
-            int results = GenreManager.Insert(genre, true);
-            Assert.AreEqual(1, results);
+            int results = new GenreManager(options).Insert(genre, true);
+            Assert.IsTrue(results > 0);
         }
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
-            Genre genre = GenreManager.LoadById(2);
+            Genre genre = new GenreManager(options).Load().FirstOrDefault();
             genre.Description = "Test";
-            int results = GenreManager.Update(genre, true);
-            Assert.AreEqual(1, results);
+            
+            Assert.IsTrue(new GenreManager(options).Update(genre, true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = GenreManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Genre genre = new GenreManager(options).Load().FirstOrDefault();
+
+            Assert.IsTrue(new GenreManager(options).Delete(genre.Id, true) > 0);
         }
     }
 }

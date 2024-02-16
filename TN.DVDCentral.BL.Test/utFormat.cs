@@ -2,13 +2,13 @@
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utFormat
+    public class utFormat : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
             List<Format> formats = new FormatManager(options).Load();
-            Assert.AreEqual(3, FormatManager.Load().Count());
+            Assert.AreEqual(3, formats.Count());
         }
         [TestMethod]
         public void InsertTest()
@@ -18,24 +18,24 @@ namespace TN.DVDCentral.BL.Test
             {
                 Description = "Test"
             };
-            int results = FormatManager.Insert(format, true);
-            Assert.AreEqual(1, results);
+            int results = new FormatManager(options).Insert(format, true);
+            Assert.IsTrue(results > 0);
         }
         [TestMethod]
         public void UpdateTest()
         {
             int id = 0;
-            Format format = FormatManager.LoadById(2);
+            Format format = new FormatManager(options).Load().FirstOrDefault();
             format.Description = "Test";
-            int results = FormatManager.Update(format, true);
-            Assert.AreEqual(1, results);
+
+            Assert.IsTrue(new FormatManager(options).Update(format, true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = FormatManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Format format = new FormatManager(options).Load().FirstOrDefault(); ;
+
+            Assert.IsTrue(new FormatManager(options).Delete(format.Id, true) > 0);
         }
     }
 }

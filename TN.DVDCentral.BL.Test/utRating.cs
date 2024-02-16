@@ -1,14 +1,17 @@
 ﻿
 
+using TN.DVDCentral.BL.Models;
+
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utRating
+    public class utRating : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, RatingManager.Load().Count());
+            List<Rating> ratings = new RatingManager(options).Load();
+            Assert.AreEqual(3, ratings.Count());
         }
         [TestMethod]
         public void InsertTest()
@@ -18,24 +21,24 @@ namespace TN.DVDCentral.BL.Test
             {
                 Description = "Test"
             };
-            int results = RatingManager.Insert(rating, true);
-            Assert.AreEqual(1, results);
+            int results = new RatingManager(options).Insert(rating, true);
+            Assert.IsTrue(results > 0);
         }
         [TestMethod]
         public void UpdateTest()
         {
             int id = 0;
-            Rating rating = RatingManager.LoadById(2);
+            Rating rating = new RatingManager(options).Load().FirstOrDefault();
             rating.Description = "Test";
-            int results = RatingManager.Update(rating, true);
-            Assert.AreEqual(1, results);
+
+            Assert.IsTrue(new RatingManager(options).Update(rating, true) > 0);
         }
         [TestMethod]
         public void DeleteTest()
         {
-            int id = 0;
-            int results = RatingManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Rating rating = new RatingManager(options).Load().FirstOrDefault();
+
+            Assert.IsTrue(new RatingManager(options).Delete(rating.Id, true) > 0);
         }
     }
 }

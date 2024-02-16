@@ -1,7 +1,7 @@
 ﻿namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utUser
+    public class utUser : utBase
     {
         [TestMethod]
         public void LoginSuccessfulTest()
