@@ -8,12 +8,11 @@
         {
             List<Director> directors = new DirectorManager(options).Load();
             int expected = 6;
-            Assert.AreEqual(expected, directors.Count());
+            Assert.AreEqual(expected, directors.Count);
         }
         [TestMethod]
         public void InsertTest()
         {
-            
             Director director = new Director
             {
                 FirstName = "Test",

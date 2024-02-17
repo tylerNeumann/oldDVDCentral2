@@ -9,7 +9,7 @@ namespace TN.DVDCentral.BL.Test
         {
             int expected = 3;
             List<Customer> customers = new CustomerManager(options).Load();
-            Assert.AreEqual(expected, customers.Count());
+            Assert.AreEqual(expected, customers.Count);
         }
         [TestMethod]
         public void InsertTest()
