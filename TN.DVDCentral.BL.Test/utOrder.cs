@@ -86,7 +86,7 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Order order = new OrderManager(options).Load().FirstOrDefault();
+            Order order = new OrderManager(options).Load().FirstOrDefault(x => x.Description == "Other");
             Assert.IsTrue(new OrderManager(options).Delete(order.Id, true) > 0);
         }
 

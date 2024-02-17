@@ -8,13 +8,14 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 10;
             List<Genre> genres = new GenreManager(options).Load();
-            Assert.AreEqual(4, genres.Count());
+            Assert.AreEqual(expected, genres.Count);
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
+            
             Genre genre = new Genre
             {
                 Description = "Test"
@@ -33,9 +34,16 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Genre genre = new GenreManager(options).Load().FirstOrDefault();
+            Genre genre = new GenreManager(options).Load().FirstOrDefault(x => x.Description == "Other");
 
             Assert.IsTrue(new GenreManager(options).Delete(genre.Id, true) > 0);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Genre genre = new GenreManager(options).Load().FirstOrDefault();
+
+            Assert.AreEqual(new GenreManager(options).LoadById(genre.Id).Id, genre.Id);
         }
     }
 }

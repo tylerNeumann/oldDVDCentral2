@@ -10,13 +10,13 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 5;
             List<Rating> ratings = new RatingManager(options).Load();
-            Assert.AreEqual(3, ratings.Count());
+            Assert.AreEqual(expected, ratings.Count());
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
             Rating rating = new Rating
             {
                 Description = "Test"
@@ -27,7 +27,6 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
             Rating rating = new RatingManager(options).Load().FirstOrDefault();
             rating.Description = "Test";
 
@@ -36,9 +35,15 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Rating rating = new RatingManager(options).Load().FirstOrDefault();
+            Rating rating = new RatingManager(options).Load().FirstOrDefault(x => x.Description == "Other");
 
             Assert.IsTrue(new RatingManager(options).Delete(rating.Id, true) > 0);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Rating rating = new RatingManager(options).Load().FirstOrDefault();
+            Assert.AreEqual(new RatingManager(options).LoadById(rating.Id).Id, rating.Id);
         }
     }
 }

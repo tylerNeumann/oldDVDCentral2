@@ -10,8 +10,9 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 3;
             List<OrderItem> orderItems = new OrderItemManager(options).Load();
-            Assert.AreEqual(3, orderItems.Count());
+            Assert.AreEqual(expected, orderItems.Count());
         }
         [TestMethod]
         public void LoadByOrderIdTest()
@@ -44,7 +45,7 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            OrderItem orderItem = new OrderItemManager(options).Load().FirstOrDefault();
+            OrderItem orderItem = new OrderItemManager(options).Load().FirstOrDefault(x => x.Description == "Other");
 
             Assert.IsTrue(new OrderItemManager(options).Delete(orderItem.Id, true) > 0);
         }

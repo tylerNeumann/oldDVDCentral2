@@ -41,7 +41,7 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+            Movie movie = new MovieManager(options).Load().FirstOrDefault(x => x.Description == "Other");
 
             Assert.IsTrue(new MovieManager(options).Delete(movie.Id, true) > 0);
         }
