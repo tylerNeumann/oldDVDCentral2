@@ -7,13 +7,13 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 4;
             List<Format> formats = new FormatManager(options).Load();
-            Assert.AreEqual(3, formats.Count());
+            Assert.AreEqual(expected, formats.Count);
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
             Format format = new Format
             {
                 Description = "Test"
@@ -24,7 +24,6 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
             Format format = new FormatManager(options).Load().FirstOrDefault();
             format.Description = "Test";
 
@@ -33,9 +32,15 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Format format = new FormatManager(options).Load().FirstOrDefault(); ;
+            Format format = new FormatManager(options).Load().FirstOrDefault(x => x.Description == "Other"); ;
 
             Assert.IsTrue(new FormatManager(options).Delete(format.Id, true) > 0);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Format format = new FormatManager(options).Load().FirstOrDefault();
+            Assert.AreEqual(new FormatManager(options).LoadById(format.Id).Id, format.Id);
         }
     }
 }
