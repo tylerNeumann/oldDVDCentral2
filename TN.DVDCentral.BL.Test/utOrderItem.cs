@@ -12,7 +12,13 @@ namespace TN.DVDCentral.BL.Test
         {
             int expected = 3;
             List<OrderItem> orderItems = new OrderItemManager(options).Load();
-            Assert.AreEqual(expected, orderItems.Count());
+            Assert.AreEqual(expected, orderItems.Count);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Guid id = new OrderItemManager(options).Load().FirstOrDefault().Id;
+            Assert.AreEqual(new OrderItemManager(options).LoadById(id).Id, id);
         }
         [TestMethod]
         public void LoadByOrderIdTest()
@@ -23,13 +29,12 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
             OrderItem orderItem = new OrderItem
             {
-                OrderId = Guid.NewGuid(),
+                OrderId = new OrderManager(options).Load().FirstOrDefault().Id,
                 Quantity = 99,
-                MovieId = Guid.NewGuid(),
-                Cost = 20.00f
+                MovieId = new MovieManager(options).Load().FirstOrDefault().Id,
+                Cost = 20.00
             };
             int results = new OrderItemManager(options).Insert(orderItem, true);
             Assert.IsTrue(results > 0);
@@ -45,7 +50,7 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            OrderItem orderItem = new OrderItemManager(options).Load().FirstOrDefault(x => x.Description == "Other");
+            OrderItem orderItem = new OrderItemManager(options).Load().FirstOrDefault();
 
             Assert.IsTrue(new OrderItemManager(options).Delete(orderItem.Id, true) > 0);
         }
