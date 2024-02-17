@@ -7,13 +7,13 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 3;
             List<Customer> customers = new CustomerManager(options).Load();
-            Assert.AreEqual(3, customers.Count());
+            Assert.AreEqual(expected, customers.Count());
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
             Customer customer = new Customer
             {
                 FirstName = "Test",
@@ -42,7 +42,13 @@ namespace TN.DVDCentral.BL.Test
         {
             Customer customer = new CustomerManager(options).Load().FirstOrDefault();
 
-            Assert.IsTrue(new CustomerManager(options).Delete(customer.Id, true) > 0); ;
+            Assert.IsTrue(new CustomerManager(options).Delete(customer.Id, true) > 0);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Customer customer = new CustomerManager(options).Load().FirstOrDefault();
+            Assert.AreEqual(new CustomerManager(options).LoadById(customer.Id).Id, customer.Id);
         }
     }
 }
