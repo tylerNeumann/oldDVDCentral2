@@ -8,15 +8,16 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
+            int expected = 7;
             List<Movie> movies = new MovieManager(options).Load();
-            Assert.AreEqual(3, movies.Count());
+            Assert.AreEqual(expected, movies.Count);
         }
         [TestMethod]
         public void InsertTest()
         {
-            int id = 0;
             Movie movie = new Movie
             {
+                Id = Guid.NewGuid(),
                 Title = "Test",
                 Description = "Test",
                 FormatId = new FormatManager(options).Load().FirstOrDefault().Id,
@@ -32,7 +33,6 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            int id = 0;
             Movie movie = new MovieManager(options).Load().FirstOrDefault();
             movie.Title = "Test";
 
@@ -41,9 +41,15 @@ namespace TN.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Movie movie = new MovieManager(options).Load().FirstOrDefault(x => x.Description == "Other");
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
 
             Assert.IsTrue(new MovieManager(options).Delete(movie.Id, true) > 0);
+        }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+            Assert.AreEqual(new MovieManager(options).LoadById(movie.Id).Id, movie.Id);
         }
     }
 }
