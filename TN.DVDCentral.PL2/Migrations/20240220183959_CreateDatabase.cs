@@ -252,9 +252,9 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Address", "City", "FirstName", "LastName", "Phone", "State", "UserId", "ZIP" },
                 values: new object[,]
                 {
-                    { new Guid("2eae0067-fa93-4262-b9a5-76f4e7ed1b38"), "159 Johnson Avenue", "Allenton", "Brian", "Foote", "9202623415", "WI", new Guid("b987fb3e-ec49-4f6b-94a1-665e9e370ab4"), "53142" },
-                    { new Guid("3447086f-6d6d-4adc-bc5a-a38f6e49e96e"), "987 Willow Road", "Slinger", "John", "Doro", "9202623345", "WI", new Guid("043b72bb-4d27-4fd2-a660-42afdea8c641"), "56495" },
-                    { new Guid("ed2173fb-110a-4eef-96ec-565fa3362c3d"), "453 Oak Street", "Fond du Lac", "Steve", "Marin", "9205879797", "WI", new Guid("5df1ac63-f39d-4a72-bf66-68c686fcf7c8"), "54935" }
+                    { new Guid("37d74e40-ec42-4599-a664-325ea6061d08"), "987 Willow Road", "Slinger", "John", "Doro", "9202623345", "WI", new Guid("c31b0ca5-678e-4c8b-bb00-3c556c770146"), "56495" },
+                    { new Guid("64966745-1d86-4338-950b-e3347a29c2b5"), "159 Johnson Avenue", "Allenton", "Brian", "Foote", "9202623415", "WI", new Guid("a861a8d5-e5ee-43f9-b8ee-1d639529934b"), "53142" },
+                    { new Guid("b02bae9d-977d-467d-bf3a-43bbc082537b"), "453 Oak Street", "Fond du Lac", "Steve", "Marin", "9205879797", "WI", new Guid("72b5640f-6736-40e5-a7f2-d885ab379dd6"), "54935" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,12 +262,12 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "FirstName", "LastName" },
                 values: new object[,]
                 {
-                    { new Guid("02fbe255-509e-4cb4-847d-4737b857bce6"), "John", "Avildsen" },
-                    { new Guid("0b4d6664-4575-48f6-ac50-6d4a8136f060"), "Other", "Other" },
-                    { new Guid("2368626c-a669-48e7-9cab-cf37954c6ebf"), "Clint", "Eastwood" },
-                    { new Guid("a664e12f-4949-45b7-bfc9-ba5e16f3af53"), "Rob", "Reiner" },
-                    { new Guid("b22e65db-93b7-4006-9f27-a8fe47b71464"), "George", "Lucas" },
-                    { new Guid("c3b52051-8b13-4542-8bdf-f08863da8b80"), "Steven", "Spielberg" }
+                    { new Guid("86671109-aa71-402b-9359-44e9538e589f"), "Other", "Other" },
+                    { new Guid("c231fa86-5313-4999-b909-ff3e0af56886"), "George", "Lucas" },
+                    { new Guid("e1471dd2-1546-4487-aeae-03755e594fc6"), "Clint", "Eastwood" },
+                    { new Guid("f1e5ca89-8771-43b4-8cef-05c73d4442ca"), "John", "Avildsen" },
+                    { new Guid("f92b54f7-b982-412e-afaf-e2c006c2d65e"), "Steven", "Spielberg" },
+                    { new Guid("faef9a92-ff19-4f0b-86dc-5e9eae9f1e7d"), "Rob", "Reiner" }
                 });
 
             migrationBuilder.InsertData(
@@ -275,10 +275,10 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
                 {
-                    { new Guid("53764a6c-13ec-475b-b263-f0425e3af752"), "VHS" },
-                    { new Guid("6e12b338-aca5-4084-9cbb-8b3f34cd87fa"), "Blu-Ray" },
-                    { new Guid("b78bdb04-5116-4e96-b22e-582b486fb460"), "Other" },
-                    { new Guid("e345f8ba-a1a0-4db9-8130-7416595b8a24"), "DVD" }
+                    { new Guid("176ec3d1-589c-4e26-a718-f5380eb81ee9"), "DVD" },
+                    { new Guid("31380c4f-730c-4dcb-bc0d-1bfe8c0c6271"), "VHS" },
+                    { new Guid("5fb3347f-776a-4f15-bfb1-092d0a452c34"), "Blu-Ray" },
+                    { new Guid("a32ff621-4995-4e36-b465-29e3167d1710"), "Other" }
                 });
 
             migrationBuilder.InsertData(
@@ -286,16 +286,16 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
                 {
-                    { new Guid("2a5fb788-cd3b-4141-bea3-21aeae6a619a"), "Other" },
-                    { new Guid("5be2e564-d78b-4758-b71a-93158c44ed39"), "Horror" },
-                    { new Guid("63159406-cac9-4bc0-af64-930cd67330bb"), "Western" },
-                    { new Guid("6627e07a-41eb-4d01-b3ce-e2668a8822c5"), "Comedy" },
-                    { new Guid("7e348927-1292-4583-9412-087d0352236a"), "Musical" },
-                    { new Guid("80d4d8de-d2ba-4b41-bee9-e206e6cc692e"), "Action" },
-                    { new Guid("b42f15b8-6da6-4055-8971-95cfb0436f7d"), "Documentary" },
-                    { new Guid("bb0bd146-66f6-4fc6-a6ef-8ec426d7cf8b"), "Sci-Fi" },
-                    { new Guid("cd38b527-ec83-496a-bfab-59e29f87d82e"), "Romance" },
-                    { new Guid("fe57bcee-9a97-494c-916e-e12fe61c2aa3"), "Mystery" }
+                    { new Guid("1979a458-e21b-4d9c-a94b-10a1f26bd7b6"), "Sci-Fi" },
+                    { new Guid("246bb906-a3ce-427b-a3ab-075c7a20d805"), "Romance" },
+                    { new Guid("31ae5e72-05b3-427c-a220-4e907f6bffde"), "Western" },
+                    { new Guid("35b91b59-efde-4940-89d8-73d140cb656c"), "Mystery" },
+                    { new Guid("4eb99a2e-6e61-4813-a7b3-e382ce91f6d7"), "Horror" },
+                    { new Guid("52407425-23e4-47d7-b402-45e60ce9bee5"), "Comedy" },
+                    { new Guid("6fe9ee31-e218-4f64-b092-2be21b1ce115"), "Documentary" },
+                    { new Guid("72613e03-06f6-488a-9d04-301a08fd7a41"), "Other" },
+                    { new Guid("aed3f82d-1785-4a97-b90a-8a99c5be539e"), "Action" },
+                    { new Guid("cd985c01-bf35-4d94-9d11-787eb48c1c16"), "Musical" }
                 });
 
             migrationBuilder.InsertData(
@@ -303,11 +303,11 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
                 {
-                    { new Guid("06dda4de-8da4-4019-89a1-574e5bd04e19"), "PG-13" },
-                    { new Guid("477e9a89-1a39-42ce-bb5b-a58a05698203"), "Other" },
-                    { new Guid("d0a399c3-891a-4a8b-9ffe-48774a1c22cd"), "R" },
-                    { new Guid("d0b93b2f-d81c-44b9-9a06-3b4265ccda9e"), "PG" },
-                    { new Guid("e13bc8de-1d4c-4623-a1e8-3d87da1bc861"), "G" }
+                    { new Guid("3a1db43e-1054-4fd6-b68f-b4cfa31befec"), "PG-13" },
+                    { new Guid("83bea5ae-6ce1-4e14-aab7-7b022ea2cd4e"), "PG" },
+                    { new Guid("8aa41446-2acc-40ac-aaf6-bb3c3b79b308"), "Other" },
+                    { new Guid("96c87ade-554c-4768-b71a-bcac405a9b56"), "G" },
+                    { new Guid("f2890847-1bfa-4833-aefd-858bf51fc19a"), "R" }
                 });
 
             migrationBuilder.InsertData(
@@ -315,9 +315,9 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("043b72bb-4d27-4fd2-a660-42afdea8c641"), "John", "Doro", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "jdoro" },
-                    { new Guid("5df1ac63-f39d-4a72-bf66-68c686fcf7c8"), "Steve", "Marin", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "smarin" },
-                    { new Guid("b987fb3e-ec49-4f6b-94a1-665e9e370ab4"), "Brian", "Foote", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "bfoote" }
+                    { new Guid("72b5640f-6736-40e5-a7f2-d885ab379dd6"), "Steve", "Marin", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "smarin" },
+                    { new Guid("a861a8d5-e5ee-43f9-b8ee-1d639529934b"), "Brian", "Foote", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "bfoote" },
+                    { new Guid("c31b0ca5-678e-4c8b-bb00-3c556c770146"), "John", "Doro", "pYfdnNb8sO0FgS4H0MRSwLGOIME=", "jdoro" }
                 });
 
             migrationBuilder.InsertData(
@@ -325,8 +325,8 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("767b8c7b-081b-4d08-9ed4-4e1f27674cd0"), new Guid("5df1ac63-f39d-4a72-bf66-68c686fcf7c8") },
-                    { new Guid("de33ce0f-4ae6-47ad-8b27-7748895fcc01"), new Guid("043b72bb-4d27-4fd2-a660-42afdea8c641") }
+                    { new Guid("524baa50-12ac-4c0b-9110-f18358b17e30"), new Guid("c31b0ca5-678e-4c8b-bb00-3c556c770146") },
+                    { new Guid("d5c1a522-aed1-4784-8c09-a6912df2527e"), new Guid("72b5640f-6736-40e5-a7f2-d885ab379dd6") }
                 });
 
             migrationBuilder.InsertData(
@@ -334,13 +334,13 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Cost", "Description", "DirectorId", "FormatId", "ImagePath", "Quantity", "RatingId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a"), 8.9900000000000002, "Jaws is a 1975 American thriller film directed by Steven Spielberg and based on the Peter Benchley 1974 novel of the same name.", new Guid("c3b52051-8b13-4542-8bdf-f08863da8b80"), new Guid("e345f8ba-a1a0-4db9-8130-7416595b8a24"), "Jaws1.jpg", 1, new Guid("06dda4de-8da4-4019-89a1-574e5bd04e19"), "Jaws" },
-                    { new Guid("4857d2cc-4ec3-4f58-9f75-ef295f68e725"), 7.5, "Star Wars: Episode IV – A New Hope is a 1977 American epic space-opera film written and directed by George Lucas, produced by Lucasfilm and distributed by 20th Century Fox.", new Guid("c3b52051-8b13-4542-8bdf-f08863da8b80"), new Guid("e345f8ba-a1a0-4db9-8130-7416595b8a24"), "StarWarsNewHope.jpg", 1, new Guid("06dda4de-8da4-4019-89a1-574e5bd04e19"), "Star Wars: Episode IV – A New Hope" },
-                    { new Guid("58b9773a-bdcf-4d45-ac4c-2a9812ddb6ef"), 6.9900000000000002, "Other", new Guid("02fbe255-509e-4cb4-847d-4737b857bce6"), new Guid("53764a6c-13ec-475b-b263-f0425e3af752"), "Rocky.jpg", 2, new Guid("e13bc8de-1d4c-4623-a1e8-3d87da1bc861"), "Other" },
-                    { new Guid("a198cd7d-309f-4ebe-ac84-89ba637193ef"), 10.5, "Indiana Jones and the Last Crusade is a 1989 American action-adventure film directed by Steven Spielberg, from a story co-written by executive producer George Lucas.", new Guid("b22e65db-93b7-4006-9f27-a8fe47b71464"), new Guid("6e12b338-aca5-4084-9cbb-8b3f34cd87fa"), "IndianaJonesLastCrusade.jpg", 2, new Guid("d0a399c3-891a-4a8b-9ffe-48774a1c22cd"), "Indiana Jones and the Last Crusade" },
-                    { new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244"), 6.9900000000000002, "Rocky is a 1976 American sports drama film directed by John G. Avildsen, written by and starring Sylvester Stallone.", new Guid("02fbe255-509e-4cb4-847d-4737b857bce6"), new Guid("53764a6c-13ec-475b-b263-f0425e3af752"), "Rocky.jpg", 2, new Guid("e13bc8de-1d4c-4623-a1e8-3d87da1bc861"), "Rocky" },
-                    { new Guid("cfb6729f-9d15-4142-97a8-735ad2140c51"), 9.9900000000000002, "Pale Rider is a 1985 American Western film produced and directed by Clint Eastwood, who also stars in the lead role.", new Guid("c3b52051-8b13-4542-8bdf-f08863da8b80"), new Guid("e345f8ba-a1a0-4db9-8130-7416595b8a24"), "PaleRider.jpg", 1, new Guid("06dda4de-8da4-4019-89a1-574e5bd04e19"), "Pale Rider" },
-                    { new Guid("f9846378-7304-416a-bd56-a7d95cac76c8"), 12.5, "The Princess Bride is a 1987 American fantasy adventure comedy film directed and co-produced by Rob Reiner, starring Cary Elwes, Robin Wright, Mandy Patinkin, Chris Sarandon, Wallace Shawn, André the Giant, and Christopher Guest.", new Guid("a664e12f-4949-45b7-bfc9-ba5e16f3af53"), new Guid("6e12b338-aca5-4084-9cbb-8b3f34cd87fa"), "PrincessBride.jpg", 4, new Guid("d0b93b2f-d81c-44b9-9a06-3b4265ccda9e"), "The Princess Bride" }
+                    { new Guid("076313f0-89c5-47ee-a4fc-bd12d0a99705"), 9.9900000000000002, "Pale Rider is a 1985 American Western film produced and directed by Clint Eastwood, who also stars in the lead role.", new Guid("f92b54f7-b982-412e-afaf-e2c006c2d65e"), new Guid("176ec3d1-589c-4e26-a718-f5380eb81ee9"), "PaleRider.jpg", 1, new Guid("3a1db43e-1054-4fd6-b68f-b4cfa31befec"), "Pale Rider" },
+                    { new Guid("271bafbd-9427-4d31-83b5-ef0c640945ca"), 6.9900000000000002, "Other", new Guid("f1e5ca89-8771-43b4-8cef-05c73d4442ca"), new Guid("31380c4f-730c-4dcb-bc0d-1bfe8c0c6271"), "Rocky.jpg", 2, new Guid("96c87ade-554c-4768-b71a-bcac405a9b56"), "Other" },
+                    { new Guid("4b1dd22b-d861-4c72-9c4b-20afb04f3fe6"), 7.5, "Star Wars: Episode IV – A New Hope is a 1977 American epic space-opera film written and directed by George Lucas, produced by Lucasfilm and distributed by 20th Century Fox.", new Guid("f92b54f7-b982-412e-afaf-e2c006c2d65e"), new Guid("176ec3d1-589c-4e26-a718-f5380eb81ee9"), "StarWarsNewHope.jpg", 1, new Guid("3a1db43e-1054-4fd6-b68f-b4cfa31befec"), "Star Wars: Episode IV – A New Hope" },
+                    { new Guid("84367a0f-5e58-4087-a55c-55dade74ff02"), 6.9900000000000002, "Rocky is a 1976 American sports drama film directed by John G. Avildsen, written by and starring Sylvester Stallone.", new Guid("f1e5ca89-8771-43b4-8cef-05c73d4442ca"), new Guid("31380c4f-730c-4dcb-bc0d-1bfe8c0c6271"), "Rocky.jpg", 2, new Guid("96c87ade-554c-4768-b71a-bcac405a9b56"), "Rocky" },
+                    { new Guid("9479327c-e16e-459d-86e8-bfa4a18e008e"), 10.5, "Indiana Jones and the Last Crusade is a 1989 American action-adventure film directed by Steven Spielberg, from a story co-written by executive producer George Lucas.", new Guid("c231fa86-5313-4999-b909-ff3e0af56886"), new Guid("5fb3347f-776a-4f15-bfb1-092d0a452c34"), "IndianaJonesLastCrusade.jpg", 2, new Guid("f2890847-1bfa-4833-aefd-858bf51fc19a"), "Indiana Jones and the Last Crusade" },
+                    { new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70"), 8.9900000000000002, "Jaws is a 1975 American thriller film directed by Steven Spielberg and based on the Peter Benchley 1974 novel of the same name.", new Guid("f92b54f7-b982-412e-afaf-e2c006c2d65e"), new Guid("176ec3d1-589c-4e26-a718-f5380eb81ee9"), "Jaws1.jpg", 1, new Guid("3a1db43e-1054-4fd6-b68f-b4cfa31befec"), "Jaws" },
+                    { new Guid("f0d83531-5c27-4151-8396-55f7c470b393"), 12.5, "The Princess Bride is a 1987 American fantasy adventure comedy film directed and co-produced by Rob Reiner, starring Cary Elwes, Robin Wright, Mandy Patinkin, Chris Sarandon, Wallace Shawn, André the Giant, and Christopher Guest.", new Guid("faef9a92-ff19-4f0b-86dc-5e9eae9f1e7d"), new Guid("5fb3347f-776a-4f15-bfb1-092d0a452c34"), "PrincessBride.jpg", 4, new Guid("83bea5ae-6ce1-4e14-aab7-7b022ea2cd4e"), "The Princess Bride" }
                 });
 
             migrationBuilder.InsertData(
@@ -348,9 +348,9 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "CustomerId", "OrderDate", "ShipDate", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("424501bf-96a4-4ce2-8057-094981f26c15"), new Guid("3447086f-6d6d-4adc-bc5a-a38f6e49e96e"), new DateTime(2017, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("043b72bb-4d27-4fd2-a660-42afdea8c641") },
-                    { new Guid("d6ee8c02-b008-415e-9e96-f214d9bedfa9"), new Guid("2eae0067-fa93-4262-b9a5-76f4e7ed1b38"), new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("043b72bb-4d27-4fd2-a660-42afdea8c641") },
-                    { new Guid("de7a0d8a-fef5-48a7-8a7b-4a53ae441164"), new Guid("2eae0067-fa93-4262-b9a5-76f4e7ed1b38"), new DateTime(2022, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("b987fb3e-ec49-4f6b-94a1-665e9e370ab4") }
+                    { new Guid("87ba3640-4da1-4b6c-89da-ce45699622a4"), new Guid("37d74e40-ec42-4599-a664-325ea6061d08"), new DateTime(2017, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("c31b0ca5-678e-4c8b-bb00-3c556c770146") },
+                    { new Guid("8df20bf0-6978-461c-a236-685be51ca6b2"), new Guid("64966745-1d86-4338-950b-e3347a29c2b5"), new DateTime(2022, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("a861a8d5-e5ee-43f9-b8ee-1d639529934b") },
+                    { new Guid("d33870c6-d44a-46f3-9cee-7db0af7a97c9"), new Guid("64966745-1d86-4338-950b-e3347a29c2b5"), new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("c31b0ca5-678e-4c8b-bb00-3c556c770146") }
                 });
 
             migrationBuilder.InsertData(
@@ -358,9 +358,9 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "CartId", "MovieId", "Quantity" },
                 values: new object[,]
                 {
-                    { new Guid("8ae5d9f0-4992-47b7-a701-ce5042341faa"), new Guid("767b8c7b-081b-4d08-9ed4-4e1f27674cd0"), new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244"), 1 },
-                    { new Guid("a5108349-4b9f-415f-b453-e7d1a3ed7b8f"), new Guid("de33ce0f-4ae6-47ad-8b27-7748895fcc01"), new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a"), 1 },
-                    { new Guid("c92574fc-bed2-48fc-b383-8f481d444393"), new Guid("767b8c7b-081b-4d08-9ed4-4e1f27674cd0"), new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a"), 2 }
+                    { new Guid("02b852b0-25f6-4998-bb60-4d408e0750f5"), new Guid("524baa50-12ac-4c0b-9110-f18358b17e30"), new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70"), 1 },
+                    { new Guid("4642ea04-63d9-499d-b106-0d1521d38459"), new Guid("d5c1a522-aed1-4784-8c09-a6912df2527e"), new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70"), 2 },
+                    { new Guid("c7eb59df-0b88-45f6-9be9-122eb85703d5"), new Guid("d5c1a522-aed1-4784-8c09-a6912df2527e"), new Guid("84367a0f-5e58-4087-a55c-55dade74ff02"), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -368,19 +368,19 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "GenreId", "MovieId" },
                 values: new object[,]
                 {
-                    { new Guid("08cdc0cc-8d6c-4a29-9ba0-c52e76e83a5f"), new Guid("b42f15b8-6da6-4055-8971-95cfb0436f7d"), new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244") },
-                    { new Guid("11d8521a-8191-451d-8d0c-140e8f0247f8"), new Guid("b42f15b8-6da6-4055-8971-95cfb0436f7d"), new Guid("a198cd7d-309f-4ebe-ac84-89ba637193ef") },
-                    { new Guid("46c8633d-28f4-4489-b907-298350edf0ba"), new Guid("80d4d8de-d2ba-4b41-bee9-e206e6cc692e"), new Guid("f9846378-7304-416a-bd56-a7d95cac76c8") },
-                    { new Guid("5902a2d4-efb6-4a3c-991f-fc6d1051a39d"), new Guid("6627e07a-41eb-4d01-b3ce-e2668a8822c5"), new Guid("f9846378-7304-416a-bd56-a7d95cac76c8") },
-                    { new Guid("5e6ac83e-2499-43da-9b07-454056199864"), new Guid("5be2e564-d78b-4758-b71a-93158c44ed39"), new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244") },
-                    { new Guid("6acc0f79-4325-48b5-84f0-5b85ff3bd84b"), new Guid("5be2e564-d78b-4758-b71a-93158c44ed39"), new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a") },
-                    { new Guid("6ec86810-0f0a-43ab-9462-78a57f7a563e"), new Guid("5be2e564-d78b-4758-b71a-93158c44ed39"), new Guid("a198cd7d-309f-4ebe-ac84-89ba637193ef") },
-                    { new Guid("8d64ba9c-bad2-412a-96a6-54cc23858c2c"), new Guid("7e348927-1292-4583-9412-087d0352236a"), new Guid("4857d2cc-4ec3-4f58-9f75-ef295f68e725") },
-                    { new Guid("bfa85a77-0252-4cc9-b65b-14d6f942444e"), new Guid("bb0bd146-66f6-4fc6-a6ef-8ec426d7cf8b"), new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a") },
-                    { new Guid("c42af495-62d2-4a62-bf7e-79ff8a62ae8e"), new Guid("b42f15b8-6da6-4055-8971-95cfb0436f7d"), new Guid("f9846378-7304-416a-bd56-a7d95cac76c8") },
-                    { new Guid("c4417640-ae84-4f45-a77a-8c0ca7881731"), new Guid("fe57bcee-9a97-494c-916e-e12fe61c2aa3"), new Guid("cfb6729f-9d15-4142-97a8-735ad2140c51") },
-                    { new Guid("e1c6557e-2732-42ec-abba-f66ef675ca94"), new Guid("bb0bd146-66f6-4fc6-a6ef-8ec426d7cf8b"), new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244") },
-                    { new Guid("fdd272f2-b6fa-487b-8c3c-b679363b857b"), new Guid("5be2e564-d78b-4758-b71a-93158c44ed39"), new Guid("4857d2cc-4ec3-4f58-9f75-ef295f68e725") }
+                    { new Guid("1a118625-d5a3-42f5-94e1-49274a9fb497"), new Guid("6fe9ee31-e218-4f64-b092-2be21b1ce115"), new Guid("f0d83531-5c27-4151-8396-55f7c470b393") },
+                    { new Guid("2326c3ce-0aec-461c-bcbb-1711a32b506e"), new Guid("4eb99a2e-6e61-4813-a7b3-e382ce91f6d7"), new Guid("84367a0f-5e58-4087-a55c-55dade74ff02") },
+                    { new Guid("2571b956-2911-4ebb-b6f8-69558e32dd30"), new Guid("4eb99a2e-6e61-4813-a7b3-e382ce91f6d7"), new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70") },
+                    { new Guid("3a1eea23-4d5f-4f5f-b26c-11e8bf97c231"), new Guid("6fe9ee31-e218-4f64-b092-2be21b1ce115"), new Guid("84367a0f-5e58-4087-a55c-55dade74ff02") },
+                    { new Guid("4d636480-338c-4417-9fe5-3329589f8f64"), new Guid("4eb99a2e-6e61-4813-a7b3-e382ce91f6d7"), new Guid("4b1dd22b-d861-4c72-9c4b-20afb04f3fe6") },
+                    { new Guid("76c6de8e-5a2d-4ee3-897a-5b88dbef6c06"), new Guid("1979a458-e21b-4d9c-a94b-10a1f26bd7b6"), new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70") },
+                    { new Guid("9958c788-468e-4d0c-80ea-7f44901c2d60"), new Guid("cd985c01-bf35-4d94-9d11-787eb48c1c16"), new Guid("4b1dd22b-d861-4c72-9c4b-20afb04f3fe6") },
+                    { new Guid("ab983a2a-f5c5-4468-8e2d-8e3edf2e4a29"), new Guid("6fe9ee31-e218-4f64-b092-2be21b1ce115"), new Guid("9479327c-e16e-459d-86e8-bfa4a18e008e") },
+                    { new Guid("c723eedc-7a48-4778-9e2f-0fcdd03b2ce6"), new Guid("aed3f82d-1785-4a97-b90a-8a99c5be539e"), new Guid("f0d83531-5c27-4151-8396-55f7c470b393") },
+                    { new Guid("c7e932ae-55d3-4469-afb8-a347d253c396"), new Guid("1979a458-e21b-4d9c-a94b-10a1f26bd7b6"), new Guid("84367a0f-5e58-4087-a55c-55dade74ff02") },
+                    { new Guid("cbf09478-4e41-49db-85c6-1f38db039cc6"), new Guid("52407425-23e4-47d7-b402-45e60ce9bee5"), new Guid("f0d83531-5c27-4151-8396-55f7c470b393") },
+                    { new Guid("e67e52ee-5529-4a46-82f0-2a81849f45a1"), new Guid("35b91b59-efde-4940-89d8-73d140cb656c"), new Guid("076313f0-89c5-47ee-a4fc-bd12d0a99705") },
+                    { new Guid("f5151936-a93b-40c8-80c9-18eb82c80764"), new Guid("4eb99a2e-6e61-4813-a7b3-e382ce91f6d7"), new Guid("9479327c-e16e-459d-86e8-bfa4a18e008e") }
                 });
 
             migrationBuilder.InsertData(
@@ -388,9 +388,9 @@ namespace TN.DVDCentral.PL2.Migrations
                 columns: new[] { "Id", "Cost", "MovieId", "OrderId", "Quantity" },
                 values: new object[,]
                 {
-                    { new Guid("2d6cf04c-3370-4c39-863f-06e07884cc9d"), 9.9900000000000002, new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a"), new Guid("424501bf-96a4-4ce2-8057-094981f26c15"), 0 },
-                    { new Guid("a8fc790a-78fa-4436-8452-966f85fefdab"), 8.9900000000000002, new Guid("bf4aaef8-562e-4f67-b0e8-5a2733931244"), new Guid("424501bf-96a4-4ce2-8057-094981f26c15"), 0 },
-                    { new Guid("af95b2c3-688d-4a7b-acc4-9c4a91e37cae"), 10.99, new Guid("3a23c0d0-3834-439b-92f0-62296a15e51a"), new Guid("d6ee8c02-b008-415e-9e96-f214d9bedfa9"), 0 }
+                    { new Guid("98f32354-d98d-46e1-bd8d-9babe48cba2d"), 8.9900000000000002, new Guid("84367a0f-5e58-4087-a55c-55dade74ff02"), new Guid("87ba3640-4da1-4b6c-89da-ce45699622a4"), 0 },
+                    { new Guid("ec53639b-3c9a-4c14-bb67-2954a2609e49"), 10.99, new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70"), new Guid("d33870c6-d44a-46f3-9cee-7db0af7a97c9"), 0 },
+                    { new Guid("f7142e48-af23-41c4-b1c6-d9be8d885d7e"), 9.9900000000000002, new Guid("bd30859c-bed0-40e1-af8a-4f2b1fb86d70"), new Guid("87ba3640-4da1-4b6c-89da-ce45699622a4"), 0 }
                 });
 
             migrationBuilder.CreateIndex(
