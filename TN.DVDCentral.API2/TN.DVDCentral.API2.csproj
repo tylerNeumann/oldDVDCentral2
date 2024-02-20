@@ -5,7 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>C:\dev\DVDCentral\TN.DVDCentral.API2\TN.DVDCentral.API.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\TN.DVDCentral.API.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

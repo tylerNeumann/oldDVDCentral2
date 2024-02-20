@@ -16,7 +16,7 @@ namespace TN.DVDCentral.BL
                 row.CustomerId = order.CustomerId;
                 row.OrderDate = order.OrderDate;
                 row.UserId = order.UserId;
-                row.ShipDate = order.ShipDate;
+                row.ShipDate = order.OrderDate.AddDays(3);
 
                 //declaration manager tues last week
                 foreach (OrderItem item in order.OrderItems)
@@ -31,7 +31,12 @@ namespace TN.DVDCentral.BL
                     oirow.Cost = item.Cost;
 
                     item.Id = row.Id;
-
+                    //2nd most important thing
+                    //setting the parent on the child
+                    oirow.Order = row;
+                    //add to the OrderItems and it will 
+                    //automatically be put in the database
+                    row.OrderItems.Add(oirow);
                 }
 
                 return base.Insert(row, rollback);
