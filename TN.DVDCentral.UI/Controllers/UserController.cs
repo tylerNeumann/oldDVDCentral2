@@ -81,7 +81,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
@@ -96,7 +96,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Edit(int id, User user, bool rollback = false)
+        public IActionResult Edit(Guid id, User user, bool rollback = false)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
 
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
@@ -157,7 +157,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
         [HttpPost]
-        public IActionResult Delete(int id, User user, bool rollback = false)
+        public IActionResult Delete(Guid id, User user, bool rollback = false)
         {
             try
             {

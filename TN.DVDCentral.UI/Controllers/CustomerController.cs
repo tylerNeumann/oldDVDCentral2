@@ -9,7 +9,7 @@ namespace TN.DVDCentral.UI.Controllers
             ViewBag.Title = "List of Customers";
             return View(CustomerManager.Load());
         }
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         {
             var item = CustomerManager.LoadById(id);
             ViewBag.Title = "Details";
@@ -46,7 +46,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
@@ -62,7 +62,7 @@ namespace TN.DVDCentral.UI.Controllers
             
         }
         [HttpPost]
-        public IActionResult Edit(int id, Customer customer, bool rollback = false)
+        public IActionResult Edit(Guid id, Customer customer, bool rollback = false)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace TN.DVDCentral.UI.Controllers
 
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             if (Authentication.IsAuthenticated(HttpContext))
             {
@@ -92,7 +92,7 @@ namespace TN.DVDCentral.UI.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Delete(int id, Customer customer, bool rollback = false)
+        public IActionResult Delete(Guid id, Customer customer, bool rollback = false)
         {
             try
             {
