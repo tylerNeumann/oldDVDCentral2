@@ -193,7 +193,7 @@ namespace TN.DVDCentral.BL
                 {
                     var results = (from o in dc.tblOrders
                                  //join c in dc.tblCustomers on o.CustomerId equals c.Id
-                                   join u in dc.tblUsers on o.UserId equals u.Id
+                                  // join u in dc.tblUsers on o.UserId equals u.Id
                                    where o.CustomerId == customerId || customerId == null
                                    select new
                                    {
@@ -201,11 +201,11 @@ namespace TN.DVDCentral.BL
                                        CustomerId = o.CustomerId,
                                        CustomerFirstName = o.Customer.FirstName,
                                        CustomerLastName = o.Customer.LastName,
-                                       UserName = u.UserName,
+                                       UserName = o.User.UserName,
                                        OrderDate = o.OrderDate,
                                        UserId = o.UserId,
-                                       UserFirstName = u.FirstName, 
-                                       UserLastName = u.LastName,
+                                       UserFirstName = o.User.FirstName, 
+                                       UserLastName = o.User.LastName,
                                        ShipDate = o.ShipDate
                                    }).ToList();
                     results.ForEach(o => orders.Add(new Order
