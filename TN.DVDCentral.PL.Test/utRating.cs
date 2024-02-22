@@ -9,6 +9,8 @@
         {
             int expected = 5;
             var ratings = base.LoadTest();
+            var moviecount = ratings[1].tblMovies.Count;
+            Assert.IsTrue(moviecount > 0);
             Assert.AreEqual(expected, ratings.Count());
         }
 

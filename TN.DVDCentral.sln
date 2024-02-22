@@ -32,9 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.WPF.UI", "TN.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.ConsoleApp", "TN.DVDCentral.ConsoleApp\TN.DVDCentral.ConsoleApp.csproj", "{A15BE03C-D469-4814-8B85-2830E277D46E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TN.DVDCentral.API2", "TN.DVDCentral.API2\TN.DVDCentral.API2.csproj", "{EFCC75AC-9E13-4A81-8E10-CEB3346B1476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.API2", "TN.DVDCentral.API2\TN.DVDCentral.API2.csproj", "{EFCC75AC-9E13-4A81-8E10-CEB3346B1476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TN.DVDCentral.API.Test", "TN.DVDCentral.API.Test\TN.DVDCentral.API.Test.csproj", "{46F8D85A-D299-4EB9-92BE-5C4CA4C8AD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.DVDCentral.API.Test", "TN.DVDCentral.API.Test\TN.DVDCentral.API.Test.csproj", "{46F8D85A-D299-4EB9-92BE-5C4CA4C8AD7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDF.Bingo.UI", "BDF.Bingo.UI\BDF.Bingo.UI.csproj", "{95F0CEC3-72BC-463C-9D05-000CA8DF2A8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +102,10 @@ Global
 		{46F8D85A-D299-4EB9-92BE-5C4CA4C8AD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46F8D85A-D299-4EB9-92BE-5C4CA4C8AD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46F8D85A-D299-4EB9-92BE-5C4CA4C8AD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95F0CEC3-72BC-463C-9D05-000CA8DF2A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95F0CEC3-72BC-463C-9D05-000CA8DF2A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95F0CEC3-72BC-463C-9D05-000CA8DF2A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95F0CEC3-72BC-463C-9D05-000CA8DF2A8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
