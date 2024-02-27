@@ -25,7 +25,7 @@
         {
             return new FormatManager(options).LoadById(id);
         }
-
+        //
         [HttpPost("{rollback?}")]
         public int Post([FromBody] Format format, bool rollback = false)
         {
