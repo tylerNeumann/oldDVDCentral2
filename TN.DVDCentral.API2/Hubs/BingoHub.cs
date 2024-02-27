@@ -6,7 +6,8 @@ namespace TN.DVDCentral.API2.Hubs
     {
         public async Task SendMessage(string user, string message)
         {
-            await Clients.All.SendAsync("RecieveMessage", user, message);
+            // do bl stuff - game logic
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }

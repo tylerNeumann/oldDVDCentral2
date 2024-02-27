@@ -15,7 +15,9 @@ internal class Program
     private static void Main(string[] args)
     {
         string user = "Neumann";
-        string hubAddress = "https://fvtcdp.azurewebsites.net/GameHub";
+       // string hubAddress = "https://fvtcdp.azurewebsites.net/GameHub";
+       //TODO: Finish fixing api and get the local host port
+        string hubAddress = "https://localhost:0000/BingoHub";
         string operation = DrawMenu();
 
         var signalRConnection = new SignalRConnection(hubAddress);
