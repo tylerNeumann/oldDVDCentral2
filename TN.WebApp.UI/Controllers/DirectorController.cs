@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TN.DVDCentral.BL;
+using TN.DVDCentral.BL.Models;
 using TN.DVDCentral.PL2.Data;
 
 namespace TN.WebApp.UI.Controllers
@@ -26,7 +25,7 @@ namespace TN.WebApp.UI.Controllers
             return View(new DirectorManager(options).Load());
         }
         
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         { 
             var item = new DirectorManager(options).LoadById(id);
             ViewBag.Title = "Director Details";
@@ -56,7 +55,7 @@ namespace TN.WebApp.UI.Controllers
             
         }
 
-        public IActionResult Edit(int id) 
+        public IActionResult Edit(Guid id) 
         {
                 var item = new DirectorManager(options).LoadById(id);
                 ViewBag.Title = "Edit a director";
@@ -78,7 +77,7 @@ namespace TN.WebApp.UI.Controllers
             
         }
 
-        public IActionResult Delete(int id) 
+        public IActionResult Delete(Guid id) 
         {
                 var item = new DirectorManager(options).LoadById(id);
                 ViewBag.Title = "Delete a director";
