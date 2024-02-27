@@ -1,3 +1,5 @@
+using TN.DVDCentral.API2.Hubs;
+
 public class Program
 {
     private static void Main(string[] args)
@@ -5,6 +7,12 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+
+        builder.Services.AddSignalR()
+            .AddJsonProtocol(options =>
+            {
+                options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+            });
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -49,10 +57,16 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
+        app.UseRouting();
         app.UseAuthorization();
 
-        app.MapControllers();
+        // app.MapControllers();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHub<BingoHub>("/bingoHub");
+        });
 
         app.Run();
     }
