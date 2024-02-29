@@ -11,6 +11,7 @@
 	</ItemGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\BDF.Utility\BDF.Utility.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL.Models\TN.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL\TN.DVDCentral.BL.csproj" />
   </ItemGroup>
