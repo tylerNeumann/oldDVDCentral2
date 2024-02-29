@@ -16,31 +16,31 @@
         public IFormFile File { get; set; }
 
 
-        public MovieVM() //int movieId
-        {
-            GenreList = GenreManager.Load();
+        //public MovieVM() //int movieId
+        //{
+        //    GenreList = GenreManager.Load();
 
-            //Movie = MovieManager.LoadById(movieId);
+        //    //Movie = MovieManager.LoadById(movieId);
 
-            FormatList = FormatManager.Load();
-            RatingList = RatingManager.Load();
-            GenreList = GenreManager.Load();
-            DirectorList = DirectorManager.Load();
-        }
-        public MovieVM(int id) 
-        {
-            GenreList = GenreManager.Load();
+        //    FormatList = FormatManager.Load();
+        //    RatingList = RatingManager.Load();
+        //    GenreList = GenreManager.Load();
+        //    DirectorList = DirectorManager.Load();
+        //}
+        //public MovieVM(int id) 
+        //{
+        //    GenreList = GenreManager.Load();
 
-            Movie = MovieManager.LoadById(id);
+        //    Movie = MovieManager.LoadById(id);
 
-            FormatList = FormatManager.Load();
-            RatingList = RatingManager.Load();
-            DirectorList = DirectorManager.Load();
+        //    FormatList = FormatManager.Load();
+        //    RatingList = RatingManager.Load();
+        //    DirectorList = DirectorManager.Load();
 
-            GenreIds = Movie.GenreList.Select(g => g.Id);
-            RatingIds = Movie.RatingList.Select(r => r.Id);
-            DirectorIds = Movie.DirectorList.Select(d => d.Id);
-            FormatIds = Movie.FormatList.Select(f => f.Id);
-        }
+        //    GenreIds = Movie.GenreList.Select(g => g.Id);
+        //    RatingIds = Movie.RatingList.Select(r => r.Id);
+        //    DirectorIds = Movie.DirectorList.Select(d => d.Id);
+        //    FormatIds = Movie.FormatList.Select(f => f.Id);
+        //}
     }
 }
