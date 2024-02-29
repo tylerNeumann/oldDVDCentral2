@@ -24,13 +24,13 @@
                         asp-items="@(new SelectList(Model.FormatList, "Id","Description"))"></select>
                 <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Movie.DirectorName" class="control-label"></label>
                 <select asp-for="Movie.DirectorId" class="form-control"
                         asp-items="@(new SelectList(Model.DirectorList, "Id","FullName"))"
                 ></select>
                 <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Movie.GenreDescription" class="control-label"></label>
                 <select 
@@ -51,11 +51,11 @@
                 <input asp-for="Movie.Cost" class="form-control" />
                 <span asp-validation-for="Movie.Cost" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Movie.InStkQty" class="control-label"></label>
                 <input asp-for="Movie.InStkQty" class="form-control" />
                 <span asp-validation-for="Movie.InStkQty" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Movie.ImagePath" class="control-label">Image Path</label>
                 <input asp-for="Movie.ImagePath" class="form-control" />
