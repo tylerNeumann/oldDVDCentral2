@@ -99,151 +99,151 @@ namespace TN.WebApp.UI.Controllers
             
         }
 #endregion
-        #region "Web-API"
+    //    #region "Web-API"
 
-        private static HttpClient InitializeClient()
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:7269/api/");
-            return client;
-        }
+    //    private static HttpClient InitializeClient()
+    //    {
+    //        HttpClient client = new HttpClient();
+    //        client.BaseAddress = new Uri("https://localhost:7269/api/");
+    //        return client;
+    //    }
 
-        public IActionResult Get()
-        {
-            HttpClient client = InitializeClient();
-            //call the API
-            HttpResponseMessage response = client.GetAsync("Director").Result;
+    //    public IActionResult Get()
+    //    {
+    //        HttpClient client = InitializeClient();
+    //        //call the API
+    //        HttpResponseMessage response = client.GetAsync("Director").Result;
 
-            //parse the result
-            string result = response.Content.ReadAsStringAsync().Result;
-            dynamic items = (JArray)JsonConvert.DeserializeObject(result);
-            List<BL.Models.Director> director = items.ToObject<List<BL.Models.Director>>();
+    //        //parse the result
+    //        string result = response.Content.ReadAsStringAsync().Result;
+    //        dynamic items = (JArray)JsonConvert.DeserializeObject(result);
+    //        List<BL.Models.Director> director = items.ToObject<List<BL.Models.Director>>();
 
-            return View(nameof(Index), director);
+    //        return View(nameof(Index), director);
 
-        }
-        public IActionResult GetOne(int id)
-        {
-            HttpClient client = InitializeClient();
-            //call api
-            HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
+    //    }
+    //    public IActionResult GetOne(int id)
+    //    {
+    //        HttpClient client = InitializeClient();
+    //        //call api
+    //        HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
 
 
-            //parse the result
-            string result = response.Content.ReadAsStringAsync().Result;
-            dynamic item = (JArray)JsonConvert.DeserializeObject(result);
-            BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
+    //        //parse the result
+    //        string result = response.Content.ReadAsStringAsync().Result;
+    //        dynamic item = (JArray)JsonConvert.DeserializeObject(result);
+    //        BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
 
-            return View(nameof(Details), director);
-        }
+    //        return View(nameof(Details), director);
+    //    }
 
-        public IActionResult Insert()
-        {
-            HttpClient client = InitializeClient();
-            //call the api
-            HttpResponseMessage response = client.GetAsync("Director").Result;
+    //    public IActionResult Insert()
+    //    {
+    //        HttpClient client = InitializeClient();
+    //        //call the api
+    //        HttpResponseMessage response = client.GetAsync("Director").Result;
 
-            //parse the result
-            string result = response.Content.ReadAsStringAsync().Result;
-            dynamic items = (JArray)JsonConvert.DeserializeObject(result);
-            List<Director> directors = items.ToObject<List<Director>>();
+    //        //parse the result
+    //        string result = response.Content.ReadAsStringAsync().Result;
+    //        dynamic items = (JArray)JsonConvert.DeserializeObject(result);
+    //        List<Director> directors = items.ToObject<List<Director>>();
 
-            Director director = new Director();
+    //        Director director = new Director();
             
             
 
-            return View(nameof(Create), director);
-        }
+    //        return View(nameof(Create), director);
+    //    }
 
-        [HttpPost]
-        public IActionResult Insert(Director director)
-        {
-            try
-            {
-                HttpClient client = InitializeClient();
+    //    [HttpPost]
+    //    public IActionResult Insert(Director director)
+    //    {
+    //        try
+    //        {
+    //            HttpClient client = InitializeClient();
                 
 
-                string serializedObject = JsonConvert.SerializeObject(director);
-                var content = new StringContent(serializedObject);
-                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+    //            string serializedObject = JsonConvert.SerializeObject(director);
+    //            var content = new StringContent(serializedObject);
+    //            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-                //call the API
-                HttpResponseMessage response = client.PostAsync("Director", content).Result;
-                return RedirectToAction(nameof(Get));
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View(nameof(Create), director);
-            }
-        }
-        public IActionResult Update(int id)
-        {
-            HttpClient client = InitializeClient();
+    //            //call the API
+    //            HttpResponseMessage response = client.PostAsync("Director", content).Result;
+    //            return RedirectToAction(nameof(Get));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            ViewBag.Error = ex.Message;
+    //            return View(nameof(Create), director);
+    //        }
+    //    }
+    //    public IActionResult Update(int id)
+    //    {
+    //        HttpClient client = InitializeClient();
 
-            //call api
-            HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
+    //        //call api
+    //        HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
 
-            //parse the result
-            string result = response.Content.ReadAsStringAsync().Result;
-            dynamic item = (JArray)JsonConvert.DeserializeObject(result);
-            BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
+    //        //parse the result
+    //        string result = response.Content.ReadAsStringAsync().Result;
+    //        dynamic item = (JArray)JsonConvert.DeserializeObject(result);
+    //        BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
 
-            //Director director = new Director();
+    //        //Director director = new Director();
 
-            return View(nameof(Edit), director);
-        }
-        [HttpPost]
-        public IActionResult Update(int id, Director director)
-        {
-            try
-            {
-                HttpClient client = InitializeClient();
+    //        return View(nameof(Edit), director);
+    //    }
+    //    [HttpPost]
+    //    public IActionResult Update(int id, Director director)
+    //    {
+    //        try
+    //        {
+    //            HttpClient client = InitializeClient();
 
-                string serializedObject = JsonConvert.SerializeObject(director);
-                var content = new StringContent(serializedObject);
-                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+    //            string serializedObject = JsonConvert.SerializeObject(director);
+    //            var content = new StringContent(serializedObject);
+    //            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-                //call the API
-                HttpResponseMessage response = client.PutAsync("Director/" + id, content).Result;
-                return RedirectToAction(nameof(Get));
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View(nameof(Edit), director);
-            }
-        }
-        public IActionResult Remove(int id)
-        {
-            HttpClient client = InitializeClient();
+    //            //call the API
+    //            HttpResponseMessage response = client.PutAsync("Director/" + id, content).Result;
+    //            return RedirectToAction(nameof(Get));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            ViewBag.Error = ex.Message;
+    //            return View(nameof(Edit), director);
+    //        }
+    //    }
+    //    public IActionResult Remove(int id)
+    //    {
+    //        HttpClient client = InitializeClient();
 
-            //call api
-            HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
+    //        //call api
+    //        HttpResponseMessage response = client.GetAsync("Director/" + id).Result;
 
-            //parse the result
-            string result = response.Content.ReadAsStringAsync().Result;
-            dynamic item = (JArray)JsonConvert.DeserializeObject(result);
-            BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
+    //        //parse the result
+    //        string result = response.Content.ReadAsStringAsync().Result;
+    //        dynamic item = (JArray)JsonConvert.DeserializeObject(result);
+    //        BL.Models.Director director = item.ToObject<List<BL.Models.Director>>();
 
-            return View(nameof(Delete), director);
-        }
-        [HttpPost]
-        public IActionResult Remove(int id, BL.Models.Director director)
-        {
-            try
-            {
-                HttpClient client = InitializeClient();
-                HttpResponseMessage response = client.DeleteAsync("Director/" + id).Result;
-                return View(nameof(Get), director);
-            }
-            catch (Exception)
-            {
+    //        return View(nameof(Delete), director);
+    //    }
+    //    [HttpPost]
+    //    public IActionResult Remove(int id, BL.Models.Director director)
+    //    {
+    //        try
+    //        {
+    //            HttpClient client = InitializeClient();
+    //            HttpResponseMessage response = client.DeleteAsync("Director/" + id).Result;
+    //            return View(nameof(Get), director);
+    //        }
+    //        catch (Exception)
+    //        {
 
-                throw;
-            }
-        }
+    //            throw;
+    //        }
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 }
