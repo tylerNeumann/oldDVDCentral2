@@ -9,6 +9,7 @@ using TN.DVDCentral.PL2.Data;
 
 namespace TN.WebApp.UI.Controllers
 {
+   
     public class DirectorController : Controller
     {
         private readonly DbContextOptions<DVDCentralEntities> options;
@@ -22,6 +23,7 @@ namespace TN.WebApp.UI.Controllers
         public IActionResult Index()
         {
             ViewBag.Title = "List of Directors";
+            ViewBag.Info = TempData["info"];
             return View(new DirectorManager(options).Load());
         }
         
