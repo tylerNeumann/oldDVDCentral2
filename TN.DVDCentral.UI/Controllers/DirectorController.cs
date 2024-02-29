@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-namespace TN.DVDCentral.UI.Controllers
+﻿namespace TN.DVDCentral.UI.Controllers
 {
-    public class DirectorController : Controller
+    public class DirectorController : GenericController<Director>
     {
+        public DirectorController(HttpClient httpClient) : base(httpClient) { }
         //        private readonly IWebHostEnvironment _host;
         //        public DirectorController(IWebHostEnvironment host)
         //        {
