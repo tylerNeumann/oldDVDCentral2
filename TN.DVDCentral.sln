@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TN.WebApp.UI", "TN.WebApp.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDF.Utility", "BDF.Utility\BDF.Utility.csproj", "{44664F5E-11E2-402A-8EC3-FA353E0FA126}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TN.Reporting", "TN.Reporting\TN.Reporting.csproj", "{0B213759-E093-4D15-AD07-A9C7AB2C0FE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{44664F5E-11E2-402A-8EC3-FA353E0FA126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44664F5E-11E2-402A-8EC3-FA353E0FA126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44664F5E-11E2-402A-8EC3-FA353E0FA126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B213759-E093-4D15-AD07-A9C7AB2C0FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B213759-E093-4D15-AD07-A9C7AB2C0FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B213759-E093-4D15-AD07-A9C7AB2C0FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B213759-E093-4D15-AD07-A9C7AB2C0FE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

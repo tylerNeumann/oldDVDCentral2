@@ -42,6 +42,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TN.DVDCentral.BL.Models\TN.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL\TN.DVDCentral.BL.csproj" />
+    <ProjectReference Include="..\TN.Reporting\TN.Reporting.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,31 @@ namespace TN.DVDCentral.BL
         public MovieManager(DbContextOptions<DVDCentralEntities> options) : base(options)
         {
         }
+
+        public static string[,] ConvertData(List<Movie> movies)
+        {
+            string[,] data = new string[movies.Count + 1, 5];
+            int counter = 0;
+
+            data[counter, 0] = "Title";
+            data[counter, 1] = "Director";
+            data[counter, 2] = "Format";
+            data[counter, 3] = "Rating";
+            data[counter, 4] = "Quantity";
+
+            counter++;
+            foreach(Movie movie in movies)
+            {
+                data[counter, 0] = movie.Title;
+                data[counter, 0] = movie.DirectorFullName;
+                data[counter, 0] = movie.FormatDescription;
+                data[counter, 0] = movie.RatingDescription;
+                data[counter, 0] = movie.Quantity.ToString();
+                counter++;
+            }
+            return data;
+        }
+
         public  int Insert(Movie movie, bool rollback = false)
         {
             try
@@ -237,6 +262,8 @@ namespace TN.DVDCentral.BL
             }
 
         }
+
+
 
         public List<Movie> Load()
         {

@@ -1,5 +1,7 @@
 
 
+using TN.Reporting;
+
 namespace TN.DVDCentral.BL.Test
 {
     [TestClass]
@@ -50,6 +52,13 @@ namespace TN.DVDCentral.BL.Test
         {
             Movie movie = new MovieManager(options).Load().FirstOrDefault();
             Assert.AreEqual(new MovieManager(options).LoadById(movie.Id).Id, movie.Id);
+        }
+
+        [TestMethod] public void utReportTest()
+        {
+            var movies = new MovieManager(options).Load();
+            var data = MovieManager.ConvertData(movies);
+            Excel.Export("movies.xlsx", data);
         }
     }
 }
