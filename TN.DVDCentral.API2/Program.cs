@@ -1,5 +1,3 @@
-using TN.DVDCentral.API2.Hubs;
-
 public class Program
 {
     private static void Main(string[] args)
@@ -45,6 +43,19 @@ public class Program
             options.UseLazyLoadingProxies();
         });
 
+        var configSettings = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configSettings)
+            .CreateLogger();
+
+        builder.Services
+            .AddLogging(c => c.AddDebug())
+            .AddLogging(c => c.AddSerilog())
+            .AddLogging(c => c.AddEventLog())
+            .AddLogging(c => c.AddConsole());
         //services before builder
         var app = builder.Build(); //takes all the service things and makes them a package
         //apps stuff after builder

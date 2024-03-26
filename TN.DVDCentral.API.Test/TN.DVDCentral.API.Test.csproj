@@ -22,7 +22,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\TN.DVDCentral.API2\TN.DVDCentral.API2.csproj" />
+    <ProjectReference Include="..\TN.DVDCentral.API2\TN.DVDCentral.API.csproj" />
     <ProjectReference Include="..\TN.DVDCentral.BL.Models\TN.DVDCentral.BL.Models.csproj" />
   </ItemGroup>
 

@@ -5,3 +5,5 @@ global using TN.DVDCentral.BL;
 global using TN.DVDCentral.BL.Models;
 global using TN.DVDCentral.PL2.Data;
 global using System.Reflection;
+global using Serilog;
+global using TN.DVDCentral.API2.Hubs;
