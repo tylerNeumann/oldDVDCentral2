@@ -43,6 +43,12 @@ public class Program
             options.UseLazyLoadingProxies();
         });
 
+        string connection = builder.Configuration.GetConnectionString("DVDCentralConnection");
+        builder.Services.AddSerilogUi(options =>
+        {
+            options.UseSqlServer(connection, "Logs");
+        });
+
         var configSettings = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build();
