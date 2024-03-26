@@ -15,6 +15,7 @@
             {
                 return new DVDCentralEntities(options) 
                     .Set<T>()
+                    .ToList<T>()
                     .OrderBy(x => x.SortField)
                     .ToList<T>();
             }
