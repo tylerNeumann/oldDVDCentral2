@@ -6,4 +6,5 @@ public class tblFormat : IEntity
 
     public string Description { get; set; }
     public virtual ICollection<tblMovie> tblMovies { get; set; }
+    public string SortField { get { return Description; } }
 }

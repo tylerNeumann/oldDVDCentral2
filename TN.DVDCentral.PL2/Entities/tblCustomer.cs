@@ -21,4 +21,5 @@ public class tblCustomer : IEntity
     public string Phone { get; set; }
 
     public virtual ICollection<tblOrder> Orders { get; set; }
+    public string SortField { get { return LastName; } }
 }

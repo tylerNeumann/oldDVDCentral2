@@ -9,5 +9,6 @@
 
         public virtual tblCart Cart { get; set; }
         public virtual tblMovie Movie { get; set; }
+        public string SortField { get { return Movie.Title; } }
     }
 }

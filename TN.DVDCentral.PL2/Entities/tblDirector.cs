@@ -9,4 +9,5 @@ public class tblDirector : IEntity
     public string LastName { get; set; }
 
     public virtual ICollection<tblMovie> tblMovies { get; set; }
+    public string SortField { get { return LastName; } }
 }

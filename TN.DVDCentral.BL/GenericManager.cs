@@ -15,6 +15,7 @@
             {
                 return new DVDCentralEntities(options) 
                     .Set<T>()
+                    .OrderBy(x => x.SortField)
                     .ToList<T>();
             }
             catch (Exception)

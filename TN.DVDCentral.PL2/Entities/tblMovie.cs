@@ -24,4 +24,5 @@ public class tblMovie : IEntity
     public virtual tblDirector Director { get; set; }
     public virtual tblRating Rating { get; set; }
     public virtual tblFormat Format { get; set; }
+    public string SortField { get { return Title; } }
 }
