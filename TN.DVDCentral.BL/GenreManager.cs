@@ -9,7 +9,9 @@ namespace TN.DVDCentral.BL
         public GenreManager(DbContextOptions<DVDCentralEntities> options) : base(options)
         {
         }
-
+        public GenreManager(ILogger logger,DbContextOptions<DVDCentralEntities> options) : base(options,logger)
+        {
+        }
         public  int Insert(Genre genre, bool rollback = false)
         {
             try

@@ -66,6 +66,11 @@ public class Program
         var app = builder.Build(); //takes all the service things and makes them a package
         //apps stuff after builder
 
+        app.UseSerilogUi(options => 
+        { 
+            options.RoutePrefix = "logs"; 
+        });
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment() || true)
         {

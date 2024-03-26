@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>TN.DVDCentral.API2</name>
+        <name>TN.DVDCentral.API</name>
     </assembly>
     <members>
         <member name="M:TN.DVDCentral.API2.Controllers.MovieController.Get">

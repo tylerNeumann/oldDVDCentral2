@@ -56,8 +56,10 @@ namespace TN.DVDCentral.BL.Test
 
         [TestMethod] public void utReportTest()
         {
+
             var movies = new MovieManager(options).Load();
-            var data = MovieManager.ConvertData(movies);
+            string[] columns = { "Title", "DirectorFullName", "FormatDescription", "RatingDescription", "Quantity" };
+            var data = MovieManager.ConvertData<Movie>(movies,columns);
             Excel.Export("movies.xlsx", data);
         }
     }
