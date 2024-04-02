@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using TN.DVDCentral.BL.Models;
-using TN.DVDCentral.PL2.Entities;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public  class GenreManager : GenericManager<tblGenre>
     {
         public GenreManager(DbContextOptions<DVDCentralEntities> options) : base(options)
         {
         }
-        public GenreManager(ILogger logger,DbContextOptions<DVDCentralEntities> options) : base(options,logger)
+        public GenreManager(ILogger logger,DbContextOptions<DVDCentralEntities> options) : base(logger,options)
         {
         }
         public  int Insert(Genre genre, bool rollback = false)
@@ -18,7 +14,7 @@ namespace TN.DVDCentral.BL
             {
                 tblGenre row = new tblGenre { Description = genre.Description };  
                 genre.Id = row.Id;
-                return base.Insert(row, rollback);
+                return base.Insert(row, e => e.Description == genre.Description, rollback);
             }
             catch (Exception)
             {

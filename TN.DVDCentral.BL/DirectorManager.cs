@@ -1,6 +1,4 @@
-﻿using TN.DVDCentral.PL2.Entities;
-
-namespace TN.DVDCentral.BL
+﻿namespace TN.DVDCentral.BL
 {
     public class DirectorManager : GenericManager<tblDirector>
     {
@@ -17,7 +15,7 @@ namespace TN.DVDCentral.BL
             
                     director.Id = row.Id;
                     
-                    return base.Insert(row, rollback);
+                    return base.Insert(row, e => e.LastName == director.LastName, rollback);
             }
             catch (Exception ex)
             {

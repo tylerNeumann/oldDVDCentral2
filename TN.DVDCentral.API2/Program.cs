@@ -1,3 +1,7 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+
 public class Program
 {
     private static void Main(string[] args)
@@ -34,16 +38,17 @@ public class Program
             c.IncludeXmlComments(xmlpath);
         });
 
-
+        string connectionString = GetSecret("DVDCentral-ConnectionString").Result;
 
         //add connection information
         builder.Services.AddDbContextPool<DVDCentralEntities>(options =>
         {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DVDCentralConnection"));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection"));
+            string connectionString = GetSecret("DVDCentral-ConnectionString").Result;
             options.UseLazyLoadingProxies();
         });
 
-        string connection = builder.Configuration.GetConnectionString("DVDCentralConnection");
+        string connection = builder.Configuration.GetConnectionString("DatabaseConnection");
         builder.Services.AddSerilogUi(options =>
         {
             options.UseSqlServer(connection, "Logs");
@@ -91,5 +96,27 @@ public class Program
         });
 
         app.Run();
+    }
+
+    public static async Task<string> GetSecret(string secretName)
+    {
+        try
+        {
+            //const string secretName = "DVDCentral-ConnectionString";
+            var keyVaultName = "kv-500189307";
+            var kvUri = $"https://{keyVaultName}.vault.azure.net";
+
+            var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+            //using var client = GetClient();
+            var secret = await client.GetSecretAsync(secretName);
+            Console.WriteLine(secret.Value.Value.ToString());
+            return secret.Value.Value.ToString();
+            //return (await client.GetSecretAsync(kvUri, secretName)).Value.ToString();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return null;
+        }
     }
 }

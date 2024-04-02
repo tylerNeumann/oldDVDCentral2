@@ -1,4 +1,6 @@
-﻿namespace TN.DVDCentral.BL
+﻿using System.Linq.Expressions;
+
+namespace TN.DVDCentral.BL
 {
     public abstract class GenericManager<T> where T : class, IEntity
     {
@@ -12,7 +14,7 @@
         public GenericManager(ILogger logger, DbContextOptions<DVDCentralEntities> options)
         {
             this.options = options;
-
+            this.logger = logger;
         }
         public GenericManager() { }
         public static string[,] ConvertData<U>(List<U> entities, string[] columns) where U : class
@@ -37,12 +39,12 @@
             }
             return data;
         }
-        public List<T> Load() 
+        public List<T> Load()
         {
             try
             {
                 if (logger != null) { logger.LogWarning($"Get{typeof(T).Name}s"); }
-                return new DVDCentralEntities(options) 
+                return new DVDCentralEntities(options)
                     .Set<T>()
                     .ToList<T>()
                     .OrderBy(x => x.SortField)
@@ -70,7 +72,9 @@
             }
         }
 
-        public int Insert(T entity, bool rollback = false)
+        public int Insert(T entity,
+                          Expression<Func<T, bool>> predicate = null,
+                          bool rollback = false)
         {
             try
             {
@@ -85,15 +89,23 @@
                     //    throw new Exception("This entity already exists.");
                     //}
 
-                    IDbContextTransaction dbTransaction = null;
-                    if (rollback) dbTransaction = dc.Database.BeginTransaction();
+                    if ((predicate == null) || ((predicate != null) && (!dc.Set<T>().Any(predicate))))
+                    {
+                        IDbContextTransaction dbTransaction = null;
+                        if (rollback) dbTransaction = dc.Database.BeginTransaction();
 
-                    entity.Id = Guid.NewGuid();
+                        entity.Id = Guid.NewGuid();
 
-                    dc.Set<T>().Add(entity);
-                    results = dc.SaveChanges();
+                        dc.Set<T>().Add(entity);
+                        results = dc.SaveChanges();
 
-                    if (rollback) dbTransaction.Rollback();
+                        if (rollback) dbTransaction.Rollback();
+                    }
+                    else
+                    {
+                        if (logger != null) logger.LogWarning("row already exists {UserId}", "bfoote");
+                        throw new Exception("row already exists");
+                    }
 
                 }
 
@@ -106,6 +118,44 @@
             }
         }
 
+        public int Insert(T entity,
+                          bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
+                {
+                    // Check if genre already exists - do not allow ....
+                    //bool inUse = dc.tblGenres.Any(e => e.Description.Trim().ToUpper() == entity.Description.Trim().ToUpper());
+
+                    //if (inUse && !rollback)
+                    //{
+                    //    throw new Exception("This entity already exists.");
+                    //}
+
+
+                    IDbContextTransaction dbTransaction = null;
+                    if (rollback) dbTransaction = dc.Database.BeginTransaction();
+
+                    entity.Id = Guid.NewGuid();
+
+                    dc.Set<T>().Add(entity);
+                    results = dc.SaveChanges();
+
+                    if (rollback) dbTransaction.Rollback();
+
+
+                }
+
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int Update(T entity, bool rollback = false)
         {
             return 0;

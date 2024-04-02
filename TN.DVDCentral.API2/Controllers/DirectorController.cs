@@ -17,7 +17,17 @@
         [HttpGet]
         public IEnumerable<Director> Get()
         {
-            return new DirectorManager(options).Load();
+            try
+            {
+                logger.LogWarning("getDirectors");
+                return new DirectorManager( options).Load();
+                // return new DirectorManager(logger,options).Load();
+            }
+            catch (Exception ex)
+            {
+                return null;
+               // return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
@@ -32,6 +42,7 @@
             try
             {
                 return new DirectorManager(options).Insert(director, rollback);
+               // return new DirectorManager(logger,options).Insert(director, rollback);
             }
             catch (Exception ex)
             {
@@ -46,6 +57,7 @@
             try
             {
                 return new DirectorManager(options).Update(director, rollback);
+                //return new DirectorManager(logger,options).Update(director, rollback);
             }
             catch (Exception ex)
             {
@@ -60,6 +72,7 @@
             try
             {
                 return new DirectorManager(options).Delete(id, rollback);
+                //return new DirectorManager(logger,options).Delete(id, rollback);
             }
             catch (Exception ex)
             {
