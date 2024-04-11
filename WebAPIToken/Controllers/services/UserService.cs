@@ -31,7 +31,8 @@ namespace WebAPIToken.Controllers.services
 
             if (user == null) { return null; }
             var token = generateJwtToken(user);
-            return AuthenticateResponse(user, token);
+            
+            return new AuthenticateResponse(user, token);
         }
 
         private string generateJwtToken(User user)
