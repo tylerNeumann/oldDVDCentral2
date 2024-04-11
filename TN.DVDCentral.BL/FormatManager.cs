@@ -78,25 +78,25 @@ namespace TN.DVDCentral.BL
                 throw ex;
             }
         }
-        public  List<Format> Load()
-        {
-            try
-            {
-                List<Format> rows = new List<Format>();
-                base.Load()
-                    .ForEach(d => rows.Add(new Format
-                    {
-                        Id = d.Id,
-                        Description = d.Description
-                    }));
-                return rows;
-            }
-            catch (Exception ex)
-            {
+        //public  List<Format> Load()
+        //{
+        //    try
+        //    {
+        //        List<Format> rows = new List<Format>();
+        //        base.Load()
+        //            .ForEach(d => rows.Add(new Format
+        //            {
+        //                Id = d.Id,
+        //                Description = d.Description
+        //            }));
+        //        return rows;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw ex;
-            }
+        //        throw ex;
+        //    }
 
-        }
+        //}
     }
 }

@@ -15,9 +15,16 @@
         }
 
         [HttpGet]
-        public IEnumerable<Format> Get()
+        public async Task<ActionResult<IEnumerable<Format>>> Get()
         {
-            return new FormatManager(options).Load();
+            try
+            {
+                return Ok(await new FormatManager(logger, options).LoadAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]

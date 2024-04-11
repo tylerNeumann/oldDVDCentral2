@@ -39,6 +39,25 @@ namespace TN.DVDCentral.BL
             }
             return data;
         }
+        public async Task<List<T>> LoadAsync()
+        {
+            try
+            {
+                if (logger != null) { logger.LogWarning($"Get{typeof(T).Name}s"); }
+                var rows = new DVDCentralEntities(options)
+                    .Set<T>()
+                    .ToListAsync<T>()
+                    .ConfigureAwait(false);
+                    //.OrderBy(x => x.SortField)
+                    //.ToList<T>();
+                    return await rows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<T> Load()
         {
             try
