@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public char[] Secret { get; internal set; }
+        public string Secret { get; set; }
     }
 }
