@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace WebAPIToken.Controllers.entities
+﻿namespace WebAPIToken.Controllers.entities
 {
     public class User
     {

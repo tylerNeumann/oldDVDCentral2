@@ -1,6 +1,3 @@
-using WebAPIToken.Controllers.helpers;
-using WebAPIToken.Controllers.services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,7 +25,7 @@ app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod());
 
-
+app.UseMiddleware<JWTMiddleWare>();
 
 app.UseHttpsRedirection();
 
