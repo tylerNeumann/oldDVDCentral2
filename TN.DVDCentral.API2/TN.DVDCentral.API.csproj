@@ -30,4 +30,9 @@
     <ProjectReference Include="..\TN.DVDCentral.PL.Test\TN.DVDCentral.PL.Test.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

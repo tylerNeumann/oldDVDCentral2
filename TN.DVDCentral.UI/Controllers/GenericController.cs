@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
-using TN.DVDCentral.PL2.Entities;
-
-namespace TN.DVDCentral.UI.Controllers
+﻿namespace TN.DVDCentral.UI.Controllers
 {
     public class GenericController<T> : Controller where T : class
     {
@@ -15,6 +12,7 @@ namespace TN.DVDCentral.UI.Controllers
         public virtual IActionResult Index()
         {
             ViewBag.Title = "List of " + typeof(T).Name + "s";
+            
             var entities = apiClient.GetList<T>(typeof(T).Name);
             return View(entities);
         }

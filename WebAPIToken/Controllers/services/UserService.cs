@@ -1,4 +1,6 @@
-﻿namespace WebAPIToken.Controllers.services
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace WebAPIToken.Controllers.services
 {
     public interface IUserService
     {
@@ -46,7 +48,7 @@
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return new UserManager(dbOptions).Load().FirstOrDefault(x => x.Id == id);
         }
 
         public User GetById(int id)

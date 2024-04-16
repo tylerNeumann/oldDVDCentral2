@@ -23,7 +23,7 @@ namespace TN.DVDCentral.Maui
 
             SemanticScreenReader.Announce(CounterBtn.Text);
 
-            ApiClient apiClient = new ApiClient("https://dvdcentralapi-12021964.azurewebsites.net/api/");
+            ApiClient apiClient = new ApiClient("https://dvdcentralapi-120212964.azurewebsites.net/api/");
             List<Movie> movies = apiClient.GetList<Movie>("Movie");
             CounterBtn.Text = movies.Count + " Movies";
         }
