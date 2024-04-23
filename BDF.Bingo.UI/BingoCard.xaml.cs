@@ -216,7 +216,7 @@ namespace BDF.Bingo.UI
 
             // change the color of a good square.
             // Message will be last number selected.
-            this.Title = message;
+            Dispatcher.Invoke(() => { this.Title = message; });
             int number;
 
 
@@ -228,22 +228,34 @@ namespace BDF.Bingo.UI
             {
                 if (int.TryParse(message, out number))
                 {
-                    this.Title = "Looking for " + number.ToString();
+                    Dispatcher.Invoke(() =>
+                    {
+                        this.Title = "Looking for " + number.ToString();
+                    });
                     if (CheckforNumber(Convert.ToInt32(message), false, out int r, out int c))
                     {
-                        this.Title = "Found " + number.ToString() + " at : " + r + ", " + c;
-                        boardLabels[r + 1, c].Background = Brushes.Purple;
-                        boardLabels[r + 1, c].Foreground = Brushes.White;
+                        Dispatcher.Invoke(() =>
+                        {
+                            this.Title = "Found " + number.ToString() + " at : " + r + ", " + c;
+                            boardLabels[r + 1, c].Background = Brushes.Purple;
+                            boardLabels[r + 1, c].Foreground = Brushes.White;
+                        });
                         SendMessageToChannel("Match");
                         if (CheckForWin())
                         {
-                            this.Title += " - You win!";
+                            Dispatcher.Invoke(() =>
+                            {
+                                this.Title += " - You win!";
+                            });
                             SendMessageToChannel("Winner");
                         }
                     }
                     else
                     {
-                        this.Title = "Not Found: " + number.ToString();
+                        Dispatcher.Invoke(() =>
+                        {
+                            this.Title = "Not Found: " + number.ToString();
+                        });
                     }
                 }
             }

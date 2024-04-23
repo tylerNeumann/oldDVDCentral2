@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System.Windows;
 
 namespace BDF.Bingo.UI
@@ -28,13 +29,13 @@ namespace BDF.Bingo.UI
 
             Configuration = configSettings;
 
-            //Log.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(configSettings)
-            //    .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configSettings)
+                .CreateLogger();
 
-            services.AddSingleton<BingoCard>();
-            //    .AddLogging(c => c.AddConsole())
-            //    .AddLogging(c => c.AddDebug());
+                services.AddLogging(c => c.AddSerilog())
+                .AddLogging(c => c.AddConsole())
+                .AddLogging(c => c.AddDebug());
 
         }
 

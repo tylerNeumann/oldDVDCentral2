@@ -1,5 +1,5 @@
-﻿using Android.Graphics;
-using BDF.Utility;
+﻿using BDF.Utility;
+using TN.DVDCentral.BL.Models;
 
 namespace TN.DVDCentral.Maui
 {
@@ -23,7 +23,7 @@ namespace TN.DVDCentral.Maui
 
             SemanticScreenReader.Announce(CounterBtn.Text);
 
-            ApiClient apiClient = new ApiClient("https://dvdcentralapi-120212964.azurewebsites.net/api/");
+            ApiClient apiClient = new ApiClient("wv4sxn03-7051.use.devtunnels.ms/swagger");
             List<Movie> movies = apiClient.GetList<Movie>("Movie");
             CounterBtn.Text = movies.Count + " Movies";
         }

@@ -19,7 +19,7 @@
             }
             return Ok();
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult GetAll() { 
             var users = _userService.GetAll();

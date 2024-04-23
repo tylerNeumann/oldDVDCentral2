@@ -16,7 +16,11 @@ namespace TN.DVDCentral.PL2.Data
         Guid[] movieId = new Guid[7];
         Guid[] orderId = new Guid[3];
         Guid[] cartId = new Guid[2];
+        Guid[] advisorId = new Guid[1];
 
+
+
+        public virtual DbSet<tblAdvisor> tblAdvisors { get; set; }
         public virtual DbSet<tblCustomer> tblCustomers { get; set; }
 
         public virtual DbSet<tblDirector> tblDirectors { get; set; }
@@ -55,7 +59,7 @@ namespace TN.DVDCentral.PL2.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            CreateAdvisors(modelBuilder);
             CreateUsers(modelBuilder);
             CreateGenres(modelBuilder);
             CreateFormats(modelBuilder);
@@ -69,7 +73,22 @@ namespace TN.DVDCentral.PL2.Data
             CreateCarts(modelBuilder);
             CreateCartItems(modelBuilder);
         }
+        private void CreateAdvisors(ModelBuilder modelBuilder)
+        {
+           
+            modelBuilder.Entity<tblAdvisor>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK_tblFormat_Id");
 
+                entity.ToTable("tblFormat");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+        }
         private void CreateFormats(ModelBuilder modelBuilder)
         {
             for (int i = 0; i < formatId.Length; i++)
